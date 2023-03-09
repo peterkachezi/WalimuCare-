@@ -29,9 +29,6 @@ namespace WalimuV2.ViewModels
 				OnPropertyChanged(nameof(OriginalPhoneNumber));
 			}
 		}
-
-
-
 		private string phoneNumber;
 		public string PhoneNumber
 		{
@@ -42,18 +39,12 @@ namespace WalimuV2.ViewModels
 				OnPropertyChanged(nameof(PhoneNumber));
 			}
 		}
-
-
-
 		private string otp;
 		public string Otp
 		{
 			get { return otp; }
 			set { otp = value; OnPropertyChanged(nameof(Otp)); }
 		}
-
-
-
 		private bool enableVerifyOtpBtn { get; set; }
 		public bool EnableVerifyOtpBtn
 		{
@@ -64,9 +55,6 @@ namespace WalimuV2.ViewModels
 				OnPropertyChanged(nameof(EnableVerifyOtpBtn));
 			}
 		}
-
-
-
 		private bool enableResendOtpBtn { get; set; }
 		public bool EnableResendOtpBtn
 		{
@@ -82,10 +70,7 @@ namespace WalimuV2.ViewModels
 		public ICommand SendOTPCommand { get; set; }
 		public ICommand ReSendOTPCommand { get; set; }
 		public ICommand VerifyOTPCommand { get; set; }
-
 		public int NumberOfSecondsRemaining { get; set; }
-
-
 
 		private string resendText;
 		public string ResendText
@@ -93,8 +78,6 @@ namespace WalimuV2.ViewModels
 			get { return resendText; }
 			set { resendText = value; OnPropertyChanged(nameof(ResendText)); }
 		}
-
-
 		public Timer Timer { get; set; }
 
 		public ConfirmOtpViewModelReset()
@@ -107,10 +90,8 @@ namespace WalimuV2.ViewModels
 
 			EnableVerifyOtpBtn = true;
 
-
-
-
 			PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
+
 			OriginalPhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
 
 			string standardizedPhoneNumber = DependencyService.Get<ResetPinPageViewModel>().StandardizePhoneNumber(PhoneNumber);
@@ -199,7 +180,6 @@ namespace WalimuV2.ViewModels
 				EnableResendOtpBtn = true;
 			}
 		}
-
 		public async Task VerifyOtp()
 		{
 			try

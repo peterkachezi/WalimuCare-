@@ -205,7 +205,9 @@ namespace WalimuV2.ViewModels
 
 							Preferences.Set("userId", result.user_Id);
 
-							Preferences.Set("memberName", result.user_name);
+							Preferences.Set("memberId", result.member_Id);
+
+							Preferences.Set("memberNumber", result.user_name);
 
 							Preferences.Set("tokenExpirationTime", result.expiration_Time);
 

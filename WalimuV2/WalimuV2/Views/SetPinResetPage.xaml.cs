@@ -5,6 +5,8 @@ using RestSharp;
 using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using WalimuV2.ApiResponses;
@@ -14,6 +16,9 @@ using WalimuV2.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms.GoogleMaps;
+using System.Text;
+using System.Net.NetworkInformation;
 
 namespace WalimuV2.Views
 {
@@ -250,45 +255,43 @@ namespace WalimuV2.Views
 		{
 			try
 			{
+				var userId = Preferences.Get("userId", string.Empty);
 
-
-				RestClient client = new RestClient(ApiDetail.EndPoint);
-
-				RestRequest restRequest = new RestRequest()
+				var model = new Register
 				{
-					Method = Method.Post,
-					Resource = "/Members/ReSetMemberPin"
+					Id = Guid.Parse(userId),
+
+					Password = Pin,
 				};
 
-				string memberNumber = Preferences.Get(nameof(AspNetUsers.memberId), "");
+				var json = JsonConvert.SerializeObject(model);
 
-				object payload = new
-				{
-					MemberId = memberNumber,
-					PinHash = Pin
-				};
+				HttpContent httpContent = new StringContent(json);
 
+				httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-				restRequest.AddJsonBody(payload);
+				var client = new HttpClient();
 
-
-				var response = await Task.Run(() =>
-				{
-					return client.Execute(restRequest);
-				});
-
+				var response = await client.PostAsync(ApiDetail.ApiUrl + "api/MemberAuth/UpdatePassword", httpContent);
 
 				try
 				{
-					if (response.IsSuccessful)
+					if (response.IsSuccessStatusCode)
 					{
+						var JsonResult = await response.Content.ReadAsStringAsync();
 
-						var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<PasswordSetViewModel>>(response.Content);
+						var result = JsonConvert.DeserializeObject<IsLoggedIn>(JsonResult);
 
-						if (deserializedResponse.success)
+						var memberNo = result.member_number;
+
+						var status = result.status;
+
+
+						if (status == "true")
 						{
 							await Navigation.PopAllPopupAsync();
-							await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuSuccessPage("Pin Set Successfully"));
+
+							await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuSuccessPage("Pin Set Successfully"));
 
 							Thread.Sleep(1000);
 
@@ -320,15 +323,13 @@ namespace WalimuV2.Views
 							});
 
 						}
+
 						else
 						{
 							await Navigation.PopAllPopupAsync();
 							await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
 
 						}
-
-
-
 					}
 					else
 					{
@@ -445,89 +446,78 @@ namespace WalimuV2.Views
 					{
 						if (!string.IsNullOrEmpty(PhoneNumber) && !string.IsNullOrEmpty(Pin))
 						{
-
 							await ShowLoadingMessage("Please wait as we sign you in");
 
-							RestClient client = new RestClient(ApiDetail.EndPoint);
+							var memberNumber = Preferences.Get("memberNumber", string.Empty);
 
-							RestRequest restRequest = new RestRequest()
+							var login = new Login()
 							{
-								Method = Method.Post,
-								Resource = "/Registration/GetUser"
+								MemberNumber = memberNumber,
+
+								Password = Pin,
 							};
 
-							string phoneNumberMain = PhoneNumber.StartsWith("0") ? PhoneNumber.TrimStart('0') : PhoneNumber;
+							var httpClient = new HttpClient();
 
-							object registration = new
-							{
-								pin = Convert.ToInt32(Pin),
-								PhoneNumber = phoneNumberMain
-							};
+							var json = JsonConvert.SerializeObject(login);
 
+							var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-							restRequest.AddJsonBody(registration);
-
-
-							var response = await Task.Run(() =>
-							{
-								return client.Execute(restRequest);
-							});
+							var response = await httpClient.PostAsync(ApiDetail.ApiUrl + "api/MemberAuth/Login", content);
 
 							AspNetUsers user = new AspNetUsers();
 
 							try
 							{
-								if (response.IsSuccessful && response.Content.Length > 2)
+								if (response.IsSuccessStatusCode)
 								{
 
+									var JsonResult = await response.Content.ReadAsStringAsync(); // reponse from api
 
+									var result = JsonConvert.DeserializeObject<Rootobject>(JsonResult); // deserialize json to c #
 
-									var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<AspNetUsers>>(response.Content);
+									Preferences.Set("accessToken", result.access_token);// saving reponse locally in essesials for validation
 
-									if (deserializedResponse.success)
+									Preferences.Set("userId", result.user_Id);
+
+									Preferences.Set("memberId", result.member_Id);
+
+									Preferences.Set("memberNumber", result.user_name);
+
+									Preferences.Set("tokenExpirationTime", result.expiration_Time);
+
+									Preferences.Set("firstName", result.firstName);
+
+									Preferences.Set("lastName", result.lastName);
+
+									Preferences.Set("lastName", result.lastName);
+
+									Preferences.Set("phoneNumber", result.phoneNumber);
+
+									Preferences.Set("gender", result.gender);
+
+									Preferences.Set("gender", result.gender);
+
+									Preferences.Set("accountStatus", result.accountStatus);
+
+									Preferences.Set("schemeStatus", result.schemeStatus);
+
+									Preferences.Set("dateOfBirth", result.dateOfBirth);
+
+									Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
+
+									if (string.IsNullOrEmpty(user.schemeId))
 									{
-
-										user = deserializedResponse.data;
-
-
-										Preferences.Set(nameof(user.email), user.email);
-										Preferences.Set(nameof(user.pinHash), user.pinHash);
-										Preferences.Set(nameof(user.firstName), user.firstName);
-										Preferences.Set(nameof(user.lastName), user.lastName);
-										Preferences.Set(nameof(user.userName), user.userName);
-										Preferences.Set(nameof(user.id), user.id);
-										Preferences.Set(nameof(user.memberId), user.memberId);
-										Preferences.Set(nameof(user.phoneNumber), user.phoneNumber.ToString());
-
-										if (string.IsNullOrEmpty(user.schemeId))
-										{
-											Preferences.Set("SchemeId", Convert.ToInt32(user.schemeId));
-										}
-
-
-
-
-
-										Device.BeginInvokeOnMainThread(async () =>
-										{
-											Application.Current.MainPage = new AppShell();
-
-										});
-
-										await RemoveLoadingMessage();
-									}
-									else if (deserializedResponse.message.ToLower().Contains("wrong"))
-									{
-										Pin = "";
-										await ShowErrorMessage("Sorry,you have entered a wrong pin ,please try again");
-									}
-									else
-									{
-										Pin = "";
-										await ShowErrorMessage();
-
+										Preferences.Set("SchemeId", Convert.ToInt32(user.schemeId));
 									}
 
+									Device.BeginInvokeOnMainThread(async () =>
+									{
+										Application.Current.MainPage = new AppShell();
+
+									});
+
+									await RemoveLoadingMessage();
 
 								}
 								else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
@@ -537,12 +527,9 @@ namespace WalimuV2.Views
 
 									try
 									{
-
 										await ShowErrorMessage("Ooops, Something is not right, try again later. If this persists please consult the Admin");
 
 										return;
-
-
 									}
 									catch (Exception ex)
 									{
@@ -551,17 +538,13 @@ namespace WalimuV2.Views
 								}
 								else
 								{
-
 									Pin = "";
 
 									try
 									{
-
 										await ShowErrorMessage("Ooops Login failed , Incorrect username / password combination");
 
 										return;
-
-
 									}
 									catch (Exception ex)
 									{
@@ -578,7 +561,6 @@ namespace WalimuV2.Views
 
 								try
 								{
-
 									SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
 									await ShowErrorMessage("Ooops Login failed , Something went wrong please try again later");
@@ -597,7 +579,6 @@ namespace WalimuV2.Views
 						}
 						else
 						{
-
 							try
 							{
 
@@ -610,10 +591,6 @@ namespace WalimuV2.Views
 								SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
 							}
-
-
-
-
 						}
 					}
 

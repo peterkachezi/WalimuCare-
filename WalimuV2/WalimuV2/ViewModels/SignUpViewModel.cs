@@ -58,7 +58,6 @@ namespace WalimuV2.ViewModels
 		public bool IsPopUpInStack = false;
 
 		private VerifyMember verifyMember;
-
 		public VerifyMember VerifyMember
 		{
 			get { return verifyMember; }
@@ -70,7 +69,6 @@ namespace WalimuV2.ViewModels
 			EnableSubmitBtn = true;
 		}
 		public ICommand SignUpCommand { get; set; }
-
 		public async Task SignUp1()
 		{
 			try
@@ -157,8 +155,6 @@ namespace WalimuV2.ViewModels
 			}
 
 		}
-
-
 		public async Task SignUp()
 		{
 			try
@@ -284,7 +280,6 @@ namespace WalimuV2.ViewModels
 				EnableSubmitBtn = true;
 			}
 		}
-
 		public async Task<bool> SendOtp()
 		{
 			try

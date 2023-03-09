@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuV2.Views.Others.CallBacksPage"
+             Title="CallBack Logs">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsVisible="{Binding IsEmptyIllustrationVisible}"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetMemberRequestsCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="empty"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabel}"
+                        Text="{Binding NoDataAvailableMessage}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalOptions="End" />
+                    <Label
+                        FontSize="Micro"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabelNormal}"
+                        Text="Tap to Refresh"
+                        VerticalOptions="End" />
+                </StackLayout>
+
+
+                <ListView
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HasUnevenRows="True"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    IsVisible="{Binding IsListViewVisible}"
+                    ItemsSource="{Binding CallBackrequests}"
+                    RefreshCommand="{Binding GetMemberRequestsCommand}"
+                    SelectionMode="None"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="10" Padding="0">
+                                    <StackLayout Margin="0" Padding="0">
+                                        <StackLayout Margin="0" Padding="5">
+                                            <Label Style="{StaticResource MedBookLabel}" Text="{Binding Remarks}" />
+                                            <Label
+                                                FontSize="Micro"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="{Binding CreateDate, StringFormat='{}{0:dd-MMM-yyyy}'}" />
+                                        </StackLayout>
+
+                                        <BoxView
+                                            Margin="0"
+                                            BackgroundColor="LightGray"
+                                            HeightRequest="1"
+                                            HorizontalOptions="FillAndExpand" />
+
+                                        <StackLayout Padding="5" MinimumHeightRequest="200">
+                                            <!--<Label Style="{StaticResource MedBookLabel}" Text="Your Complaint Description" />-->
+                                            <Label Style="{StaticResource MedBookLabelNormal}" Text="{Binding PhoneNumber}" />
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button
+                    x:Name="FloatingActionButtonAdd"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Command="{Binding AddNewRequestCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Style="{StaticResource ButtonMaterialFilledSecondary}"
+                    Text="+"
+                    WidthRequest="60" />
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

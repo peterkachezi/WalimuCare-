@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="WalimuV2.DataTemplates.EntryWithBorder"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:WalimuV2.CustomRenderer">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="MyFrame" TargetType="Frame">
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="BorderColor" Value="Gray" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            </Style>
+
+            <Style
+                x:Key="Pin"
+                BasedOn="{StaticResource MedBookEntryNormal}"
+                TargetType="Entry">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="VerticalTextAlignment" Value="Start" />
+
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Frame BorderColor="Gray" Style="{StaticResource MyFrame}">
+            <local:EntryNoBottomBorder x:Name="txtPin2" Style="{StaticResource Pin}" />
+        </Frame>
+    </ContentView.Content>
+</ContentView>

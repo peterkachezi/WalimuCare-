@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="WalimuV2.Views.WalimuInfoPage"
+                CloseWhenBackgroundIsClicked="True"
+                xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                NavigationPage.HasNavigationBar="False">
+    <popup:PopupPage.Content>
+        <StackLayout
+            Padding="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Frame
+                Padding="0"
+                BackgroundColor="White"
+                CornerRadius="10"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="200">
+
+                <!--<StackLayout Orientation="Vertical">
+
+                    <Image Source="warning.png"
+                           WidthRequest="40"  />
+
+                    <Label Text="Invalid Member Id or Phone Number"
+                           x:Name="lblMessage"
+                           TextColor="{StaticResource Primary}"
+                           FontSize="Default" Style="{x:StaticResource MedBookLabelNormal}"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" />
+
+                </StackLayout>-->
+
+                <StackLayout
+                    Margin="0"
+                    Padding="0"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        Margin="0"
+                        Padding="20"
+                        BackgroundColor="#3BE4FF">
+
+                        <Image
+                            HeightRequest="70"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="info"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <StackLayout Padding="10">
+
+
+
+                        <Label
+                            x:Name="lblMessage"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource MedBookLabelNormal}"
+                            Text="Please wait for more info ..."
+                            VerticalOptions="CenterAndExpand"
+                            TextColor="Black"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+        </StackLayout>
+    </popup:PopupPage.Content>
+    </popup:PopupPage>

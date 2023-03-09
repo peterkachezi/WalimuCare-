@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customRender:CustomContentPageRenderer
+    xmlns:customRender="clr-namespace:WalimuV2.CustomRenderer"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="WalimuV2.Views.Policy.PolicyLimitsPage"
+    Title="Policy Limit">
+
+    <ContentPage.Resources>
+        <Style
+            x:Key="Title"
+            BasedOn="{StaticResource MedBookLabelNormal}"
+            TargetType="Label">
+            <Setter Property="TextColor" Value="Gray" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+
+        <Style
+            x:Key="Value"
+            BasedOn="{StaticResource MedBookLabelMedium}"
+            TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+
+        <DataTemplate x:Key="ClaimsDataTemplate">
+            <ViewCell>
+                <Frame
+                    Margin="5"
+                    Padding="0"
+                    CornerRadius="1"
+                    HasShadow="True">
+
+                    <StackLayout
+                        HorizontalOptions="FillAndExpand"
+                        Orientation="Horizontal"
+                        VerticalOptions="FillAndExpand">
+
+                        <BoxView BackgroundColor="{x:StaticResource PrimaryLight1}" WidthRequest="4" />
+
+                        <Grid
+                            Padding="10"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+
+
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.30*" />
+                                <ColumnDefinition Width="0.70*" />
+
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Style="{x:StaticResource Title}"
+                                Text="Department" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Style="{x:StaticResource Value}"
+                                Text="{Binding departmentName}" />
+
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Style="{x:StaticResource Title}"
+                                Text="Limit Amount" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{x:StaticResource Value}"                                                                                                           
+                                Text="{Binding limitAmount, StringFormat='{0:#,0.#0}'}"/>
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{x:StaticResource Title}"
+                                Text="Utilized" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Style="{x:StaticResource Value}"
+                                Text="{Binding utilizeAmount, StringFormat='{0:#,0.#0}'}"/>
+
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Style="{x:StaticResource Title}"
+                                Text="Available" />
+                            <Label
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Style="{x:StaticResource Value}"
+                               Text="{Binding availableAmount, StringFormat='{0:#,0.#0}'}"/>
+
+
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            VerticalOptions="FillAndExpand">
+            <!--<Frame
+                Padding="0"
+                BackgroundColor="{StaticResource Primary}"
+                CornerRadius="0"
+                HasShadow="True"
+                HeightRequest="60"
+                VerticalOptions="StartAndExpand">
+
+                <StackLayout Padding="10" Orientation="Horizontal">
+
+                    <Image
+                        Margin="10,0,0,0"
+                        HeightRequest="20"
+                        HorizontalOptions="Start"
+                        Source="backbutton.png"
+                        VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackButtonCommand}" CommandParameter="///AboutPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label
+                        Margin="10,0,0,0"
+                        FontSize="20"
+                        HorizontalOptions="StartAndExpand"
+                        Style="{StaticResource MedBookLabel}"
+                        Text="Hospital Visits"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+
+                </StackLayout>
+
+            </Frame>-->
+
+            <StackLayout
+                Padding="10"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding IsListViewVisible}"
+                Orientation="Vertical"
+                VerticalOptions="StartAndExpand">
+
+                <ListView
+                    HasUnevenRows="True"
+                    HorizontalOptions="FillAndExpand"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    ItemTapped="ListView_ItemTapped"
+                    ItemTemplate="{StaticResource ClaimsDataTemplate}"
+                    ItemsSource="{Binding PolicyLimits}"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    SelectionMode="None"
+                    SeparatorVisibility="None"
+                    VerticalOptions="FillAndExpand" />
+
+
+
+            </StackLayout>
+
+
+            <StackLayout IsVisible="{Binding IsEmptyIllustrationVisible}" VerticalOptions="StartAndExpand">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RefreshCommand}" />
+                </StackLayout.GestureRecognizers>
+                <Image
+                    Aspect="AspectFill"
+                    HorizontalOptions="CenterAndExpand"
+                    Source="empty"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource MedBookLabel}"
+                    Text="{Binding NoDataAvailableMessage}"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="End" />
+                <Label
+                    FontSize="Micro"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource MedBookLabelNormal}"
+                    Text="Tap to Refresh"
+                    VerticalOptions="End" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</customRender:CustomContentPageRenderer>

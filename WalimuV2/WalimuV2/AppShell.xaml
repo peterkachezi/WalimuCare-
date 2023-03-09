@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:WalimuV2.Views"
+       xmlns:hospitals="clr-namespace:WalimuV2.Views.hospitals"
+       xmlns:TrackHospitalVisit="clr-namespace:WalimuV2.Views.TrackHospitalVisit"
+       xmlns:Dependants="clr-namespace:WalimuV2.Views.Dependants"
+       xmlns:Policy="clr-namespace:WalimuV2.Views.Policy"
+       xmlns:Downloads="clr-namespace:WalimuV2.Views.Downloads"
+       xmlns:Telemedicine="clr-namespace:WalimuV2.Views.Telemedicine"
+       xmlns:Others="clr-namespace:WalimuV2.Views.Others"
+       Title="WalimuV2"
+       x:Class="WalimuV2.AppShell" 
+       Visual="Material" >      
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+            <!--
+            Default Styles for all Flyout Items
+            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
+            -->
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Secondary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <!--<VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource HkBackground}" />
+                                </VisualState.Setters>
+                            </VisualState>-->
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!--
+            Custom Style you can apply to any Flyout Item
+            -->
+            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid HorizontalOptions="FillAndExpand" HeightRequest="100" 
+              VerticalOptions="FillAndExpand" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image 
+                    Aspect="AspectFill"
+                   Source="gradient.png"
+                   Grid.ColumnSpan="5"
+                   Grid.RowSpan="4"
+                   Opacity="1"
+                   />
+                <Image 
+                    Source="user.png" 
+                    HeightRequest="70" 
+                    WidthRequest="60"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    HorizontalOptions="Start"
+                    VerticalOptions="End"/>
+                <StackLayout                         
+                         VerticalOptions="CenterAndExpand"
+                         Grid.Row="1" 
+                         Margin="10,0,0,0"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="3"
+                         Orientation="Vertical">
+                    <Label HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       TextColor="white"
+                       Text="Peter Kachezi"/>
+                    <Label HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       TextColor="white"
+                       Text="View Profile"/>
+                </StackLayout>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>    
+    
+
+    <FlyoutItem  Title="Dashboard" Icon="dashboardIcon.png" >
+        <ShellContent  Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Find Hospital" Icon="hospitalIcon.png">
+        <ShellContent  Route="FindHospitalPage" ContentTemplate="{DataTemplate hospitals:FindHospitalPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Track Hospital Visit" Icon="hospitalbedicon.png" >
+        <ShellContent  Route="HospitalVisitPage" ContentTemplate="{DataTemplate TrackHospitalVisit:HospitalVisitPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Manage Dependants" Icon="dependantsIcon.png" >
+        <ShellContent  Route="DependantPage" ContentTemplate="{DataTemplate Dependants:DependantPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Know Your Policy" Icon="policydocumentsicon.png">
+        <ShellContent  Route="PolicyDetailsPage" ContentTemplate="{DataTemplate Policy:PolicyDetailsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Available Limits" Icon="policydocumentsicon.png">
+        <ShellContent  Route="PolicyLimitsPage" ContentTemplate="{DataTemplate Policy:PolicyLimitsPage}" />
+    </FlyoutItem>
+
+    <!--<FlyoutItem  Title="E-Card" Icon="ecard.png" >
+        <ShellContent  Route="ECardPage" ContentTemplate="{DataTemplate Ecard:ECardPage}" />
+    </FlyoutItem>-->
+
+    <FlyoutItem  Title="My Download Center" Icon="mydownloadcentre.png">
+        <ShellContent  Route="MyDownloadCenterPage" ContentTemplate="{DataTemplate Downloads:MyDownloadCenterPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Telemedicine" Icon="telemedicine.png" >
+        <ShellContent  Route="TeleMedicineCallOrWebLinkPage" ContentTemplate="{DataTemplate Telemedicine:TeleMedicineCallOrWebLinkPage}" />
+    </FlyoutItem>
+
+    <!--<FlyoutItem  Title="Reports Issues/Feedback" Icon="complaint.png" >
+        <ShellContent  Route="SubmitComplaintsPage" ContentTemplate="{DataTemplate Others:SubmitComplaintsPage}" />
+    </FlyoutItem>-->
+
+    <FlyoutItem  Title="Request Callback" Icon="callbackicon.png" >
+        <ShellContent  Route="CallBacksPage" ContentTemplate="{DataTemplate Others:CallBacksPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="FAQs" Icon="faqs.png" >
+        <ShellContent  Route="FAQPage" ContentTemplate="{DataTemplate Others:FAQPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Covid 19" Icon="covid.png" >
+        <ShellContent  Route="Covid19Page" ContentTemplate="{DataTemplate Others:Covid19Page}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Emergency Contacts" Icon="contactUsIcon.png" >
+        <ShellContent  Route="ContactUsPage" ContentTemplate="{DataTemplate Others:ContactUsPage}" />
+    </FlyoutItem>
+
+
+    <!--<FlyoutItem Title="Browse" Icon="icon_feed.png">
+        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    </FlyoutItem>-->
+
+    <MenuItem
+        Clicked="OnMenuItemClicked"
+        IconImageSource="LogoutIcon.png"
+        StyleClass="MenuItemLayoutStyle"
+        Text="Logout" />
+
+    <TabBar>
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+    </TabBar>
+
+
+
+</Shell>

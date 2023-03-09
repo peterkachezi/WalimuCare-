@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+                xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="WalimuV2.Views.WalimuLoaderPage"
+                CloseWhenBackgroundIsClicked="True"
+                NavigationPage.HasNavigationBar="False">
+
+    <popup:PopupPage.Content>
+        <StackLayout
+            Padding="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="200">
+
+            <Frame
+                BackgroundColor="White"
+                CornerRadius="10"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <StackLayout>
+                    <!--<Image Source="hkloading.gif" x:Name="loader" IsAnimationPlaying="True" />-->
+
+                    <!--<ffimageloading:CachedImage CacheDuration= "90"
+                                                    RetryCount= "3"
+                                                    RetryDelay= "600"
+                                                    Source="hkloading.gif"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    HeightRequest="50"
+                                                    />-->
+
+                    <WebView x:Name="webViewLoader" HeightRequest="70">
+                        <WebView.Source>
+                            <HtmlWebViewSource Html="{Binding LoaderHtml}" />
+                        </WebView.Source>
+                    </WebView>
+
+
+                    <Label
+                        x:Name="lblMessage"
+                        FontSize="Default"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Style="{x:StaticResource MedBookLabelNormal}"
+                        Text=""
+                        TextColor="{x:StaticResource Secondary}" />
+
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </popup:PopupPage.Content>
+    </popup:PopupPage>  

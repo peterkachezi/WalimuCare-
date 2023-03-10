@@ -684,12 +684,12 @@ namespace WalimuV2.ViewModels
 						break;
 					}
 
-
 				}
 			}
 			catch (Exception ex)
 			{
 				await ShowErrorMessage();
+
 				SendErrorMessageToAppCenter(ex, "Find Hospital", "", PhoneNumber);
 			}
 		}
@@ -716,16 +716,16 @@ namespace WalimuV2.ViewModels
 					Map.Pins.Clear();
 				});
 
-
-
 				foreach (var hosp in LstHospitals.Where(p => p.latitude != null && !p.latitude.Contains(",") && p.longitude != null))
 				{
-
 					bool isConversionSuccessful = false;
+
 					double latitude = 0;
+
 					double longitude = 0;
 
 					isConversionSuccessful = Double.TryParse(hosp.latitude, out latitude);
+
 					isConversionSuccessful = Double.TryParse(hosp.longitude, out longitude);
 
 					if (isConversionSuccessful)
@@ -733,10 +733,15 @@ namespace WalimuV2.ViewModels
 						Pin pin = new Pin()
 						{
 							Type = PinType.Place,
+
 							Label = hosp.name,
+
 							Address = hosp.address,
+
 							Position = new Position(latitude, longitude),
+
 							Rotation = 33.3f,
+
 							Tag = hosp.name,
 							//Icon = BitmapDescriptorFactory.FromBundle("hospitalmapicon"),
 

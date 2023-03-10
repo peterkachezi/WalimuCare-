@@ -162,9 +162,9 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-				var MemberNo = "20133";
+				var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
-				var PhoneNumber = "0704509484";
+				var MemberNo = Preferences.Get("memberNumber", string.Empty);
 
 				IsListViewVisible = true;
 
@@ -182,7 +182,7 @@ namespace WalimuV2.ViewModels
 
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-				HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/CallBack/GetCallBacks?MemberNumber=" + MemberNo + "&PhoneNumber="+ PhoneNumber + "");
+				HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/CallBack/GetCallBacks?MemberNumber=" + MemberNo + "&PhoneNumber=" + phoneNumber + "");
 
 				if (getData.IsSuccessStatusCode)
 				{
@@ -232,11 +232,15 @@ namespace WalimuV2.ViewModels
 			catch (Exception ex)
 			{
 				await ShowErrorMessage();
+
 				SendErrorMessageToAppCenter(ex, "Request Call Back");
 
 				IsListViewVisible = false;
+
 				IsEmptyIllustrationVisible = true;
+
 				NoDataAvailableMessage = "Something went wrong, Please try again";
+
 				IsRefreshing = false;
 			}
 		}
@@ -253,6 +257,11 @@ namespace WalimuV2.ViewModels
 					}
 					else
 					{
+						var firstName = Preferences.Get("firstName", string.Empty);
+
+						var lastName = Preferences.Get("lastName", string.Empty);
+
+						var MemberNo = Preferences.Get("memberNumber", string.Empty);
 
 						var model = new CallBackrequests
 						{
@@ -260,9 +269,9 @@ namespace WalimuV2.ViewModels
 
 							Remarks = remarks,
 
-							MemberName = "Peter",
+							MemberName = firstName + " " + lastName,
 
-							MemberNumber = "20133"
+							MemberNumber = MemberNo
 						};
 
 						var json = JsonConvert.SerializeObject(model);
@@ -283,8 +292,8 @@ namespace WalimuV2.ViewModels
 								await ShowSuccessMessage("Call Back request Submitted successfuly");
 
 								Thread.Sleep(2000);
-						
-								await Shell.Current.Navigation.PopAsync();			
+
+								await Shell.Current.Navigation.PopAsync();
 
 							}
 						}
@@ -304,9 +313,7 @@ namespace WalimuV2.ViewModels
 
 				SendErrorMessageToAppCenter(ex, "Request Call back", MemberId, PhoneNumber);
 			}
-
 		}
-
 		public async Task GoToLists()
 		{
 			try

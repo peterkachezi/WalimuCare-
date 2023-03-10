@@ -101,7 +101,7 @@ namespace WalimuV2.ViewModels
 
 				if (string.IsNullOrEmpty(memberNo))
 				{
-					await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
+					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
 
 					return;
 				}
@@ -124,7 +124,7 @@ namespace WalimuV2.ViewModels
 
 						client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-						HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/PolicyLimit/GetPolicyLimit?MemberNo=123&PolicyNo=2");
+						HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/PolicyLimit/GetPolicyLimit?MemberNo=" + memberNo + "&PolicyNo=2");
 
 						if (getData.IsSuccessStatusCode)
 						{

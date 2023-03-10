@@ -284,6 +284,7 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
+
 				IsBusy = true;
 
 				EnableSubmitBtn = false;
@@ -299,16 +300,12 @@ namespace WalimuV2.ViewModels
 					Resource = "/Members/SendOTP"
 				};
 
-
 				object payload = new
 				{
 					AddressMobileNumber = PhoneNumber,
 				};
 
-
-
 				restRequest.AddJsonBody(payload);
-
 
 				var response = await Task.Run(() =>
 				{

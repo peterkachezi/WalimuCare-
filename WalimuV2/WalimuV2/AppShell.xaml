@@ -170,7 +170,7 @@
         <ShellContent  Route="PolicyDetailsPage" ContentTemplate="{DataTemplate Policy:PolicyDetailsPage}" />
     </FlyoutItem>
 
-    <FlyoutItem  Title="Available Limits" Icon="policydocumentsicon.png">
+    <FlyoutItem  Title="Available Limits" Icon="policylimitsicon.png">
         <ShellContent  Route="PolicyLimitsPage" ContentTemplate="{DataTemplate Policy:PolicyLimitsPage}" />
     </FlyoutItem>
 

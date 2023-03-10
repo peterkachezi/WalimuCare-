@@ -81,16 +81,12 @@ namespace WalimuV2.ViewModels
 			}
 		}
 
-
 		private bool isGpsEnabledVisible;
 		public bool IsGpsEnabledVisible
 		{
 			get { return isGpsEnabledVisible; }
 			set { isGpsEnabledVisible = value; OnPropertyChanged(); }
 		}
-
-
-
 
 		private int numberOfHospitals;
 		public int NumberOfHospitals
@@ -104,9 +100,7 @@ namespace WalimuV2.ViewModels
 			}
 		}
 
-
 		public string PhoneNumber { get; set; }
-
 
 		private string selectedSearchOption;
 		public string SelectedSearchOption
@@ -115,13 +109,9 @@ namespace WalimuV2.ViewModels
 			set { selectedSearchOption = value; OnPropertyChanged(); }
 		}
 
-
-
 		//public string SelectedSearchOption { get; set; }
 
 		public bool IsAnimationOutInvoked { get; set; }
-
-
 		private List<County> lstLocations { get; set; }
 		public List<County> LstLocations
 		{
@@ -132,11 +122,7 @@ namespace WalimuV2.ViewModels
 				OnPropertyChanged(nameof(LstLocations));
 			}
 		}
-
-
 		public List<County> OriginalLstLocations { get; set; }
-
-
 		public List<Speciality> lstSpecialities { get; set; }
 		public List<Speciality> LstSpecialities
 		{
@@ -148,14 +134,12 @@ namespace WalimuV2.ViewModels
 			set
 			{
 				lstSpecialities = value;
+
 				OnPropertyChanged(nameof(LstSpecialities));
 			}
 		}
 
-
 		public List<Speciality> OriginalLstSpecialities { get; set; }
-
-
 		public List<Hospital> lstHospitals { get; set; }
 		public List<Hospital> LstHospitals
 		{
@@ -163,15 +147,13 @@ namespace WalimuV2.ViewModels
 			set
 			{
 				lstHospitals = value;
+
 				NumberOfHospitals = lstHospitals.Count();
+
 				OnPropertyChanged(nameof(LstHospitals));
 			}
 		}
-
-
 		public List<Hospital> OriginalLstHospitals { get; set; }
-
-
 
 		private HospitalDetails selectedHospitalDetails;
 		public HospitalDetails SelectedHospitalDetails
@@ -180,11 +162,10 @@ namespace WalimuV2.ViewModels
 			set
 			{
 				selectedHospitalDetails = value;
+
 				OnPropertyChanged(nameof(SelectedHospitalDetails));
 			}
 		}
-
-
 
 		private string searchString;
 		public string SearchString
@@ -193,46 +174,43 @@ namespace WalimuV2.ViewModels
 			set
 			{
 				searchString = value;
+
 				OnPropertyChanged(nameof(SearchString));
+
 				SearchCountyOrSpecialty();
 			}
 		}
-
-
 		private string searchBy;
 		public string SearchBy
 		{
 			get { return searchBy; }
+
 			set { searchBy = value; OnPropertyChanged(nameof(SearchBy)); }
 		}
-
-
 
 		private string nameOfSelectedArea;
 		public string NameOfSelectedArea
 		{
 			get { return nameOfSelectedArea; }
+
 			set
 			{
 				nameOfSelectedArea = value;
 				OnPropertyChanged(nameof(NameOfSelectedArea));
 			}
 		}
-
-
-
 		private bool isCountyListViewVisible;
 		public bool IsCountyListViewVisible
 		{
 			get { return isCountyListViewVisible; }
+
 			set
 			{
 				isCountyListViewVisible = value;
+
 				OnPropertyChanged(nameof(IsCountyListViewVisible));
 			}
 		}
-
-
 
 		private bool isSpecialityListViewVisible;
 		public bool IsSpecialityListViewVisible
@@ -241,12 +219,10 @@ namespace WalimuV2.ViewModels
 			set
 			{
 				isSpecialityListViewVisible = value;
+
 				OnPropertyChanged(nameof(IsSpecialityListViewVisible));
 			}
 		}
-
-
-
 		private bool isHospitalSearchListViewVisible;
 		public bool IsHospitalSearchListViewVisible
 		{
@@ -258,29 +234,22 @@ namespace WalimuV2.ViewModels
 			}
 		}
 
-
-
 		private string placeHolderText;
 		public string PlaceHolderText
 		{
 			get { return placeHolderText; }
 			set { placeHolderText = value; OnPropertyChanged(nameof(PlaceHolderText)); }
 		}
-
-
-
 		public Location selectedLocation { get; set; }
 		public Location CurrentLocation { get; set; }
-
 
 		private Map map;
 		public Map Map
 		{
 			get { return map; }
+
 			set { map = value; OnPropertyChanged(); }
 		}
-
-
 
 		private bool isSelectCurrentLocationVisible;
 		public bool IsSelectCurrentLocationVisible
@@ -315,7 +284,6 @@ namespace WalimuV2.ViewModels
 
 		public FindHospitalViewModel()
 		{
-
 			PageTitle = "Find Hospital";
 
 			PageSubTitle = "Find List of Hospitals Near Your Area";
@@ -338,19 +306,15 @@ namespace WalimuV2.ViewModels
 
 				Stream stream = assembly.GetManifestResourceStream("WalimuV2.SimpleLabel.json");
 
-
 				string text = "";
 
 				using (var reader = new StreamReader(stream))
 				{
 					text = reader.ReadToEnd();
 				}
-
-
 				//string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MapStyle.json");
 
 				//string fileContent = File.ReadAllText(fileName);
-
 
 				Map.MapStyle = MapStyle.FromJson(text);
 
@@ -387,15 +351,12 @@ namespace WalimuV2.ViewModels
 			}
 			catch (Exception ex)
 			{
-
-
 				SendErrorMessageToAppCenter(ex, "Find Hospital", "", PhoneNumber);
 
 				Task.Run(async () =>
 				{
 					await ShowErrorMessage();
 				});
-
 			}
 
 		}
@@ -404,12 +365,10 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-
 				IsGpsEnabled = DependencyService.Get<ILocSettings>().isGpsAvailable();
 
 				if (IsGpsEnabled == false)
 				{
-
 					if (UserProceedsWithoutGpsBiengTurnedOn)
 					{
 
@@ -421,7 +380,6 @@ namespace WalimuV2.ViewModels
 					}
 
 				}
-
 
 				if (IsGpsEnabled)
 				{
@@ -436,12 +394,12 @@ namespace WalimuV2.ViewModels
 					return;
 				}
 
-
-
-
 				await ShowLoadingMessage();
+
 				IsRefreshing = true;
+
 				NameOfSelectedArea = "you";
+
 				IsSelectCurrentLocationVisible = false;
 
 				if (!await CheckInternetConnectivity())
@@ -450,14 +408,10 @@ namespace WalimuV2.ViewModels
 					return;
 				}
 
-
-
 				if (IsGpsEnabled == true)
 				{
 					await GetUserCurrentLocation();
 				}
-
-
 				await GetAllCounties();
 
 				await GetAllHospitals();
@@ -485,24 +439,20 @@ namespace WalimuV2.ViewModels
 					CurrentLocation = new Location()
 					{
 						Latitude = -1.2862394,
+
 						Longitude = 36.78932030000001
 					};
 
 					await MoveOnMap(CurrentLocation, 50);
 				}
-
-
 				await RemoveLoadingMessage();
+
 				IsRefreshing = false;
-
-
-
-
 			}
 			catch (Exception ex)
 			{
-
 				await ShowErrorMessage();
+
 				SendErrorMessageToAppCenter(ex, "Find Hospital", "", PhoneNumber);
 			}
 		}
@@ -510,7 +460,6 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-
 				await Task.Delay(1000);
 
 				RestClient client = new RestClient(ApiDetail.EndPoint);
@@ -518,6 +467,7 @@ namespace WalimuV2.ViewModels
 				RestRequest restRequest = new RestRequest()
 				{
 					Method = Method.Get,
+
 					Resource = "/Hospitals/GetAllCounties"
 				};
 
@@ -531,21 +481,21 @@ namespace WalimuV2.ViewModels
 					if (deserializedData.success)
 					{
 						LstLocations = deserializedData.data;
+
 						OriginalLstLocations = deserializedData.data;
+
 						//cmbLocations.DataSource = LstLocations.Select(p => p.county).ToList();
 					}
 					else
 					{
 						await ShowErrorMessage("Something went wrong when getting list of counties, please try again later");
 					}
-
 				}
-
-
 			}
 			catch (Exception ex)
 			{
 				SendErrorMessageToAppCenter(ex, "Find Hospital", "", PhoneNumber);
+
 				Console.Write(ex);
 			}
 
@@ -651,20 +601,14 @@ namespace WalimuV2.ViewModels
 						Map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(Kilometers)));
 
 					});
-
-
-
-
 					//Map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(Kilometers)));
-
 				}
-
-
 
 			}
 			catch (Exception ex)
 			{
 				await ShowErrorMessage("Something went wrong when moving on map");
+
 				SendErrorMessageToAppCenter(ex, "Find Hospital", "", PhoneNumber);
 			}
 		}
@@ -687,11 +631,14 @@ namespace WalimuV2.ViewModels
 				{
 
 					bool isConversionSuccessful = false;
+
 					double latitude = 0;
+
 					double longitude = 0;
 
-					isConversionSuccessful = Double.TryParse(hosp.latitude, out latitude);
-					isConversionSuccessful = Double.TryParse(hosp.longitude, out longitude);
+					isConversionSuccessful = double.TryParse(hosp.latitude, out latitude);
+
+					isConversionSuccessful = double.TryParse(hosp.longitude, out longitude);
 
 					if (isConversionSuccessful)
 					{
@@ -707,11 +654,8 @@ namespace WalimuV2.ViewModels
 						{
 							LstHospitals.Add(hosp);
 						}
-
 					}
-
 				}
-
 				LstHospitals = LstHospitals.OrderBy(p => p.DistanceFromLocation).ToList();
 
 			}
@@ -1273,6 +1217,7 @@ namespace WalimuV2.ViewModels
 			catch (Exception ex)
 			{
 				SendErrorMessageToAppCenter(ex, "Find Hospital", "", PhoneNumber);
+
 				Console.Write(ex);
 			}
 
@@ -1289,7 +1234,6 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "Find Hospital");
 			}
 		}
-
 		public async Task CheckIfLocationPermissionIsEnabled()
 		{
 			try
@@ -1314,7 +1258,6 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "Find Hospital");
 			}
 		}
-
 		public async Task RequestLocationPermision()
 		{
 			try
@@ -1347,7 +1290,6 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "Find Hospital");
 			}
 		}
-
 		public async Task GetUserSelectedLocation()
 		{
 			try
@@ -1407,8 +1349,6 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "Find Hospital");
 			}
 		}
-
-
 		public void EnableCurrentLocationSelection()
 		{
 			try

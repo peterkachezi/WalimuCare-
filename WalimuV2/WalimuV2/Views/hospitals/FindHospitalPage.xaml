@@ -2,8 +2,15 @@
 <customrenderer:CustomContentPageRenderer 
     xmlns:customrenderer="clr-namespace:WalimuV2.CustomRenderer"
     xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    x:Class="WalimuV2.Views.hospitals.FindHospitalPage">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="WalimuV2.Views.hospitals.FindHospitalPage"
+    Title="Find Hospital Near You"
+>
+    
+    
+    
+    
     <ContentPage.Resources>
 
         <DataTemplate x:Key="hospitalsDataTemplate" x:Name="hospitalsDataTemplate">
@@ -78,7 +85,7 @@
                 RowSpacing="0"
                 VerticalOptions="FillAndExpand">
 
-                <Frame
+                <!--<Frame
                     Grid.Row="0"
                     Padding="0"
                     BackgroundColor="{StaticResource Primary}"
@@ -95,7 +102,7 @@
                             Source="backbutton.png"
                             VerticalOptions="CenterAndExpand">
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BackButtonCommand}" CommandParameter="///HomePage" />
+                                <TapGestureRecognizer Command="{Binding BackButtonCommand}" CommandParameter="///AboutPage" />
                             </Image.GestureRecognizers>
                         </Image>
 
@@ -110,7 +117,7 @@
 
                     </StackLayout>
 
-                </Frame>
+                </Frame>-->
 
                 <ContentView
                     Grid.Row="1"

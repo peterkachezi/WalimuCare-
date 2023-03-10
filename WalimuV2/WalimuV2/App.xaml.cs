@@ -1,6 +1,7 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using System;
 using System.Diagnostics;
+using WalimuV2.Interfaces;
 using WalimuV2.Models;
 using WalimuV2.Services;
 using WalimuV2.ViewModels;
@@ -97,50 +98,69 @@ namespace WalimuV2
 		}
 		public void RegisterDependencyModels()
 		{
+			try
+			{
 
-			DependencyService.Register<ConfirmOtpViewModelReset>();
+	
 
-			DependencyService.Register<ResetPinPageViewModel>();
 
-			DependencyService.Register<TheRealLoginViewModel>();
+				//view models 
+				DependencyService.Register<MockDataStore>();
 
-			DependencyService.Register<RequestCallBackViewModel>();
+				DependencyService.Register<AppShellViewModel>();
 
-			DependencyService.Register<PolicyLimitViewModel>();
+				DependencyService.Register<PolicyLimitViewModel>();
 
-			DependencyService.Register<UserProfileViewModel>();
+				DependencyService.Register<SignUpViewModel>();
 
-			DependencyService.Register<ConfirmOtpViewModel>();
+				DependencyService.Register<ConfirmOtpViewModel>();
 
-			DependencyService.Register<SignUpViewModel>();
+				DependencyService.Register<ConfirmMemberDetailsViewModel>();
 
-			DependencyService.Register<ConfirmMemberDetailsViewModel>();
+				DependencyService.Register<TheRealLoginViewModel>();
 
-			DependencyService.Register<FAQPageViewModel>();
+				DependencyService.Register<DependantsViewModel>();
 
-			DependencyService.Register<Covid19ViewModel>();
+				DependencyService.Register<HospitalVisitViewModel>();
 
-			DependencyService.Register<HospitalVisitViewModel>();
+				DependencyService.Register<PolicyDetailsViewModel>();	
 
-			DependencyService.Register<DependantsViewModel>();
+				DependencyService.Register<RequestCallBackViewModel>();
 
-			DependencyService.Register<PolicyDetailsViewModel>();
+				DependencyService.Register<FindHospitalViewModel>();
 
-			DependencyService.Register<FindHospitalViewModel>();
+				DependencyService.Register<UserProfileViewModel>();
 
-			DependencyService.Register<EnableGpsViewModel>();
+				DependencyService.Register<RequestCallBackViewModel>();
 
-			DependencyService.Register<UserLocationViewModel>();
+				DependencyService.Register<EnableGpsViewModel>();
 
-			DependencyService.Register<ECardViewModel>();
+				DependencyService.Register<FAQPageViewModel>();
 
-			DependencyService.Register<DownloadsViewModel>();
+				DependencyService.Register<ConfirmOtpViewModelReset>();
 
-			//DependencyService.Register<PolicyLimitsViewModel>();
+				DependencyService.Register<ResetPinPageViewModel>();
 
-			DependencyService.Register<MockDataStore>();
+				DependencyService.Register<Covid19ViewModel>();
+
+				DependencyService.Register<UserLocationViewModel>();
+
+				DependencyService.Register<ECardViewModel>();
+
+				DependencyService.Register<DownloadsViewModel>();
+
+				DependencyService.Register<IDownload>();
+
+				DependencyService.Register<ILocSettings>();
+
+				DependencyService.Register<IFileSavePdf>();
+			}
+			catch (Exception ex)
+			{
+
+				Console.Write(ex);
+			}
 		}
-
 		protected override void OnStart()
 		{
 		}

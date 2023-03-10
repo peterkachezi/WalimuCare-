@@ -22,7 +22,7 @@ namespace WalimuV2.ApiResponses
 			public string gender { get; set; }
 			public DateTime dateOfBirth { get; set; }
 			public string phoneNumber { get; set; }
-			public int accountStatus { get; set; }
+			public string accountStatus { get; set; }
 			public int schemeStatus { get; set; }
 		}
 

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
+using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -168,8 +169,17 @@ namespace WalimuV2.ViewModels
 
 			try
 			{
-				EnableLoader = true;
+				var memberNo = Preferences.Get("memberNumber", string.Empty);
 
+				if (memberNo == "")
+				{
+					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
+
+					return;
+				}
+
+				EnableLoader = true;
+				
 				if (await CheckInternetConnectivity())
 				{
 					if (await CheckIfApiDetailsAreSetUp())
@@ -180,7 +190,7 @@ namespace WalimuV2.ViewModels
 
 						var login = new Login()
 						{
-							MemberNumber = "20133",
+							MemberNumber = memberNo,
 
 							Password = pin,
 						};
@@ -201,6 +211,20 @@ namespace WalimuV2.ViewModels
 
 							var result = JsonConvert.DeserializeObject<Rootobject>(JsonResult); // deserialize json to c #
 
+							if (result.accountStatus == "Wrong Password")
+							{
+								await ShowErrorMessage("You have entered wrong password");
+
+								return;
+							}
+							
+							if (result.accountStatus == "Account not available")
+							{
+								await ShowErrorMessage("Sorry account details not found , kindly create an account");
+
+								return;
+							}
+
 							Preferences.Set("accessToken", result.access_token);// saving reponse locally in essesials for validation
 
 							Preferences.Set("userId", result.user_Id);
@@ -213,15 +237,11 @@ namespace WalimuV2.ViewModels
 
 							Preferences.Set("firstName", result.firstName);
 
-							Preferences.Set("lastName", result.lastName);
-
-							Preferences.Set("lastName", result.lastName);
+							Preferences.Set("lastName", result.lastName);			
 
 							Preferences.Set("phoneNumber", result.phoneNumber);
 
-							Preferences.Set("gender", result.gender);
-
-							Preferences.Set("gender", result.gender);
+							Preferences.Set("gender", result.gender);			
 
 							Preferences.Set("accountStatus", result.accountStatus);
 

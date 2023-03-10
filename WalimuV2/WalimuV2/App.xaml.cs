@@ -27,15 +27,17 @@ namespace WalimuV2
 
                 SetApiDetails();
 
-                //var firstName = Preferences.Get(nameof(AspNetUsers.firstName), null);
+				Preferences.Clear();    
+
 				var firstName = Preferences.Get("firstName", string.Empty);
 
 				var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
-				//MainPage = new WelcomeScreenPage();
 
-                //var phoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), null);
+				var memberNumber = Preferences.Get("memberNumber", string.Empty);
 
-                if (firstName == null || phoneNumber == null)
+				var password = Preferences.Get("password", string.Empty);
+
+				if (string.IsNullOrEmpty(memberNumber))
                 {
                     MainPage = new WelcomeScreenPage();
                 }

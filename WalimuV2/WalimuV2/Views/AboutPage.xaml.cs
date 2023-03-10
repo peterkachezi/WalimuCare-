@@ -131,7 +131,6 @@ namespace WalimuV2.Views
 			try
 			{
 				await Shell.Current.Navigation.PushAsync(new Covid19Page());
-
 			}
 			catch (Exception ex)
 			{
@@ -139,5 +138,44 @@ namespace WalimuV2.Views
 
 			}
 		}
+		private string greetings;
+		public string Greetings
+		{
+			get { return greetings; }
+
+			set { greetings = value; }
+		}
+		public void SetGreetings()
+		{
+			try
+			{
+				var timeOfDay = DateTime.Now.TimeOfDay;
+
+				if (timeOfDay > new TimeSpan(5, 0, 0) && timeOfDay < new TimeSpan(12, 0, 0))
+				{
+					Greetings = "Good Morning, ";
+				}
+				else if (timeOfDay >= new TimeSpan(12, 0, 0) && timeOfDay < new TimeSpan(16, 0, 0))
+				{
+					Greetings = "Good Afternoon, ";
+				}
+				else if (timeOfDay >= new TimeSpan(16, 0, 0) && timeOfDay < new TimeSpan(19, 0, 0))
+				{
+					Greetings = "Good Evening, ";
+				}
+				else
+				{
+					Greetings = "Welcome back,  ";
+				}
+			}
+			catch (Exception ex)
+			{
+
+				SendErrorMessageToAppCenter(ex, "Login", "");
+
+				Greetings = "Welcome back, ";
+			}
+		}
+
 	}
 }

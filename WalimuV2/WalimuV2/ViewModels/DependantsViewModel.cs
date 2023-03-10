@@ -12,6 +12,7 @@ using WalimuV2.Models;
 using WalimuV2.Services;
 using WalimuV2.Views;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace WalimuV2.ViewModels
 {
@@ -84,10 +85,11 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
+				var memberNo = Preferences.Get("memberNumber", string.Empty);
 
-				if (SchemeId == "" && MemberNo == "")
+				if (memberNo == "")
 				{
-					await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
+					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
 
 					return;
 				}
@@ -103,10 +105,6 @@ namespace WalimuV2.ViewModels
 						IsEmptyIllustrationVisible = false;
 
 						IsListViewVisible = true;
-
-						//var memberNo = Preferences.Get("memberName", string.Empty);
-
-						var memberNo = "20133";
 
 						var client = new HttpClient();
 

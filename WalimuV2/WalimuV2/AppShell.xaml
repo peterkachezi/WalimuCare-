@@ -90,34 +90,60 @@
                 </Grid.RowDefinitions>
                 <Image 
                     Aspect="AspectFill"
-                   Source="gradient.png"
-                   Grid.ColumnSpan="5"
-                   Grid.RowSpan="4"
-                   Opacity="1"
+                    
+                    Source="gradient.png"
+                    
+                    Grid.ColumnSpan="5"
+                    
+                    Grid.RowSpan="4"
+                    
+                    Opacity="1"
                    />
                 <Image 
                     Source="user.png" 
+                    
                     HeightRequest="70" 
+                    
                     WidthRequest="60"
+                    
                     Grid.Column="1"
+                    
                     Grid.Row="1"
+                    
                     HorizontalOptions="Start"
+                    
                     VerticalOptions="End"/>
+                
                 <StackLayout                         
                          VerticalOptions="CenterAndExpand"
+                    
                          Grid.Row="1" 
+                    
                          Margin="10,0,0,0"
+                    
                          Grid.Column="2"
+                    
                          Grid.ColumnSpan="3"
+                    
                          Orientation="Vertical">
-                    <Label HorizontalTextAlignment="Start"
-                       VerticalTextAlignment="Center"
-                       TextColor="white"
-                       Text="Peter Kachezi"/>
-                    <Label HorizontalTextAlignment="Start"
-                       VerticalTextAlignment="Center"
-                       TextColor="white"
-                       Text="View Profile"/>
+                    
+                    <Label 
+                        HorizontalTextAlignment="Start"
+                        
+                        VerticalTextAlignment="Center"
+                        
+                        TextColor="white"
+                        
+                        Text="{Binding ProfileName}"/>
+                    
+                    <Label 
+                        HorizontalTextAlignment="Start"
+                        
+                        VerticalTextAlignment="Center"
+                        
+                        TextColor="white"
+                        
+                        Text="View Profile"/>
                 </StackLayout>
             </Grid>
         </DataTemplate>

@@ -100,13 +100,11 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-				//var memberNo = Preferences.Get("memberName", string.Empty);
-
-				var memberNo = "20133";
+				var memberNo = Preferences.Get("memberNumber", string.Empty);		
 
 				if (memberNo == "")
 				{
-					await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
+					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
 
 					return;
 				}

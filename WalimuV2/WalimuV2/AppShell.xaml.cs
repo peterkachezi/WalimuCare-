@@ -13,17 +13,22 @@ using Xamarin.Forms;
 
 namespace WalimuV2
 {
-	public partial class AppShell : Xamarin.Forms.Shell
+	public partial class AppShell : Shell
 	{
 
 
 		public string PhoneNumber { get; set; }
 		public string MemberNumber { get; set; }
+		public string ProfileName { get; } = "MY TEXT";
+
 		public AppShell()
 		{
 			InitializeComponent();
 
 			RegisterMyRoutes();
+
+			this.BindingContext = new AppShellViewModel();
+
 		}
 		public void RegisterMyRoutes()
 		{
@@ -108,7 +113,7 @@ namespace WalimuV2
 
 			Application.Current.MainPage = new NavigationPage();
 
-			Application.Current.MainPage = new NavigationPage(new FinalLoginPage());
+			Application.Current.MainPage = new NavigationPage(new LoginPageTwo());
 		}
 
 		public void SendErrorMessageToAppCenter(Exception ex, string NameOfModule, string MemberNumber = "", string PhoneNumber = "")

@@ -12,15 +12,17 @@ using WalimuV2.Models;
 using WalimuV2.Services;
 using WalimuV2.Views;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace WalimuV2.ViewModels
-{   
+{
 	public class PolicyLimitViewModel : AppViewModel
 	{
 		private string schemeId;
 		public string SchemeId
 		{
 			get { return schemeId; }
+
 			set { schemeId = value; OnPropertyChanged(nameof(SchemeId)); }
 		}
 
@@ -28,12 +30,13 @@ namespace WalimuV2.ViewModels
 		public string MemberNo
 		{
 			get { return memberNo; }
+
 			set { memberNo = value; OnPropertyChanged(nameof(MemberNo)); }
 		}
 		public string PhoneNumber { get; set; }
 
 		private ObservableCollection<PolicyLimit> policyLimits;
-		public ObservableCollection<PolicyLimit>  PolicyLimits
+		public ObservableCollection<PolicyLimit> PolicyLimits
 		{
 			get { return policyLimits; }
 			set { policyLimits = value; OnPropertyChanged(nameof(PolicyLimits)); }
@@ -94,11 +97,9 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-				//var memberNo = Preferences.Get("memberName", string.Empty);
+				var memberNo = Preferences.Get("memberNumber", string.Empty);
 
-				var memberNo = "20133";
-
-				if (memberNo == "")
+				if (string.IsNullOrEmpty(memberNo))
 				{
 					await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
 

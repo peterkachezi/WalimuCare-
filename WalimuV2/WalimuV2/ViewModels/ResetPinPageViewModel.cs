@@ -99,6 +99,9 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
+
+				var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
+
 				IsBusy = true;
 
 				EnableSubmitBtn = false;
@@ -116,8 +119,7 @@ namespace WalimuV2.ViewModels
 
 				object payload = new
 				{
-					AddressMobileNumber = OriginalPhoneNumber
-
+					AddressMobileNumber = phoneNumber
 				};
 
 				restRequest.AddJsonBody(payload);

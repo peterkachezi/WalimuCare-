@@ -89,6 +89,17 @@ namespace WalimuV2.ViewModels
 			}
 		}
 
+		private string memberNumber;
+		public string MemberNumber
+		{
+			get { return memberNumber; }
+			set
+			{
+				memberNumber = value;
+
+				OnPropertyChanged(nameof(MemberNumber));
+			}
+		}
 
 		private string greetings;
 		public string Greetings
@@ -161,25 +172,28 @@ namespace WalimuV2.ViewModels
 				ApiDetail.EndPoint = ApiDetail.LocalEndPoint;
 			}
 		}
-
-
 		public async Task SubmitLogin()
 		{
 			LoginCommand.CanExecute(false);
 
 			try
 			{
-				var memberNo = Preferences.Get("memberNumber", string.Empty);
+				var memberNo = "";
+
+				var savedMemberNo = Preferences.Get("memberNumber", string.Empty);
+
+				memberNo = savedMemberNo;
 
 				if (memberNo == "")
 				{
-					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
+					//await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Something is not right, please log out then Login again"));
 
-					return;
+					//return;
+					memberNo = memberNumber.Trim();
 				}
 
 				EnableLoader = true;
-				
+
 				if (await CheckInternetConnectivity())
 				{
 					if (await CheckIfApiDetailsAreSetUp())
@@ -217,7 +231,7 @@ namespace WalimuV2.ViewModels
 
 								return;
 							}
-							
+
 							if (result.accountStatus == "Account not available")
 							{
 								await ShowErrorMessage("Sorry account details not found , kindly create an account");
@@ -237,11 +251,11 @@ namespace WalimuV2.ViewModels
 
 							Preferences.Set("firstName", result.firstName);
 
-							Preferences.Set("lastName", result.lastName);			
+							Preferences.Set("lastName", result.lastName);
 
 							Preferences.Set("phoneNumber", result.phoneNumber);
 
-							Preferences.Set("gender", result.gender);			
+							Preferences.Set("gender", result.gender);
 
 							Preferences.Set("accountStatus", result.accountStatus);
 
@@ -336,246 +350,246 @@ namespace WalimuV2.ViewModels
 		}
 
 
-		public async Task SubmitLogin1()
-		{
-			LoginCommand.CanExecute(false);
+		//public async Task SubmitLogin1()
+		//{
+		//	LoginCommand.CanExecute(false);
 
-			try
-			{
-				EnableLoader = true;
+		//	try
+		//	{
+		//		EnableLoader = true;
 
-				if (await CheckInternetConnectivity())
-				{
-					if (await CheckIfApiDetailsAreSetUp())
-					{
-						if (!string.IsNullOrEmpty(PhoneNumber) && !string.IsNullOrEmpty(Pin))
-						{
+		//		if (await CheckInternetConnectivity())
+		//		{
+		//			if (await CheckIfApiDetailsAreSetUp())
+		//			{
+		//				if (!string.IsNullOrEmpty(PhoneNumber) && !string.IsNullOrEmpty(Pin))
+		//				{
 
-							EnableLoginBtn = false;
+		//					EnableLoginBtn = false;
 
-							await ShowLoadingMessage("Please wait as we sign you in");
+		//					await ShowLoadingMessage("Please wait as we sign you in");
 
-							RestClient client = new RestClient(ApiDetail.EndPoint);
+		//					RestClient client = new RestClient(ApiDetail.EndPoint);
 
-							RestRequest restRequest = new RestRequest()
-							{
-								Method = Method.Post,
+		//					RestRequest restRequest = new RestRequest()
+		//					{
+		//						Method = Method.Post,
 
-								Resource = "/Registration/GetUser"
-							};
+		//						Resource = "/Registration/GetUser"
+		//					};
 
-							string phoneNumberMain = PhoneNumber.StartsWith("0") ? PhoneNumber.TrimStart('0') : PhoneNumber;
+		//					string phoneNumberMain = PhoneNumber.StartsWith("0") ? PhoneNumber.TrimStart('0') : PhoneNumber;
 
-							object registration = new
-							{
-								pin = Convert.ToInt32(Pin),
+		//					object registration = new
+		//					{
+		//						pin = Convert.ToInt32(Pin),
 
-								PhoneNumber = phoneNumberMain
-							};
+		//						PhoneNumber = phoneNumberMain
+		//					};
 
-							restRequest.AddJsonBody(registration);
+		//					restRequest.AddJsonBody(registration);
 
-							AspNetUsers user = new AspNetUsers();
+		//					AspNetUsers user = new AspNetUsers();
 
-							try
-							{
-								var response = await Task.Run(() =>
-								{
-									return client.Execute(restRequest);
+		//					try
+		//					{
+		//						var response = await Task.Run(() =>
+		//						{
+		//							return client.Execute(restRequest);
 
-								});
+		//						});
 
-								if (response.IsSuccessful && response.Content.Length > 2)
-								{
-									EnableLoginBtn = true;
+		//						if (response.IsSuccessful && response.Content.Length > 2)
+		//						{
+		//							EnableLoginBtn = true;
 
-									EnableLoader = false;
+		//							EnableLoader = false;
 
-									var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<AspNetUsers>>(response.Content);
+		//							var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<AspNetUsers>>(response.Content);
 
-									if (deserializedResponse.success)
-									{
+		//							if (deserializedResponse.success)
+		//							{
 
-										user = deserializedResponse.data;
+		//								user = deserializedResponse.data;
 
-										Preferences.Set(nameof(user.email), user.email);
-										Preferences.Set(nameof(user.pinHash), user.pinHash);
-										Preferences.Set(nameof(user.firstName), user.firstName);
-										Preferences.Set(nameof(user.lastName), user.lastName);
-										Preferences.Set(nameof(user.userName), user.userName);
-										Preferences.Set(nameof(user.id), user.id);
-										Preferences.Set(nameof(user.memberId), user.memberId);
-										Preferences.Set(nameof(user.phoneNumber), user.phoneNumber);
-										Preferences.Set(nameof(user.jobGroup), user.jobGroup);
-										Preferences.Set(nameof(user.DateOfBirth), user.DateOfBirth);
-										Preferences.Set(nameof(user.Gender), user.Gender);
-										Preferences.Set(nameof(user.schemeId), user.schemeId);
-										Preferences.Set(nameof(user.idNumber), user.idNumber);
-										Preferences.Set(nameof(user.station), user.station);
-										Preferences.Set(nameof(user.county), user.county);
-										Preferences.Set(nameof(user.nhifNo), user.nhifNo);
-										Preferences.Set(nameof(user.postal_address), user.postal_address);
-										Preferences.Set(nameof(user.schemeId), user.schemeId);
-										Preferences.Set(nameof(user.memberNumber), user.memberNumber);
-										Preferences.Set(nameof(user.jobGroup), user.jobGroup);
+		//								Preferences.Set(nameof(user.email), user.email);
+		//								Preferences.Set(nameof(user.pinHash), user.pinHash);
+		//								Preferences.Set(nameof(user.firstName), user.firstName);
+		//								Preferences.Set(nameof(user.lastName), user.lastName);
+		//								Preferences.Set(nameof(user.userName), user.userName);
+		//								Preferences.Set(nameof(user.id), user.id);
+		//								Preferences.Set(nameof(user.memberId), user.memberId);
+		//								Preferences.Set(nameof(user.phoneNumber), user.phoneNumber);
+		//								Preferences.Set(nameof(user.jobGroup), user.jobGroup);
+		//								Preferences.Set(nameof(user.DateOfBirth), user.DateOfBirth);
+		//								Preferences.Set(nameof(user.Gender), user.Gender);
+		//								Preferences.Set(nameof(user.schemeId), user.schemeId);
+		//								Preferences.Set(nameof(user.idNumber), user.idNumber);
+		//								Preferences.Set(nameof(user.station), user.station);
+		//								Preferences.Set(nameof(user.county), user.county);
+		//								Preferences.Set(nameof(user.nhifNo), user.nhifNo);
+		//								Preferences.Set(nameof(user.postal_address), user.postal_address);
+		//								Preferences.Set(nameof(user.schemeId), user.schemeId);
+		//								Preferences.Set(nameof(user.memberNumber), user.memberNumber);
+		//								Preferences.Set(nameof(user.jobGroup), user.jobGroup);
 
-										if (string.IsNullOrEmpty(user.schemeId))
-										{
-											Preferences.Set("SchemeId", Convert.ToInt32(user.schemeId));
-										}
-										Device.BeginInvokeOnMainThread(() =>
-										{
-											Application.Current.MainPage = new AppShell();
+		//								if (string.IsNullOrEmpty(user.schemeId))
+		//								{
+		//									Preferences.Set("SchemeId", Convert.ToInt32(user.schemeId));
+		//								}
+		//								Device.BeginInvokeOnMainThread(() =>
+		//								{
+		//									Application.Current.MainPage = new AppShell();
 
-										});
+		//								});
 
-										await RemoveLoadingMessage();
-									}
-									else if (deserializedResponse.message.ToLower().Contains("wrong"))
-									{
-										Pin = "";
-										await ShowErrorMessage("Sorry,you have entered a wrong pin ,please try again");
-									}
-									else if (deserializedResponse.message.ToLower().Contains("tsc"))
-									{
-										Pin = "";
-										await ShowErrorMessage("Sorry,you are not a member of TSC Scheme");
-									}
-									else
-									{
-										Pin = "";
-										await ShowErrorMessage();
+		//								await RemoveLoadingMessage();
+		//							}
+		//							else if (deserializedResponse.message.ToLower().Contains("wrong"))
+		//							{
+		//								Pin = "";
+		//								await ShowErrorMessage("Sorry,you have entered a wrong pin ,please try again");
+		//							}
+		//							else if (deserializedResponse.message.ToLower().Contains("tsc"))
+		//							{
+		//								Pin = "";
+		//								await ShowErrorMessage("Sorry,you are not a member of TSC Scheme");
+		//							}
+		//							else
+		//							{
+		//								Pin = "";
+		//								await ShowErrorMessage();
 
-									}
-
-
-								}
-								else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-								{
-									EnableLoginBtn = true;
-									Pin = "";
-
-									try
-									{
-
-										await ShowErrorMessage("Ooops, Something is not right, try again later. If this persists please consult the Admin");
-
-										return;
+		//							}
 
 
-									}
-									catch (Exception ex)
-									{
-										SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
-									}
-								}
-								else
-								{
-									EnableLoginBtn = true;
-									Pin = "";
+		//						}
+		//						else if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+		//						{
+		//							EnableLoginBtn = true;
+		//							Pin = "";
 
-									try
-									{
+		//							try
+		//							{
 
-										await ShowErrorMessage("Ooops Login failed , Incorrect username / password combination");
+		//								await ShowErrorMessage("Ooops, Something is not right, try again later. If this persists please consult the Admin");
 
-										return;
+		//								return;
 
 
-									}
-									catch (Exception ex)
-									{
-										SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
-									}
-								}
+		//							}
+		//							catch (Exception ex)
+		//							{
+		//								SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+		//							}
+		//						}
+		//						else
+		//						{
+		//							EnableLoginBtn = true;
+		//							Pin = "";
+
+		//							try
+		//							{
+
+		//								await ShowErrorMessage("Ooops Login failed , Incorrect username / password combination");
+
+		//								return;
 
 
-							}
-							catch (Exception ex)
-							{
-								EnableLoginBtn = true;
-								Pin = "";
+		//							}
+		//							catch (Exception ex)
+		//							{
+		//								SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+		//							}
+		//						}
 
-								try
-								{
 
-									SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+		//					}
+		//					catch (Exception ex)
+		//					{
+		//						EnableLoginBtn = true;
+		//						Pin = "";
 
-									await ShowErrorMessage("Ooops Login failed , Something went wrong please try again later");
+		//						try
+		//						{
 
-									Thread.Sleep(4000);
-								}
-								catch (Exception e)
-								{
-									Console.WriteLine(e.Message);
-								}
+		//							SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
-							}
-						}
-						else
-						{
-							try
-							{
-								await ShowErrorMessage("Please enter Phone Number / Pin");
+		//							await ShowErrorMessage("Ooops Login failed , Something went wrong please try again later");
 
-								return;
-							}
-							catch (Exception ex)
-							{
-								SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+		//							Thread.Sleep(4000);
+		//						}
+		//						catch (Exception e)
+		//						{
+		//							Console.WriteLine(e.Message);
+		//						}
 
-							}
-						}
-					}
-				}
+		//					}
+		//				}
+		//				else
+		//				{
+		//					try
+		//					{
+		//						await ShowErrorMessage("Please enter Phone Number / Pin");
 
-			}
-			catch (Exception ex)
-			{
-				EnableLoginBtn = true;
+		//						return;
+		//					}
+		//					catch (Exception ex)
+		//					{
+		//						SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
-				try
-				{
-					SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+		//					}
+		//				}
+		//			}
+		//		}
 
-					await ShowErrorMessage();
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		EnableLoginBtn = true;
 
-					Thread.Sleep(2000);
-				}
-				catch (Exception e)
-				{
+		//		try
+		//		{
+		//			SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
-					Console.WriteLine(e.Message);
+		//			await ShowErrorMessage();
 
-				}
+		//			Thread.Sleep(2000);
+		//		}
+		//		catch (Exception e)
+		//		{
 
-			}
-			finally
-			{
-				IsBusy = false;
+		//			Console.WriteLine(e.Message);
 
-				EnableLoader = false;
+		//		}
 
-				EnableSubmitBtn = true;
+		//	}
+		//	finally
+		//	{
+		//		IsBusy = false;
 
-				Pin = "";
+		//		EnableLoader = false;
 
-				try
-				{
-					//await App.Current.MainPage.Navigation.PopAllPopupAsync();
-				}
-				catch (Exception ex)
-				{
-					SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+		//		EnableSubmitBtn = true;
 
-					Console.WriteLine(ex);
-				}
+		//		Pin = "";
 
-			}
+		//		try
+		//		{
+		//			//await App.Current.MainPage.Navigation.PopAllPopupAsync();
+		//		}
+		//		catch (Exception ex)
+		//		{
+		//			SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
-			LoginCommand.CanExecute(true);
+		//			Console.WriteLine(ex);
+		//		}
 
-		}
+		//	}
+
+		//	LoginCommand.CanExecute(true);
+
+		//}
 
 		public void SubmitForgotPin()
 		{

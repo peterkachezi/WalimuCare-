@@ -1,12 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WalimuV2.Views.TheRealLoginPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:WalimuV2.CustomRenderer" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="WalimuV2.Views.TheRealLoginPage"
+        Title="Login"
+    BackgroundColor="{StaticResource Primary}"
+    NavigationPage.HasNavigationBar="False"
+    Style="{StaticResource MyContentPageStyle}">
+    
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout
+            Padding="20,30,20,0"
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            VerticalOptions="StartAndExpand">
+                <Label
+                FontSize="28"
+                Style="{StaticResource MedBookLabelMedium}"
+                Text="Hi, Already have an Account?"
+                TextColor="white" />
+
+                <Label
+                Margin="0,20,0,0"
+                FontSize="18"
+                Style="{StaticResource MedBookLabelMedium}"
+                Text="What's your Member Number and Pin?"
+                TextColor="White" />
+
+                <local:EntryWithBorderBottomColorWhite
+                Margin="0,10,0,10"
+                ClearButtonVisibility="WhileEditing"
+                Keyboard="Numeric"
+                Placeholder="Enter Member Number "
+                PlaceholderColor="#F16C70"
+                Style="{x:StaticResource MedBookEntryNormal}"
+                Text="{Binding MemberNumber}"
+                TextColor="White">
+                    <local:EntryWithBorderBottomColorWhite.Behaviors>
+                        <xct:UserStoppedTypingBehavior
+                        MinimumLengthThreshold="10"
+                        ShouldDismissKeyboardAutomatically="True"
+                        StoppedTypingTimeThreshold="500" />
+                    </local:EntryWithBorderBottomColorWhite.Behaviors>
+                </local:EntryWithBorderBottomColorWhite>
+
+
+                <local:EntryWithBorderBottomColorWhite
+                Margin="0,10,0,0"
+                ClearButtonVisibility="WhileEditing"
+                IsPassword="True"
+                Keyboard="Numeric"
+                MaxLength="10"
+                Placeholder="Enter Pin"
+                PlaceholderColor="#F16C70"
+                Style="{x:StaticResource MedBookEntryNormal}"
+                Text="{Binding Pin}"
+                TextColor="White">
+                    <local:EntryWithBorderBottomColorWhite.Behaviors>
+                        <xct:UserStoppedTypingBehavior
+                        MinimumLengthThreshold="4"
+                        ShouldDismissKeyboardAutomatically="True"
+                        StoppedTypingTimeThreshold="500" />
+                    </local:EntryWithBorderBottomColorWhite.Behaviors>
+                </local:EntryWithBorderBottomColorWhite>
+
+
+
+                <Button
+                x:Name="btnSignUp"
+                Margin="0,60,0,10"
+                Command="{Binding LoginCommand}"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding EnableLoginBtn}"
+                Style="{x:StaticResource ButtonStyleLogin}"
+                Text="Login"
+                TextColor="{StaticResource HkBackground}" />
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

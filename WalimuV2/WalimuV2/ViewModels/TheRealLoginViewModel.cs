@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using Rg.Plugins.Popup.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
@@ -16,7 +14,6 @@ using WalimuV2.Services;
 using WalimuV2.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using static Android.Media.Session.MediaSession;
 
 namespace WalimuV2.ViewModels
 {
@@ -118,9 +115,8 @@ namespace WalimuV2.ViewModels
 				OnPropertyChanged(nameof(FormatedPhoneNumber));
 			}
 		}
-
-
 		public ICommand LoginCommand { get; set; }
+		public ICommand LoginCommand2 { get; set; }
 		public ICommand PinSubmit { get; set; }
 		public ICommand ForgotPinCommand { get; set; }
 
@@ -132,12 +128,13 @@ namespace WalimuV2.ViewModels
 
 			LoginCommand = new Command(async () => await SubmitLogin());
 
+			LoginCommand2 = new Command(async () => await SubmitLogin2());
+
 			PinSubmit = new Command(async () => await SubmitLogin());
 
 			ForgotPinCommand = new Command(SubmitForgotPin);
 
 			ResetPinCommand = new Command(async () => await ResetPin());
-
 
 			EnableLoginBtn = true;
 
@@ -147,9 +144,14 @@ namespace WalimuV2.ViewModels
 			//Pin = Preferences.Get(nameof(AspNetUsers.pinHash), "");
 			Pin = "";
 			//FullName = Preferences.Get(nameof(AspNetUsers.firstName), "") + " " + Preferences.Get(nameof(AspNetUsers.lastName), "");
-			FullName = Preferences.Get(nameof(AspNetUsers.firstName), "");
 
-			PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
+			var firstName = Preferences.Get("firstName", string.Empty);
+
+			var lastName = Preferences.Get("lastName", string.Empty);
+
+			FullName = firstName + " " + lastName;
+
+			PhoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
 			FullName = FullName.ToTitleCase();
 
@@ -167,11 +169,179 @@ namespace WalimuV2.ViewModels
 			}
 			else
 			{
-				//means we are on production
-				//ApiDetail.EndPoint = ApiDetail.PublicEndPoint;
 				ApiDetail.EndPoint = ApiDetail.LocalEndPoint;
 			}
 		}
+		public async Task SubmitLogin2()
+		{
+			LoginCommand2.CanExecute(false);
+
+			try
+			{
+				if (memberNumber == "")
+				{
+					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Please enter your Member Number"));
+
+					return;
+				}
+
+				EnableLoader = true;
+
+				if (await CheckInternetConnectivity())
+				{
+					if (await CheckIfApiDetailsAreSetUp())
+					{
+						//EnableLoginBtn = false;
+
+						await ShowLoadingMessage("Please wait as we sign you in");
+
+						var login = new Login()
+						{
+							MemberNumber = memberNumber.Trim(),
+
+							Password = pin,
+						};
+
+						var httpClient = new HttpClient();
+
+						var json = JsonConvert.SerializeObject(login);
+
+						var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+						var response = await httpClient.PostAsync(ApiDetail.ApiUrl + "api/MemberAuth/Login", content);
+
+						if (response.IsSuccessStatusCode)
+						{
+							Rootobject user = new Rootobject();
+
+							var JsonResult = await response.Content.ReadAsStringAsync(); // reponse from api
+
+							var result = JsonConvert.DeserializeObject<Rootobject>(JsonResult); // deserialize json to c #
+
+							if (result.accountStatus == "Wrong Password")
+							{
+								await ShowErrorMessage("You have entered wrong password");
+
+								return;
+							}
+
+							if (result.accountStatus == "Account not available")
+							{
+								await ShowErrorMessage("Sorry account details not found , kindly create an account");
+
+								return;
+							}
+
+							Preferences.Set("accessToken", result.access_token);// saving reponse locally in essesials for validation
+
+							Preferences.Set("userId", result.user_Id);
+
+							Preferences.Set("memberId", result.member_Id);
+
+							Preferences.Set("memberNumber", result.user_name);
+
+							Preferences.Set("tokenExpirationTime", result.expiration_Time);
+
+							Preferences.Set("firstName", result.firstName);
+
+							Preferences.Set("lastName", result.lastName);
+
+							Preferences.Set("phoneNumber", result.phoneNumber);
+
+							Preferences.Set("gender", result.gender);
+
+							Preferences.Set("accountStatus", result.accountStatus);
+
+							Preferences.Set("schemeStatus", result.schemeStatus);
+
+							Preferences.Set("dateOfBirth", result.dateOfBirth);
+
+							Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
+
+							Device.BeginInvokeOnMainThread(() =>
+							{
+								Application.Current.MainPage = new AppShell();
+
+								//Application.Current.MainPage = new NavigationPage(new AppShell());
+
+							});
+
+							await RemoveLoadingMessage();
+
+						}
+						else
+						{
+							await ShowErrorMessage("Please enter Phone Number / Pin");
+
+						}
+
+
+					}
+					else
+					{
+						try
+						{
+							await ShowErrorMessage("Please enter Phone Number / Pin");
+
+							return;
+						}
+						catch (Exception ex)
+						{
+							SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+
+						}
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+				EnableLoginBtn = true;
+
+				try
+				{
+					SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+
+					await ShowErrorMessage();
+
+					Thread.Sleep(2000);
+				}
+				catch (Exception e)
+				{
+
+					Console.WriteLine(e.Message);
+
+				}
+
+			}
+			finally
+			{
+				IsBusy = false;
+
+				EnableLoader = false;
+
+				EnableSubmitBtn = true;
+
+				Pin = "";
+
+				try
+				{
+					//await App.Current.MainPage.Navigation.PopAllPopupAsync();
+				}
+				catch (Exception ex)
+				{
+					SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
+
+					Console.WriteLine(ex);
+				}
+
+			}
+
+			LoginCommand.CanExecute(true);
+
+		}
+
 		public async Task SubmitLogin()
 		{
 			LoginCommand.CanExecute(false);

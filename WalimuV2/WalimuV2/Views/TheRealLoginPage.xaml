@@ -72,7 +72,7 @@
                 <Button
                 x:Name="btnSignUp"
                 Margin="0,60,0,10"
-                Command="{Binding LoginCommand}"
+                Command="{Binding LoginCommand2}"
                 HorizontalOptions="FillAndExpand"
                 IsEnabled="{Binding EnableLoginBtn}"
                 Style="{x:StaticResource ButtonStyleLogin}"

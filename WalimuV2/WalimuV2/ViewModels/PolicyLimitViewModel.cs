@@ -149,11 +149,10 @@ namespace WalimuV2.ViewModels
 						{
 							IsEmptyIllustrationVisible = true;
 
-							NoDataAvailableMessage = "You do not have any Hospital Visits";
+							NoDataAvailableMessage = "Limit has not been allocated to your scheme at the moment";
 
 							IsListViewVisible = false;
 						}
-
 					}
 				}
 				else
@@ -168,10 +167,15 @@ namespace WalimuV2.ViewModels
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex);
+
 				IsRefreshing = false;
+
 				IsActive = false;
+
 				IsEmptyIllustrationVisible = true;
+
 				NoDataAvailableMessage = "Sorry Something went wrong";
+
 				SendErrorMessageToAppCenter(ex, "Track Hospital Visits", MemberNo, PhoneNumber);
 			}
 		}

@@ -9,11 +9,11 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
 
-            <CollectionView ItemsSource="{Binding Dependants}">
+            <!--<CollectionView ItemsSource="{Binding Dependants}">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ContentView>
+                        <ContentView>-->
                             <Frame
                                 Margin="5"
                                 Padding="10"
@@ -30,7 +30,7 @@
                                             HorizontalOptions="CenterAndExpand"
                                             Size="50"
                                             Source="{Binding PhotoPath}"
-                                            Text="{Binding Initials}"
+                                            Text="PK"
                                             VerticalOptions="CenterAndExpand" />
 
                                         <StackLayout
@@ -40,13 +40,13 @@
                                             <Label
                                                 FontSize="14"
                                                 Style="{StaticResource MedBookLabelMedium}"
-                                                Text="{Binding FullName}"
+                                                Text="Peter Kachezi"
                                                 TextColor="{StaticResource Secondary}"
                                                 VerticalOptions="Center" />
                                             <Label
                                                 FontSize="10"
                                                 Style="{StaticResource MedBookLabelNormal}"
-                                                Text="{Binding Relationship}"
+                                                Text="Self"
                                                 TextColor="{StaticResource Secondary}"
                                                 VerticalOptions="Center" />
                                         </StackLayout>
@@ -67,10 +67,10 @@
 
                                 </StackLayout>
                             </Frame>
-                        </ContentView>
+                        <!--</ContentView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </CollectionView>-->
             <StackLayout  HorizontalOptions="CenterAndExpand">
 
                 <Label FontSize="10"  HorizontalOptions="CenterAndExpand"

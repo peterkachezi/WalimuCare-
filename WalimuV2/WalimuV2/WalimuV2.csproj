@@ -19,6 +19,7 @@
     <PackageReference Include="AI.Xamarin.Forms.Bullet.List" Version="1.0.0-beta5" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="PanCardView" Version="1.0.0" />
     <PackageReference Include="RestSharp" Version="108.0.3" />
     <PackageReference Include="SkorXam.Pin" Version="1.0.4" />
     <PackageReference Include="Syncfusion.Licensing" Version="20.4.0.52" />
@@ -70,6 +71,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Ecard\ECardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Ecard\ViewECardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ExitPage.xaml">

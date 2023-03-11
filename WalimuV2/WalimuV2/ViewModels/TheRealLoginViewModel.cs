@@ -222,12 +222,16 @@ namespace WalimuV2.ViewModels
 							{
 								await ShowErrorMessage("You have entered wrong password");
 
+								Preferences.Clear();
+
 								return;
 							}
 
 							if (result.accountStatus == "Account not available")
 							{
 								await ShowErrorMessage("Sorry account details not found , kindly create an account");
+
+								Preferences.Clear();
 
 								return;
 							}
@@ -273,6 +277,7 @@ namespace WalimuV2.ViewModels
 						{
 							await ShowErrorMessage("Please enter Phone Number / Pin");
 
+							Preferences.Clear();
 						}
 
 
@@ -283,12 +288,15 @@ namespace WalimuV2.ViewModels
 						{
 							await ShowErrorMessage("Please enter Phone Number / Pin");
 
+							Preferences.Clear();
+
 							return;
 						}
 						catch (Exception ex)
 						{
 							SendErrorMessageToAppCenter(ex, "Login", "", PhoneNumber);
 
+							Preferences.Clear();
 						}
 					}
 
@@ -309,11 +317,8 @@ namespace WalimuV2.ViewModels
 				}
 				catch (Exception e)
 				{
-
 					Console.WriteLine(e.Message);
-
 				}
-
 			}
 			finally
 			{

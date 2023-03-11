@@ -5,13 +5,13 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android;
+using Xamarin.Forms.GoogleMaps.Android;
 
 namespace WalimuV2.Droid
 {
 	[Activity(Label = "WalimuV2", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
-
 		const int RequestLocationId = 0;
 
 		readonly string[] LocationPermissions =
@@ -37,7 +37,6 @@ namespace WalimuV2.Droid
 				}
 			}
 		}
-
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -53,6 +52,13 @@ namespace WalimuV2.Droid
 			Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
 
 			FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+
+			var platformConfig = new PlatformConfig
+			{
+				BitmapDescriptorFactory = new BitmapConfig()
+			};
+
+			Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig);
 
 			LoadApplication(new App());
 		}

@@ -9,6 +9,7 @@
        xmlns:Downloads="clr-namespace:WalimuV2.Views.Downloads"
        xmlns:Telemedicine="clr-namespace:WalimuV2.Views.Telemedicine"
        xmlns:Others="clr-namespace:WalimuV2.Views.Others"
+       xmlns:Ecard="clr-namespace:WalimuV2.Views.Ecard"
        Title="WalimuV2"
        x:Class="WalimuV2.AppShell" 
        Visual="Material" >      
@@ -174,9 +175,9 @@
         <ShellContent  Route="PolicyLimitsPage" ContentTemplate="{DataTemplate Policy:PolicyLimitsPage}" />
     </FlyoutItem>
 
-    <!--<FlyoutItem  Title="E-Card" Icon="ecard.png" >
+    <FlyoutItem  Title="E-Card" Icon="ecard.png" >
         <ShellContent  Route="ECardPage" ContentTemplate="{DataTemplate Ecard:ECardPage}" />
-    </FlyoutItem>-->
+    </FlyoutItem>
 
     <FlyoutItem  Title="My Download Center" Icon="mydownloadcentre.png">
         <ShellContent  Route="MyDownloadCenterPage" ContentTemplate="{DataTemplate Downloads:MyDownloadCenterPage}" />

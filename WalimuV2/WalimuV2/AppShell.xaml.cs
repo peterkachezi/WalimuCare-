@@ -5,22 +5,18 @@ using System.Collections.Generic;
 using WalimuV2.ViewModels;
 using WalimuV2.Views;
 using WalimuV2.Views.Dependants;
+using WalimuV2.Views.Ecard;
 using WalimuV2.Views.Others;
 using WalimuV2.Views.Policy;
 using WalimuV2.Views.TrackHospitalVisit;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-
 namespace WalimuV2
 {
 	public partial class AppShell : Shell
 	{
-
-
 		public string PhoneNumber { get; set; }
 		public string MemberNumber { get; set; }
-		public string ProfileName { get; } = "MY TEXT";
-
 		public AppShell()
 		{
 			InitializeComponent();
@@ -28,15 +24,18 @@ namespace WalimuV2
 			RegisterMyRoutes();
 
 			this.BindingContext = new AppShellViewModel();
-
 		}
 		public void RegisterMyRoutes()
 		{
 			try
 			{
 				//Routing.RegisterRoute(nameof(TheRealLoginPage), typeof(TheRealLoginPage));
-
+				
 				//Routing.RegisterRoute(nameof(SignUpPage), typeof(SignUpPage));
+
+				Routing.RegisterRoute(nameof(ViewECardPage), typeof(ViewECardPage));
+
+				Routing.RegisterRoute(nameof(ECardPage), typeof(ECardPage));
 
 				Routing.RegisterRoute(nameof(RequestCallBack), typeof(RequestCallBack));
 
@@ -69,8 +68,7 @@ namespace WalimuV2
 		}
 
 		protected override bool OnBackButtonPressed()
-		{			
-
+		{		
 			var theCurrentPage = (Shell.Current?.CurrentItem?.CurrentItem as IShellSectionController)?.PresentedPage;
 
 			string nameOfCurrentPage = theCurrentPage.ToString();
@@ -91,12 +89,8 @@ namespace WalimuV2
 
 		private void OnMenuItemClicked(object sender, EventArgs e)
 		{
-			//await Navigation.PushAsync(new FinalLoginPage()).ConfigureAwait(false);
-
-			//await Shell.Current.GoToAsync("//LoginPage");
 			try
 			{
-
 				var loginModel = DependencyService.Get<TheRealLoginViewModel>();
 
 				var x = loginModel.Pin = "";
@@ -118,17 +112,24 @@ namespace WalimuV2
 
 		public void SendErrorMessageToAppCenter(Exception ex, string NameOfModule, string MemberNumber = "", string PhoneNumber = "")
 		{
-			var properties = new Dictionary<string, string>
+			try
+			{
+				var properties = new Dictionary<string, string>
 									{
 										{ "NameOfModule", NameOfModule },
 
 										{ "MemberNumber", MemberNumber},
 
 										{ "PhoneNumber", PhoneNumber}
-
 									};
 
-			Crashes.TrackError(ex, properties);
+				Crashes.TrackError(ex, properties);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
 		}
 	}
 }

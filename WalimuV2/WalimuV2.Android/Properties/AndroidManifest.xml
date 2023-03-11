@@ -11,6 +11,8 @@
 	<application android:theme="@style/MainTheme" android:icon="@drawable/icon" android:label="WalimuCare" android:requestLegacyExternalStorage="true">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDV_F3Q2cIWws40ratZ7PhvlTUo-2xZNXk" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<uses-library	android:name="org.apache.http.legacy" android:required="false"></uses-library>
+
 	</application>
 	
 	

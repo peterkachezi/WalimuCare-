@@ -1,13 +1,9 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WalimuV2.CustomRenderer;
 using WalimuV2.Models;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.Xaml;
 using Map = Xamarin.Essentials.Map;
@@ -43,34 +39,49 @@ namespace WalimuV2.Views.Others
 		}
 		protected override void OnAppearing()
 		{
-			base.OnAppearing();
-
-			BindingContext = this;
-
-			PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
-
-			MemberNumber = Preferences.Get("MemberNumber", "");
-
-			PageTitle = "Contact Us";
-			PageSubTitle = "Talk to us on any of the platforms below";
-
-			Position position = new Position(-1.285970541839565, 36.81322219158326);
-
-			Pin pin = new Pin()
+			try
 			{
-				Type = PinType.Place,
-				Label = "Healthier Kenya",
-				Address = "",
-				Position = position,
-				Rotation = 33.3f,
-				Tag = "The Arch Place",
+				base.OnAppearing();
 
-			};
+				BindingContext = this;
 
-			map.Pins.Add(pin);
+				PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
 
-			map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(1)), true);
+				MemberNumber = Preferences.Get("MemberNumber", "");
 
+				PageTitle = "Contact Us";
+
+				PageSubTitle = "Talk to us on any of the platforms below";
+
+				Position position = new Position(-1.285970541839565, 36.81322219158326);
+
+				Pin pin = new Pin()
+				{
+					Type = PinType.Place,
+
+					Label = "MINET KENYA",
+
+					Address = "",
+
+					Position = position,
+
+					Rotation = 33.3f,
+
+					Tag = "The Arch Place",
+				};
+
+				map.Pins.Add(pin);
+
+				map.MoveToRegion(MapSpan.FromCenterAndRadius(position, Distance.FromKilometers(1)), true);
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+
+				SendErrorMessageToAppCenter(ex, "Contact Us", MemberNumber, PhoneNumber);
+
+			}
 		}
 		private void PhoneNumber_Tapped(object sender, EventArgs e)
 		{
@@ -81,6 +92,7 @@ namespace WalimuV2.Views.Others
 			catch (Exception ex)
 			{
 				SendErrorMessageToAppCenter(ex, "Contact Us", MemberNumber, PhoneNumber);
+
 				Console.WriteLine(ex);
 			}
 		}
@@ -93,6 +105,7 @@ namespace WalimuV2.Views.Others
 			catch (Exception ex)
 			{
 				SendErrorMessageToAppCenter(ex, "Contact Us", MemberNumber, PhoneNumber);
+
 				Console.WriteLine(ex);
 			}
 		}
@@ -193,19 +206,29 @@ namespace WalimuV2.Views.Others
 			catch (Exception ex)
 			{
 				SendErrorMessageToAppCenter(ex, "Contact Us", MemberNumber, PhoneNumber);
+
 				Console.WriteLine(ex);
 			}
 		}
 		public void SendErrorMessageToAppCenter(Exception ex, string NameOfModule, string MemberNumber = "", string PhoneNumber = "")
 		{
-			var properties = new Dictionary<string, string>
+			try
+			{
+				var properties = new Dictionary<string, string>
 									{
 										{ "NameOfModule", NameOfModule },
 										{ "MemberNumber", MemberNumber},
 										{ "PhoneNumber", PhoneNumber}
 
 									};
-			Crashes.TrackError(ex, properties);
+				Crashes.TrackError(ex, properties);
+			}
+			catch (Exception)
+			{
+				SendErrorMessageToAppCenter(ex, "Contact Us", MemberNumber, PhoneNumber);
+
+				throw;
+			}
 		}
 
 		private async void whatsappNumber_Tapped(object sender, EventArgs e)

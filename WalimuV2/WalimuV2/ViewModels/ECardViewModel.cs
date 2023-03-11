@@ -16,6 +16,7 @@ using WalimuV2.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using System.IO;
+using WalimuV2.Views.Ecard;
 
 namespace WalimuV2.ViewModels
 {
@@ -93,7 +94,7 @@ namespace WalimuV2.ViewModels
 
 			GetDependantsCommand = new Command(async () => await GetDependants());
 
-			//ViewECardCommand = new Command<string>(async x => await ViewECard(x));
+			ViewECardCommand = new Command<string>(async x => await ViewECard(x));
 
 			DownloadECardCommand = new Command(async () => await DownloadECard());
 
@@ -179,24 +180,24 @@ namespace WalimuV2.ViewModels
 			//}
 		}
 
-		//public async Task ViewECard(string Id)
-		//{
-		//	try
-		//	{
-		//		SelectedDependant = dependants.Where(p => p.Id == Id).FirstOrDefault();
+		public async Task ViewECard(string Id)
+		{
+			try
+			{
+				//SelectedDependant = dependants.Where(p => p.Id == Id).FirstOrDefault();
 
-		//		PhotoPath = null;
+				//PhotoPath = null;
 
-		//		await GetEcardPhotoFromServer();
+				//await GetEcardPhotoFromServer();
 
-		//		await Shell.Current.GoToAsync(nameof(ViewECardPage), true);
-		//	}
-		//	catch (Exception ex)
-		//	{
+				await Shell.Current.GoToAsync(nameof(ViewECardPage), true);
+			}
+			catch (Exception ex)
+			{
 
-		//		SendErrorMessageToAppCenter(ex, "E Card");
-		//	}
-		//}
+				SendErrorMessageToAppCenter(ex, "E Card");
+			}
+		}
 
 
 		public async Task DownloadECard()
@@ -281,10 +282,8 @@ namespace WalimuV2.ViewModels
 					PhotoPath = null;
 					return;
 				}
-
-
-
 				var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
 				using (var stream = await photo.OpenReadAsync())
 				{
 					using (var newStream = File.OpenWrite(newFile))
@@ -322,9 +321,6 @@ namespace WalimuV2.ViewModels
 					PhotoPath = null;
 					return;
 				}
-
-
-
 				var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 				using (var stream = await photo.OpenReadAsync())
 				{

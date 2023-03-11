@@ -100,10 +100,6 @@ namespace WalimuV2
 		{
 			try
 			{
-
-	
-
-
 				//view models 
 				DependencyService.Register<MockDataStore>();
 
@@ -157,7 +153,6 @@ namespace WalimuV2
 			}
 			catch (Exception ex)
 			{
-
 				Console.Write(ex);
 			}
 		}

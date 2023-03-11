@@ -26,6 +26,7 @@
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectHospitalDetailsCommand, Source={x:Reference FindHospitalPagePage}}" CommandParameter="{Binding pkid}" />
                     </Grid.GestureRecognizers>
+                    
                     <ffimage:CachedImage
                         Grid.Column="0"
                         Margin="0,-3,0,0"

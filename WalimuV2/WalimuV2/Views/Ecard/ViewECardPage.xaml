@@ -1,0 +1,439 @@
+﻿
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuV2.Views.Ecard.ViewECardPage"   
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             BackgroundColor="{StaticResource HkBackground}"
+             Shell.NavBarIsVisible="False">
+
+
+    <!--<ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateOfBirthToAgeConverter x:Key="DateOfBirthToAgeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>-->
+
+    <ContentPage.Content>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <!---->
+            <Frame
+                Padding="0"
+                AbsoluteLayout.LayoutBounds="0,0,1,0.09"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="{StaticResource Primary}"
+                CornerRadius="0"
+                HasShadow="True">
+                <StackLayout Padding="10" Orientation="Horizontal">
+
+                    <Image
+                        Margin="10,0,0,0"
+                        HeightRequest="20"
+                        HorizontalOptions="Start"
+                        Source="backbutton.png"
+                        VerticalOptions="CenterAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackButtonCommand}" CommandParameter="ECardPage" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label
+                        Margin="10,0,0,0"
+                        FontSize="20"
+                        HorizontalOptions="StartAndExpand"
+                        Style="{StaticResource MedBookLabel}"
+                        Text="E-Card Details"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+
+                </StackLayout>
+
+            </Frame>
+            <StackLayout
+                Margin="0,50,0,0"
+                Padding="10"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                VerticalOptions="FillAndExpand">
+
+
+                <cards:CubeView
+                    x:Name="newCards"
+                    Margin="0,20,0,0"
+                    VerticalOptions="StartAndExpand">
+                    <cards:CubeView.ItemsSource>
+                        <x:Array Type="{x:Type View}">
+                            <ContentView>
+                                <Frame
+                                    Margin="5"
+                                    Padding="0"
+                                    CornerRadius="10">
+
+                                    <StackLayout>
+                                        <StackLayout
+                                            Margin="10"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Start">
+
+                                            <StackLayout HorizontalOptions="StartAndExpand">
+                                                <Image
+                                                    HeightRequest="50"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Source="minetlogo.png"
+                                                    VerticalOptions="StartAndExpand" />
+                                            </StackLayout>
+
+                                            <StackLayout HorizontalOptions="EndAndExpand" Spacing="0">
+                                                <Label
+                                                    FontSize="10"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="MEMBER NO"
+                                                    TextColor="White" />
+                                                <Label
+                                                    CharacterSpacing="0"
+                                                    FontSize="12"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="MEDICAL CARD"
+                                                    TextColor="Black"
+                                                    VerticalOptions="EndAndExpand" />
+                                            </StackLayout>
+
+                                        </StackLayout>
+
+                                        <StackLayout
+                                            Margin="10"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="CenterAndExpand">
+
+                                            <Grid
+                                                ColumnDefinitions="0.35*,0.65*"
+                                                ColumnSpacing="0"
+                                                HorizontalOptions="StartAndExpand"
+                                                RowDefinitions="*,*,*,*,*,*"
+                                                RowSpacing="0">
+
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="TSC No "
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text=": 60135 "
+                                                    TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text=": " />
+                                                                <Span Text="20133" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+
+
+
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="Name "
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text=": " />
+                                                                <Span Text="Peter Kachezi" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+
+
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="Job Group "
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Row="2"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text=": " />
+                                                                <Span Text="KD" />
+
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+
+
+
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="Relationship "
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Row="3"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text=": " />
+                                                                <Span Text="Self" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="Gender "
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text=": " />
+                                                                <Span Text="M" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+
+                                                <Label
+                                                    Grid.Row="5"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="Age "
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Row="5"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text=":  "
+                                                    TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text=": " />
+                                                                <Span Text="18" />
+                                                                <Span Text=" Yrs " />
+
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                            </Grid>
+
+                                            <StackLayout HorizontalOptions="EndAndExpand">
+
+                                                <xct:AvatarView
+                                                    Margin="0,0,0,0"
+                                                    HeightRequest="0"
+                                                    CornerRadius="20"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Size="80"
+                                                    Source="{Binding PhotoPath}"
+                                                    Text="PK"
+                                                    VerticalOptions="FillAndExpand" />
+
+
+
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <StackLayout VerticalOptions="End">
+                                            <StackLayout
+                                                Padding="10,0,10,0"
+                                                BackgroundColor="{StaticResource Primary}"
+                                                HeightRequest="30"
+                                                HorizontalOptions="FillAndExpand"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="StartAndExpand">
+
+                                                <Label
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="TSC Medical Scheme"
+                                                    TextColor="White"
+                                                    VerticalOptions="CenterAndExpand" />
+
+                                                <Label
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Style="{StaticResource MedBookLabelNormal}"
+                                                    Text="Valid Until: 28/04/2022"
+                                                    TextColor="White"
+                                                    VerticalOptions="CenterAndExpand" />
+
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                    </StackLayout>
+
+                                </Frame>
+                            </ContentView>
+                            <ContentView>
+                                <Frame
+                                    Margin="5"
+                                    Padding="0"
+                                    CornerRadius="10">
+
+                                    <StackLayout>
+                                        <StackLayout
+                                            Margin="0,20,0,0"
+                                            BackgroundColor="DarkGray"
+                                            HeightRequest="50"
+                                            VerticalOptions="Start" />
+
+                                        <StackLayout
+                                            Padding="10"
+                                            HorizontalOptions="FillAndExpand"
+                                            Spacing="2"
+                                            VerticalOptions="CenterAndExpand">
+                                            <Label
+                                                HorizontalOptions="CenterAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="This card is valid for 1 year subject to yearly membership renewal"
+                                                TextColor="Black"
+                                                VerticalOptions="CenterAndExpand" />
+
+                                            <Label
+                                                Margin="0,20,0,0"
+                                                FontSize="Micro"
+                                                HorizontalOptions="CenterAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="For more information:"
+                                                TextColor="Black"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <Label
+                                                FontSize="Micro"
+                                                HorizontalOptions="CenterAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="Please call: +254 719 091 000"
+                                                TextColor="Black"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <Label
+                                                FontSize="Micro"
+                                                HorizontalOptions="CenterAndExpand"
+                                                HorizontalTextAlignment="Center"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="or visit our webiste: www.healthierkenya.co.ke"
+                                                TextColor="Black"
+                                                VerticalOptions="CenterAndExpand" />
+
+
+                                        </StackLayout>
+
+                                        <StackLayout
+                                            Padding="10"
+                                            HorizontalOptions="FillAndExpand"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="EndAndExpand">
+
+                                            <Image
+                                                HeightRequest="20"
+                                                HorizontalOptions="StartAndExpand"
+                                                Source="minetlogo.png"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <Image
+                                                HeightRequest="20"
+                                                HorizontalOptions="EndAndExpand"
+                                                Source="minetlogo.png"
+                                                VerticalOptions="CenterAndExpand" />
+
+                                        </StackLayout>
+
+                                    </StackLayout>
+
+                                </Frame>
+                            </ContentView>
+                        </x:Array>
+                    </cards:CubeView.ItemsSource>
+
+
+                    <!--<controls:LeftArrowControl />
+                    <controls:RightArrowControl />
+
+                    <controls:IndicatorsControl />-->
+
+                </cards:CubeView>
+
+
+                <StackLayout
+                    Grid.Row="2"
+                    Padding="10"
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
+
+                    <Grid ColumnDefinitions="*,*" HorizontalOptions="FillAndExpand">
+                        <!--<Button
+                        IsVisible="{Binding IsUploadVisible}"
+                            Grid.Column="0"
+                            Command="{Binding ShowUploadPopUpCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource ButtonOutlineSecondary}"
+                            Text="Upload Photo"
+                            VerticalOptions="EndAndExpand" />-->
+
+                        <Button
+                            Grid.Column="1"
+                            Command="{Binding DownloadECardCommand}"
+                            HorizontalOptions="FillAndExpand"
+                            Style="{StaticResource ButtonOutlineSecondary}"
+                            Text="Download Ecard"
+                            VerticalOptions="EndAndExpand" />
+                    </Grid>
+
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="5"
+                    Orientation="Horizontal"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="EndAndExpand">
+                    <Label FontSize="10"
+                        Style="{StaticResource MedBookLabelNormal}"
+                           HorizontalOptions="CenterAndExpand"
+                        Text="*Ecard photos can only be uploaded once, If you need to chnage afterwards kindly contact +254730604000 "
+                        TextColor="{StaticResource Secondary}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

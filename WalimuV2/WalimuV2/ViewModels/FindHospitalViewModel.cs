@@ -23,18 +23,18 @@ namespace WalimuV2.ViewModels
 {
 	public class FindHospitalViewModel : AppViewModel
 	{
-
 		private bool proceedWithoutEnablingLocationPermission;
 		public bool ProceedWithoutEnablingLocationPermission
 		{
 			get { return proceedWithoutEnablingLocationPermission; }
+
 			set
 			{
 				proceedWithoutEnablingLocationPermission = value;
+
 				OnPropertyChanged();
 			}
 		}
-
 
 		private bool showEnableLocationServicesLabel;
 		public bool ShowEnableLocationServicesLabel
@@ -43,24 +43,21 @@ namespace WalimuV2.ViewModels
 			set { showEnableLocationServicesLabel = value; OnPropertyChanged(); }
 		}
 
-
 		private bool userProceedsWithoutGpsBiengTurnedOn;
 		public bool UserProceedsWithoutGpsBiengTurnedOn
 		{
 			get { return userProceedsWithoutGpsBiengTurnedOn; }
+
 			set { userProceedsWithoutGpsBiengTurnedOn = value; OnPropertyChanged(); }
 		}
-
-
 
 		private bool hasErrorMessageAppearedMoreThanTwice;
 		public bool HasErrorMessageAppearedMoreThanTwice
 		{
 			get { return hasErrorMessageAppearedMoreThanTwice; }
+
 			set { hasErrorMessageAppearedMoreThanTwice = value; }
 		}
-
-
 
 		private bool isGpsEnabled;
 		public bool IsGpsEnabled
@@ -358,7 +355,6 @@ namespace WalimuV2.ViewModels
 					await ShowErrorMessage();
 				});
 			}
-
 		}
 
 		private async void SetUpFindHospitalViewModel()
@@ -532,7 +528,8 @@ namespace WalimuV2.ViewModels
 
 						LstHospitals = new List<Hospital>();
 
-						NumberOfHospitals = LstHospitals.Count;
+						//NumberOfHospitals = LstHospitals.Count;
+						NumberOfHospitals = OriginalLstHospitals.Count;
 
 					}
 					//else

@@ -6,13 +6,11 @@
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:Class="WalimuV2.Views.hospitals.FindHospitalPage"
     Title="Find Hospital Near You"
->
-    
-    
-    
+    x:Name="FindHospitalPage1"
+>  
+       
     
     <ContentPage.Resources>
-
         <DataTemplate x:Key="hospitalsDataTemplate" x:Name="hospitalsDataTemplate">
             <ViewCell>
                 <Grid
@@ -24,7 +22,7 @@
                     VerticalOptions="FillAndExpand">
 
                     <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectHospitalDetailsCommand, Source={x:Reference FindHospitalPagePage}}" CommandParameter="{Binding pkid}" />
+                        <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectHospitalDetailsCommand, Source={x:Reference FindHospitalPage1}}" CommandParameter="{Binding pkid}" />
                     </Grid.GestureRecognizers>
                     
                     <ffimage:CachedImage
@@ -82,7 +80,7 @@
                 AbsoluteLayout.LayoutBounds="1,1,1,1"
                 AbsoluteLayout.LayoutFlags="All"
                 HorizontalOptions="FillAndExpand"
-                RowDefinitions="0.1*,0.5*,0.5*"
+                RowDefinitions="0.5*,0.5*"
                 RowSpacing="0"
                 VerticalOptions="FillAndExpand">
 
@@ -121,8 +119,8 @@
                 </Frame>-->
 
                 <ContentView
-                    Grid.Row="1"
-                    Margin="0,-20,0,0"
+                    Grid.Row="0"
+                    Margin="0,0,0,0"
                     Padding="0"
                     Content="{Binding Map}"
                     HorizontalOptions="FillAndExpand"
@@ -130,7 +128,7 @@
 
                 <Frame
                     x:Name="frameListOfHospitals"
-                    Grid.Row="2"
+                    Grid.Row="1"
                     Margin="0,-8,0,-10"
                     Padding="0"
                     AutomationProperties.IsInAccessibleTree="True"

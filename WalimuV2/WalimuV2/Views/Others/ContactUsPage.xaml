@@ -3,7 +3,8 @@
     xmlns:customrenderer="clr-namespace:WalimuV2.CustomRenderer"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:templates="clr-namespace:WalimuV2.DataTemplates" xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+    xmlns:templates="clr-namespace:WalimuV2.DataTemplates" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     x:Class="WalimuV2.Views.Others.ContactUsPage">
 
     <Shell.TitleView>
@@ -50,12 +51,26 @@
 
     <ContentPage.Content>
         <ScrollView>
+
             <StackLayout
                 Margin="0,10,0,0"
                 Padding="10"
                 HorizontalOptions="StartAndExpand"
                 Spacing="15"
                 VerticalOptions="StartAndExpand">
+
+                <StackLayout
+                    Margin="10,0,10,0"
+                    HeightRequest="200"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <maps:Map
+                        x:Name="map"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+
+                </StackLayout>
+
                 <templates:LabelWithIcon
                     x:Name="txtOtherPhoneNumber"
                     CustomText="1528"
@@ -69,6 +84,7 @@
                     </templates:LabelWithIcon.GestureRecognizers>
 
                 </templates:LabelWithIcon>
+                
                 <BoxView Style="{StaticResource MyBoxView}" />
 
 
@@ -85,6 +101,7 @@
                     </templates:LabelWithIcon.GestureRecognizers>
 
                 </templates:LabelWithIcon>
+                
                 <BoxView Style="{StaticResource MyBoxView}" />
 
 
@@ -143,7 +160,7 @@
 
                 <BoxView Style="{StaticResource MyBoxView}" />
 
-                <templates:LabelWithIcon
+                <!--<templates:LabelWithIcon
                     x:Name="txtFacebook"
                     CustomText="Minet Kenya"
                     FontSize="19"
@@ -158,9 +175,9 @@
 
                 </templates:LabelWithIcon>
 
-                <BoxView Style="{StaticResource MyBoxView}" />
+                <BoxView Style="{StaticResource MyBoxView}" />-->
 
-                <templates:LabelWithIcon
+                <!--<templates:LabelWithIcon
                     x:Name="txtTwitter"
                     CustomText="@Minet_Kenya"
                     FontSize="19"
@@ -172,11 +189,11 @@
                     <templates:LabelWithIcon.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Twitter_Tapped" />
                     </templates:LabelWithIcon.GestureRecognizers>
-                </templates:LabelWithIcon>
+                </templates:LabelWithIcon>-->
 
-                <BoxView Style="{StaticResource MyBoxView}" />
+                <!--<BoxView Style="{StaticResource MyBoxView}" />-->
 
-                <templates:LabelWithIcon
+                <!--<templates:LabelWithIcon
                     x:Name="txtInstagram"
                     CustomText="Minet Kenya"
                     FontSize="19"
@@ -189,9 +206,11 @@
                         <TapGestureRecognizer Tapped="Instagram_Tapped" />
                     </templates:LabelWithIcon.GestureRecognizers>
 
-                </templates:LabelWithIcon>
-                <BoxView Style="{StaticResource MyBoxView}" />
-                <templates:LabelWithIcon
+                </templates:LabelWithIcon>-->
+                
+                <!--<BoxView Style="{StaticResource MyBoxView}" />-->
+                
+                <!--<templates:LabelWithIcon
                     x:Name="txtTelegram"
                     CustomText="Teachers Medical Scheme"
                     FontSize="19"
@@ -204,10 +223,10 @@
                         <TapGestureRecognizer Tapped="Telegram_Tapped" />
                     </templates:LabelWithIcon.GestureRecognizers>
 
-                </templates:LabelWithIcon>
-                <BoxView Style="{StaticResource MyBoxView}" />
+                </templates:LabelWithIcon>-->
+                <!--<BoxView Style="{StaticResource MyBoxView}" />-->
 
-                <templates:LabelWithIcon
+                <!--<templates:LabelWithIcon
                     x:Name="txtLocation"
                     CustomText="Minet House, Processional Way (off Nyerere Rd)"
                     FontSize="19"
@@ -221,17 +240,8 @@
                         <TapGestureRecognizer Tapped="Location_Tapped" />
                     </templates:LabelWithIcon.GestureRecognizers>
 
-                </templates:LabelWithIcon>
-                <StackLayout
-                    Margin="10,0,10,0"
-                    HeightRequest="200"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-                    <maps:Map
-                        x:Name="map"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand" />
-                </StackLayout>
+                </templates:LabelWithIcon>-->
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -145,7 +145,7 @@ namespace WalimuV2.ViewModels
 			{
 				lstHospitals = value;
 
-				NumberOfHospitals = lstHospitals.Count();
+				//NumberOfHospitals = lstHospitals.Count();
 
 				OnPropertyChanged(nameof(LstHospitals));
 			}
@@ -374,7 +374,6 @@ namespace WalimuV2.ViewModels
 						await Shell.Current.Navigation.PushModalAsync(new EnableGpsPage());
 						return;
 					}
-
 				}
 
 				if (IsGpsEnabled)
@@ -384,7 +383,6 @@ namespace WalimuV2.ViewModels
 
 				if (IsGpsEnabled == true && ShowEnableLocationServicesLabel == true && ProceedWithoutEnablingLocationPermission == false)
 				{
-
 					await Shell.Current.Navigation.PushModalAsync(new UserLocationPage());
 
 					return;
@@ -401,6 +399,7 @@ namespace WalimuV2.ViewModels
 				if (!await CheckInternetConnectivity())
 				{
 					IsRefreshing = false;
+
 					return;
 				}
 
@@ -511,6 +510,7 @@ namespace WalimuV2.ViewModels
 				RestRequest restRequest = new RestRequest()
 				{
 					Method = Method.Get,
+
 					Resource = "/Hospitals/GetAllClinics"
 				};
 
@@ -1168,19 +1168,19 @@ namespace WalimuV2.ViewModels
 							if (serializedResponse.success)
 							{
 								SelectedHospitalDetails = serializedResponse.data;
+
 								selectedHospitalDetails.HospitalName = LstHospitals.Where(p => p.pkid == HospitalId).Select(x => x.name).FirstOrDefault()
 ;
-
 								//lblDescriptionOfLocation.CustomText = SelectedHospitalDetails.DescriptionOfLocation ?? "";
 								//lblWorkingHours.CustomText = SelectedHospitalDetails.WorkingHours ?? "";
 								//lblPhoneNumber.CustomText = SelectedHospitalDetails.PhoneNumber ?? "";
 								//lblEmail.CustomText = SelectedHospitalDetails.Email ?? "";
 								//lblWebsite.CustomText = SelectedHospitalDetails.Website ?? "";
 
-
 								try
 								{
 									double latitude = CurrentLocation.Latitude;
+
 									double longitude = CurrentLocation.Longitude;
 
 									bool checkIfConversionIsSuccessful = Double.TryParse(lstHospitals.Where(p => p.pkid == HospitalId).FirstOrDefault().latitude, out latitude);

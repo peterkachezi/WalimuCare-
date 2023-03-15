@@ -1,28 +1,18 @@
-﻿using Android.Util;
-using Java.Lang.Reflect;
-using Newtonsoft.Json;
-using RestSharp;
-using Rg.Plugins.Popup.Extensions;
+﻿using Java.Lang.Reflect;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static Android.Provider.MediaStore;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WalimuV2.ApiResponses;
-using WalimuV2.Models;
-using WalimuV2.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using System.IO;
 using WalimuV2.Views.Ecard;
 
+
 namespace WalimuV2.ViewModels
 {
 	public class ECardViewModel : AppViewModel
 	{
-
 		private string photoPath;
 		public string PhotoPath
 		{
@@ -33,9 +23,7 @@ namespace WalimuV2.ViewModels
 				OnPropertyChanged(nameof(PhotoPath));
 			}
 		}
-
 		//private readonly DependantService dependantService;
-
 		private List<Member> dependants;
 		public List<Member> Dependants
 		{
@@ -58,6 +46,7 @@ namespace WalimuV2.ViewModels
 			get { return fileBytesToBeUploaded; }
 			set { fileBytesToBeUploaded = value; }
 		}
+
 		private bool isUploadVisible = true;
 		public bool IsUploadVisible
 		{
@@ -66,28 +55,19 @@ namespace WalimuV2.ViewModels
 		}
 
 		private string selectedFileName;
-
 		public string SelectedFileName
 		{
 			get { return selectedFileName; }
 			set { selectedFileName = value; }
 		}
 		public ICommand GetDependantsCommand { get; set; }
-
 		public ICommand ViewECardCommand { get; set; }
-
 		public ICommand DownloadECardCommand { get; set; }
-
 		public ICommand TakePhotoCommand { get; set; }
-
 		public ICommand PickPictureCommand { get; set; }
-
 		public ICommand ShowUploadPopUpCommand { get; set; }
-
 		public ICommand UploadImageToServerCommand { get; set; }
-
 		public ICommand ClosePopUpCommand { get; set; }
-
 		public ECardViewModel()
 		{
 			//dependantService = DependencyService.Get<DependantService>();
@@ -110,8 +90,6 @@ namespace WalimuV2.ViewModels
 
 			Task.Run(async () => await GetDependants());
 		}
-
-
 		public async Task GetDependants()
 		{
 			//try
@@ -179,7 +157,6 @@ namespace WalimuV2.ViewModels
 			//	SendErrorMessageToAppCenter(ex, "E-Card");
 			//}
 		}
-
 		public async Task ViewECard(string Id)
 		{
 			try
@@ -202,71 +179,69 @@ namespace WalimuV2.ViewModels
 
 		public async Task DownloadECard()
 		{
-			//try
-			//{
+            try
+            {
 
-			//	var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
+                await Browser.OpenAsync("https://localhost:44371/home/GenerateEcard", BrowserLaunchMode.SystemPreferred);
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "Contact Us Page");
+            }
+            //try
+            //{
 
-			//	var storageWriteStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            //	var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
 
-			//	PermissionStatus storageReadIsAllowed = PermissionStatus.Denied;
+            //	var storageWriteStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
-			//	PermissionStatus storageWriteIsAllowed = PermissionStatus.Denied;
+            //	PermissionStatus storageReadIsAllowed = PermissionStatus.Denied;
 
+            //	PermissionStatus storageWriteIsAllowed = PermissionStatus.Denied;
 
-			//	if (storageReadStatus == PermissionStatus.Denied)
-			//	{
-			//		storageReadIsAllowed = await Permissions.RequestAsync<Permissions.StorageRead>();
-			//	}
-			//	else
-			//	{
-			//		storageReadIsAllowed = PermissionStatus.Granted;
-			//	}
+            //	if (storageReadStatus == PermissionStatus.Denied)
+            //	{
+            //		storageReadIsAllowed = await Permissions.RequestAsync<Permissions.StorageRead>();
+            //	}
+            //	else
+            //	{
+            //		storageReadIsAllowed = PermissionStatus.Granted;
+            //	}
+            //	if (storageWriteStatus == PermissionStatus.Denied)
+            //	{
+            //		storageWriteIsAllowed = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            //	}
+            //	else
+            //	{
+            //		storageWriteIsAllowed = PermissionStatus.Granted;
+            //	}
+            //	if (await CheckStoragePermisions())
+            //	{
+            //		string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
 
+            //		string NameOfFile = SelectedDependant.FullName + ".pdf";
+            //		//try
+            //		//{
+            //		//    await Browser.OpenAsync(url + "/" + NameOfFile);
 
-			//	if (storageWriteStatus == PermissionStatus.Denied)
-			//	{
-			//		storageWriteIsAllowed = await Permissions.RequestAsync<Permissions.StorageWrite>();
-			//	}
-			//	else
-			//	{
-			//		storageWriteIsAllowed = PermissionStatus.Granted;
-			//	}
+            //		//}
+            //		//catch (Exception ex)
+            //		//{
 
+            //		//    SendErrorMessageToAppCenter(ex, "Policy Details");
+            //		//}
 
-			//	if (await CheckStoragePermisions())
-			//	{
-			//		string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
+            //		await DependencyService.Get<IDownload>().DownloadFileAsync(url, NameOfFile);
 
-			//		string NameOfFile = SelectedDependant.FullName + ".pdf";
-			//		//try
-			//		//{
-			//		//    await Browser.OpenAsync(url + "/" + NameOfFile);
+            //	}
 
-			//		//}
-			//		//catch (Exception ex)
-			//		//{
+            //}
+            //catch (Exception ex)
+            //{
 
-			//		//    SendErrorMessageToAppCenter(ex, "Policy Details");
-			//		//}
-
-
-			//		await DependencyService.Get<IDownload>().DownloadFileAsync(url, NameOfFile);
-
-			//	}
-
-
-
-
-
-
-			//}
-			//catch (Exception ex)
-			//{
-
-			//	SendErrorMessageToAppCenter(ex, "ECard");
-			//}
-		}
+            //	SendErrorMessageToAppCenter(ex, "ECard");
+            //}
+        }
 
 
 		public async Task TakePhoto()
@@ -305,7 +280,6 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "User Profile");
 			}
 		}
-
 		public async Task PickPicture()
 		{
 			try
@@ -341,7 +315,6 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "User Profile");
 			}
 		}
-
 		//public async Task ShowUploadPopUp()
 		//{
 		//	try
@@ -354,7 +327,6 @@ namespace WalimuV2.ViewModels
 		//		SendErrorMessageToAppCenter(ex, "E-Card View");
 		//	}
 		//}
-
 		public async Task UploadImageToServer()
 		{
 			//try
@@ -411,7 +383,6 @@ namespace WalimuV2.ViewModels
 			//	await ShowErrorMessage();
 			//}
 		}
-
 		public async Task GetEcardPhotoFromServer()
 		{
 			//try
@@ -461,6 +432,5 @@ namespace WalimuV2.ViewModels
 			//	await ShowErrorMessage();
 			//}
 		}
-
 	}
 }

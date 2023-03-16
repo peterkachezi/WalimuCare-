@@ -43,9 +43,9 @@ namespace WalimuV2.Views
 				},
 				   new MyCorousel()
 				{
-						 ImageUrl = "telemedicineNew.png",
-					Title="Video Telemedicine",
-					SubTitle="Video consult or chat with top doctors online from the comfort of your phone",
+				    ImageUrl = "telemedicineNew.png",
+					Title="Book Telemedine",
+					SubTitle="Book appointments online and get a dedicated doctor to provide you with a personalized care",
 					PreviousBtnText = "Back",
 					NextBtnText = "Get Started",
 					lblPreviousCommand = new Command<int>((x)=>SetCurrentItem(x)),

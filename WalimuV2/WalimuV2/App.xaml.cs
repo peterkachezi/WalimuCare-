@@ -28,7 +28,7 @@ namespace WalimuV2
 
 				SetApiDetails();
 
-			    //Preferences.Clear();
+			    Preferences.Clear();
 
 				var firstName = Preferences.Get("firstName", string.Empty);
 
@@ -78,7 +78,6 @@ namespace WalimuV2
 				Crashes.TrackError(ex);
 
 				Console.WriteLine(ex);
-
 			}
 
 		}

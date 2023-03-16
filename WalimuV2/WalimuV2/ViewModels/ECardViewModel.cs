@@ -1,5 +1,4 @@
-﻿using Java.Lang.Reflect;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -7,430 +6,421 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using System.IO;
 using WalimuV2.Views.Ecard;
-
+using WalimuV2.Services;
+using WalimuV2.Models;
+using System.Linq;
+using WalimuV2.Interfaces;
 
 namespace WalimuV2.ViewModels
 {
-	public class ECardViewModel : AppViewModel
-	{
-		private string photoPath;
-		public string PhotoPath
-		{
-			get { return photoPath; }
-			set
-			{
-				photoPath = value;
-				OnPropertyChanged(nameof(PhotoPath));
-			}
-		}
-		//private readonly DependantService dependantService;
-		private List<Member> dependants;
-		public List<Member> Dependants
-		{
-			get { return dependants; }
+    public class ECardViewModel : AppViewModel
+    {
+        private string photoPath;
+        public string PhotoPath
+        {
+            get { return photoPath; }
+            set
+            {
+                photoPath = value;
 
-			set { dependants = value; OnPropertyChanged(); }
-		}
+                OnPropertyChanged(nameof(PhotoPath));
+            }
+        }
 
-		private Member selectedDependant;
-		public Member SelectedDependant
-		{
-			get { return selectedDependant; }
+        private readonly DependantService dependantService;
 
-			set { selectedDependant = value; OnPropertyChanged(); }
-		}
+        private List<Dependant> dependants;
+        public List<Dependant> Dependants
+        {
+            get { return dependants; }
 
-		private byte[] fileBytesToBeUploaded;
-		public byte[] FileBytesToBeUploaded
-		{
-			get { return fileBytesToBeUploaded; }
-			set { fileBytesToBeUploaded = value; }
-		}
+            set { dependants = value; OnPropertyChanged(); }
+        }
+        private Dependant selectedDependant;
+        public Dependant SelectedDependant
+        {
+            get { return selectedDependant; }
 
-		private bool isUploadVisible = true;
-		public bool IsUploadVisible
-		{
-			get { return isUploadVisible; }
-			set { isUploadVisible = value; }
-		}
+            set { selectedDependant = value; OnPropertyChanged(); }
+        }
+        private byte[] fileBytesToBeUploaded;
+        public byte[] FileBytesToBeUploaded
+        {
+            get { return fileBytesToBeUploaded; }
 
-		private string selectedFileName;
-		public string SelectedFileName
-		{
-			get { return selectedFileName; }
-			set { selectedFileName = value; }
-		}
-		public ICommand GetDependantsCommand { get; set; }
-		public ICommand ViewECardCommand { get; set; }
-		public ICommand DownloadECardCommand { get; set; }
-		public ICommand TakePhotoCommand { get; set; }
-		public ICommand PickPictureCommand { get; set; }
-		public ICommand ShowUploadPopUpCommand { get; set; }
-		public ICommand UploadImageToServerCommand { get; set; }
-		public ICommand ClosePopUpCommand { get; set; }
-		public ECardViewModel()
-		{
-			//dependantService = DependencyService.Get<DependantService>();
+            set { fileBytesToBeUploaded = value; }
+        }
+        private bool isUploadVisible = true;
+        public bool IsUploadVisible
+        {
+            get { return isUploadVisible; }
 
-			GetDependantsCommand = new Command(async () => await GetDependants());
+            set { isUploadVisible = value; }
+        }
+        private string selectedFileName;
+        public string SelectedFileName
+        {
+            get { return selectedFileName; }
 
-			ViewECardCommand = new Command<string>(async x => await ViewECard(x));
+            set { selectedFileName = value; }
+        }
+        public ICommand GetDependantsCommand { get; set; }
+        public ICommand ViewECardCommand { get; set; }
+        public ICommand DownloadECardCommand { get; set; }
+        public ICommand TakePhotoCommand { get; set; }
+        public ICommand PickPictureCommand { get; set; }
+        public ICommand ShowUploadPopUpCommand { get; set; }
+        public ICommand UploadImageToServerCommand { get; set; }
+        public ICommand ClosePopUpCommand { get; set; }
+        public ECardViewModel()
+        {
+            dependantService = DependencyService.Get<DependantService>();
 
-			DownloadECardCommand = new Command(async () => await DownloadECard());
+            GetDependantsCommand = new Command(async () => await GetDependants());
 
-			TakePhotoCommand = new Command(async () => await TakePhoto());
+            ViewECardCommand = new Command<string>(async x => await ViewECard(x));
 
-			PickPictureCommand = new Command(async () => await PickPicture());
+            DownloadECardCommand = new Command(async () => await DownloadECard());
 
-			//ShowUploadPopUpCommand = new Command(async () => await ShowUploadPopUp());
+            TakePhotoCommand = new Command(async () => await TakePhoto());
 
-			UploadImageToServerCommand = new Command(async () => await UploadImageToServer());
+            PickPictureCommand = new Command(async () => await PickPicture());
 
-			ClosePopUpCommand = new Command(async () => await RemoveLoadingMessage());
+           // ShowUploadPopUpCommand = new Command(async () => await ShowUploadPopUp());
 
-			Task.Run(async () => await GetDependants());
-		}
-		public async Task GetDependants()
-		{
-			//try
-			//{
+            //UploadImageToServerCommand = new Command(async () => await UploadImageToServer());
 
-			//	if (await CheckInternetConnectivity())
-			//	{
+            ClosePopUpCommand = new Command(async () => await RemoveLoadingMessage());
 
-			//		await ShowLoadingMessage();
+            Task.Run(async () => await GetDependants());
+        }
 
-			//		string MemberId = Preferences.Get(nameof(AspNetUsers.memberId), "");
-
-			//		IsRefreshing = true;
-
-			//		var data = await dependantService.GetDependants(MemberId);
-
-			//		IsRefreshing = false;
-
-			//		if (data != null)
-			//		{
-
-			//			//data.Insert(0, new Member()
-			//			//{
-			//			//	MemberNumber = Preferences.Get("MemberNumber", ""),
-			//			//	FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
-			//			//	LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
-			//			//	Gender = Preferences.Get(nameof(AspNetUsers.Gender), ""),
-			//			//	DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
-			//			//	//MiddleName = Preferences.Get(nameof(AspNetUsers.userName), ""),
-			//			//	Relationship = "Principal",
-			//			//	Id = Preferences.Get(nameof(AspNetUsers.id), ""),
-			//			//	JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup), "")
-			//			//});
-
-			//			data = data.Select(p => { p.JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup), ""); return p; }).ToList();
-
-			//			Dependants = data;
-			//		}
-			//		else
-			//		{
-			//			Dependants = new List<Member>()
-			//			{
-			//				//new Member()
-			//				//{
-			//				//	FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
-			//				//	LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
-			//				//	MiddleName = Preferences.Get(nameof(AspNetUsers.userName), ""),
-			//				//	Relationship = "Principal",
-			//				//	Id = Preferences.Get(nameof(AspNetUsers.id), ""),
-			//				//	JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup),""),
-			//				//	Gender = Preferences.Get(nameof(AspNetUsers.Gender), ""),
-			//				//	DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
-			//				//}
-			//			};
-			//		}
-
-			//		await RemoveLoadingMessage();
-
-			//	}
-
-			//}
-			//catch (Exception ex)
-			//{
-
-			//	SendErrorMessageToAppCenter(ex, "E-Card");
-			//}
-		}
-		public async Task ViewECard(string Id)
-		{
-			try
-			{
-				//SelectedDependant = dependants.Where(p => p.Id == Id).FirstOrDefault();
-
-				//PhotoPath = null;
-
-				//await GetEcardPhotoFromServer();
-
-				await Shell.Current.GoToAsync(nameof(ViewECardPage), true);
-			}
-			catch (Exception ex)
-			{
-
-				SendErrorMessageToAppCenter(ex, "E Card");
-			}
-		}
-
-
-		public async Task DownloadECard()
-		{
+        public async Task GetDependants()
+        {
             try
             {
+                if (await CheckInternetConnectivity())
+                {
+                    await ShowLoadingMessage();
 
-                await Browser.OpenAsync("https://localhost:44371/home/GenerateEcard", BrowserLaunchMode.SystemPreferred);
+                    string MemberId = Preferences.Get(nameof(AspNetUsers.memberId), "");
+
+                    IsRefreshing = true;
+
+                    var data = await dependantService.GetDependants();
+
+                    IsRefreshing = false;
+
+                    if (data != null)
+                    {
+                        data.Insert(0, new Dependant()
+                        {
+                            MemberNumber = Preferences.Get("MemberNumber", ""),
+                            FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
+                            LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
+                            Gender = Preferences.Get(nameof(AspNetUsers.Gender), ""),
+                            DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
+                            //MiddleName = Preferences.Get(nameof(AspNetUsers.userName), ""),
+                           // Relationship = "Principal",
+                            Id = Preferences.Get(nameof(AspNetUsers.id), ""),
+                            JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup), "")
+                        });
+
+                        data = data.Select(p => { p.JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup), ""); return p; }).ToList();
+
+                        Dependants = data;
+                    }
+                    else
+                    {
+                        Dependants = new List<Dependant>()
+                        {
+                            new Dependant()
+                            {
+                                FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
+                                LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
+                                MiddleName = Preferences.Get(nameof(AspNetUsers.userName), ""),
+                               // Relationship = "Principal",
+                                Id = Preferences.Get(nameof(AspNetUsers.id), ""),
+                                JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup),""),
+                                Gender = Preferences.Get(nameof(AspNetUsers.Gender), ""),
+                                DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
+                            }
+                        };
+                    }
+                    await RemoveLoadingMessage();
+                }
             }
             catch (Exception ex)
             {
-                SendErrorMessageToAppCenter(ex, "Contact Us Page");
+                SendErrorMessageToAppCenter(ex, "E-Card");
             }
-            //try
-            //{
+        }
 
-            //	var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
+        public async Task ViewECard(string Id)
+        {
+            try
+            {
+                SelectedDependant = dependants.Where(p => p.Id == Id).FirstOrDefault();
 
-            //	var storageWriteStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+                PhotoPath = null;
 
-            //	PermissionStatus storageReadIsAllowed = PermissionStatus.Denied;
+                //await GetEcardPhotoFromServer();
 
-            //	PermissionStatus storageWriteIsAllowed = PermissionStatus.Denied;
-
-            //	if (storageReadStatus == PermissionStatus.Denied)
-            //	{
-            //		storageReadIsAllowed = await Permissions.RequestAsync<Permissions.StorageRead>();
-            //	}
-            //	else
-            //	{
-            //		storageReadIsAllowed = PermissionStatus.Granted;
-            //	}
-            //	if (storageWriteStatus == PermissionStatus.Denied)
-            //	{
-            //		storageWriteIsAllowed = await Permissions.RequestAsync<Permissions.StorageWrite>();
-            //	}
-            //	else
-            //	{
-            //		storageWriteIsAllowed = PermissionStatus.Granted;
-            //	}
-            //	if (await CheckStoragePermisions())
-            //	{
-            //		string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
-
-            //		string NameOfFile = SelectedDependant.FullName + ".pdf";
-            //		//try
-            //		//{
-            //		//    await Browser.OpenAsync(url + "/" + NameOfFile);
-
-            //		//}
-            //		//catch (Exception ex)
-            //		//{
-
-            //		//    SendErrorMessageToAppCenter(ex, "Policy Details");
-            //		//}
-
-            //		await DependencyService.Get<IDownload>().DownloadFileAsync(url, NameOfFile);
-
-            //	}
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            //	SendErrorMessageToAppCenter(ex, "ECard");
-            //}
+                await Shell.Current.GoToAsync(nameof(ViewECardPage), true);
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "E Card");
+            }
         }
 
 
-		public async Task TakePhoto()
-		{
-			try
-			{
+        public async Task DownloadECard()
+        {
+            try
+            {
+                var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
 
-				var photo = await MediaPicker.CapturePhotoAsync();
+                var storageWriteStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
-				// canceled
-				if (photo == null)
-				{
-					PhotoPath = null;
-					return;
-				}
-				var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+                PermissionStatus storageReadIsAllowed = PermissionStatus.Denied;
 
-				using (var stream = await photo.OpenReadAsync())
-				{
-					using (var newStream = File.OpenWrite(newFile))
-					{
-						await stream.CopyToAsync(newStream);
-					}
+                PermissionStatus storageWriteIsAllowed = PermissionStatus.Denied;
 
-					FileBytesToBeUploaded = ConvertStramToByteArray(stream);
-				}
+                if (storageReadStatus == PermissionStatus.Denied)
+                {
+                    storageReadIsAllowed = await Permissions.RequestAsync<Permissions.StorageRead>();
+                }
+                else
+                {
+                    storageReadIsAllowed = PermissionStatus.Granted;
+                }
 
-				PhotoPath = newFile;
-				SelectedFileName = photo.FileName;
+                if (storageWriteStatus == PermissionStatus.Denied)
+                {
+                    storageWriteIsAllowed = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                }
+                else
+                {
+                    storageWriteIsAllowed = PermissionStatus.Granted;
+                }
+                if (await CheckStoragePermisions())
+                {
+                    string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
 
+                    string NameOfFile = SelectedDependant.FullName + ".pdf";
+                    //try
+                    //{
+                    //    await Browser.OpenAsync(url + "/" + NameOfFile);
 
-			}
-			catch (Exception ex)
-			{
+                    //}
+                    //catch (Exception ex)
+                    //{
 
-				SendErrorMessageToAppCenter(ex, "User Profile");
-			}
-		}
-		public async Task PickPicture()
-		{
-			try
-			{
+                    //    SendErrorMessageToAppCenter(ex, "Policy Details");
+                    //}
+                    await DependencyService.Get<IDownload>().DownloadFileAsync(url, NameOfFile);
+                }
+            }
+            catch (Exception ex)
+            {
 
-				PhotoPath = null;
-
-				var photo = await MediaPicker.PickPhotoAsync();
-
-				// canceled
-				if (photo == null)
-				{
-					PhotoPath = null;
-					return;
-				}
-				var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
-				using (var stream = await photo.OpenReadAsync())
-				{
-					using (var newStream = File.OpenWrite(newFile))
-					{
-						await stream.CopyToAsync(newStream);
-					}
-
-					FileBytesToBeUploaded = ConvertStramToByteArray(stream);
-				}
-
-				PhotoPath = newFile;
-				SelectedFileName = photo.FileName;
-
-			}
-			catch (Exception ex)
-			{
-				SendErrorMessageToAppCenter(ex, "User Profile");
-			}
-		}
-		//public async Task ShowUploadPopUp()
-		//{
-		//	try
-		//	{
-		//		await App.Current.MainPage.Navigation.PushPopupAsync(new SelectEcardPhotoType());
-		//	}
-		//	catch (Exception ex)
-		//	{
-
-		//		SendErrorMessageToAppCenter(ex, "E-Card View");
-		//	}
-		//}
-		public async Task UploadImageToServer()
-		{
-			//try
-			//{
+                SendErrorMessageToAppCenter(ex, "ECard");
+            }
+        }
 
 
-			//	await ShowLoadingMessage();
+        public async Task TakePhoto()
+        {
+            try
+            {
+                var photo = await MediaPicker.CapturePhotoAsync();
 
-			//	RestClient client = new RestClient(ApiDetail.EndPoint);
+                // canceled
+                if (photo == null)
+                {
+                    PhotoPath = null;
+                    return;
+                }
 
-			//	RestRequest restRequest = new RestRequest()
-			//	{
-			//		Resource = "/api/Reports/SaveEcardPhotoForMember",
-			//		Method = Method.Post
-			//	};
+                var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 
-			//	UpdateProfileImage updateProfileImage = new UpdateProfileImage()
-			//	{
-			//		memberId = SelectedDependant.Id,
-			//		profileImgFile = FileBytesToBeUploaded.Length > 0 ? Base64.EncodeToString(FileBytesToBeUploaded, Base64Flags.NoWrap) : "",
-			//		profileImgName = SelectedFileName
-			//	};
+                using (var stream = await photo.OpenReadAsync())
+                {
+                    using (var newStream = File.OpenWrite(newFile))
+                    {
+                        await stream.CopyToAsync(newStream);
+                    }
 
-			//	restRequest.AddJsonBody(updateProfileImage);
+                    FileBytesToBeUploaded = ConvertStramToByteArray(stream);
+                }
 
-			//	var response = await client.ExecuteAsync(restRequest);
+                PhotoPath = newFile;
 
-			//	if (response.IsSuccessful)
-			//	{
+                SelectedFileName = photo.FileName;
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "User Profile");
+            }
+        }
 
-			//		var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<bool>>(response.Content);
+        public async Task PickPicture()
+        {
+            try
+            {
+                PhotoPath = null;
 
-			//		if (deserializedResponse.success)
-			//		{
-			//			//await ShowSuccessMessage();
+                var photo = await MediaPicker.PickPhotoAsync();
+                // canceled
+                if (photo == null)
+                {
+                    PhotoPath = null;
+                    return;
+                }
 
-			//			await GetEcardPhotoFromServer();
-			//		}
-			//		else
-			//		{
-			//			await ShowErrorMessage();
-			//		}
+                var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
 
-			//	}
-			//	else
-			//	{
-			//		await ShowErrorMessage();
-			//	}
+                using (var stream = await photo.OpenReadAsync())
+                {
+                    using (var newStream = File.OpenWrite(newFile))
+                    {
+                        await stream.CopyToAsync(newStream);
+                    }
 
-			//}
-			//catch (Exception ex)
-			//{
-			//	SendErrorMessageToAppCenter(ex, "E-Card");
-			//	await ShowErrorMessage();
-			//}
-		}
-		public async Task GetEcardPhotoFromServer()
-		{
-			//try
-			//{
+                    FileBytesToBeUploaded = ConvertStramToByteArray(stream);
+                }
+
+                PhotoPath = newFile;
+
+                SelectedFileName = photo.FileName;
+
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "User Profile");
+            }
+        }
+
+        //public async Task ShowUploadPopUp()
+        //{
+        //    try
+        //    {
+        //        await App.Current.MainPage.Navigation.PushPopupAsync(new SelectEcardPhotoType());
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        SendErrorMessageToAppCenter(ex, "E-Card View");
+        //    }
+        //}
+
+        //public async Task UploadImageToServer()
+        //{
+        //    try
+        //    {
 
 
-			//	await ShowLoadingMessage();
+        //        await ShowLoadingMessage();
 
-			//	RestClient client = new RestClient(ApiDetail.EndPoint);
+        //        RestClient client = new RestClient(ApiDetail.EndPoint);
 
-			//	RestRequest restRequest = new RestRequest()
-			//	{
-			//		Resource = "/api/Reports/GetEcardPhoto",
-			//		Method = Method.Get
-			//	};
+        //        RestRequest restRequest = new RestRequest()
+        //        {
+        //            Resource = "/api/Reports/SaveEcardPhotoForMember",
+        //            Method = Method.Post
+        //        };
 
-			//	restRequest.AddQueryParameter("memberId", SelectedDependant.Id);
+        //        UpdateProfileImage updateProfileImage = new UpdateProfileImage()
+        //        {
+        //            memberId = SelectedDependant.Id,
+        //            profileImgFile = FileBytesToBeUploaded.Length > 0 ? Base64.EncodeToString(FileBytesToBeUploaded, Base64Flags.NoWrap) : "",
+        //            profileImgName = SelectedFileName
+        //        };
+
+        //        restRequest.AddJsonBody(updateProfileImage);
+
+        //        var response = await client.ExecuteAsync(restRequest);
+
+        //        if (response.IsSuccessful)
+        //        {
+
+        //            var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<bool>>(response.Content);
+
+        //            if (deserializedResponse.success)
+        //            {
+        //                //await ShowSuccessMessage();
+
+        //                await GetEcardPhotoFromServer();
+        //            }
+        //            else
+        //            {
+        //                await ShowErrorMessage();
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            await ShowErrorMessage();
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        SendErrorMessageToAppCenter(ex, "E-Card");
+        //        await ShowErrorMessage();
+        //    }
+        //}
+
+        //public async Task GetEcardPhotoFromServer()
+        //{
+        //    try
+        //    {
+
+
+        //        await ShowLoadingMessage();
+
+        //        RestClient client = new RestClient(ApiDetail.EndPoint);
+
+        //        RestRequest restRequest = new RestRequest()
+        //        {
+        //            Resource = "/api/Reports/GetEcardPhoto",
+        //            Method = Method.Get
+        //        };
+
+        //        restRequest.AddQueryParameter("memberId", SelectedDependant.Id);
 
 
 
-			//	var response = await client.ExecuteAsync(restRequest);
+        //        var response = await client.ExecuteAsync(restRequest);
 
-			//	if (response.IsSuccessful)
-			//	{
-			//		isUploadVisible = false;
-			//		var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<ECardPhotoDto>>(response.Content);
+        //        if (response.IsSuccessful)
+        //        {
+        //            isUploadVisible = false;
+        //            var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<ECardPhotoDto>>(response.Content);
 
-			//		if (deserializedResponse.success)
-			//		{
+        //            if (deserializedResponse.success)
+        //            {
 
-			//			PhotoPath = deserializedResponse.data.PhotoUrl;
-			//			IsUploadVisible = false;
-			//		}
-			//		else
-			//		{
+        //                PhotoPath = deserializedResponse.data.PhotoUrl;
+        //                IsUploadVisible = false;
+        //            }
+        //            else
+        //            {
 
-			//		}
+        //            }
 
-			//	}
+        //        }
 
-			//	await RemoveLoadingMessage();
+        //        await RemoveLoadingMessage();
 
-			//}
-			//catch (Exception ex)
-			//{
-			//	SendErrorMessageToAppCenter(ex, "E-Card");
-			//	await ShowErrorMessage();
-			//}
-		}
-	}
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        SendErrorMessageToAppCenter(ex, "E-Card");
+        //        await ShowErrorMessage();
+        //    }
+        //}
+
+    }
 }

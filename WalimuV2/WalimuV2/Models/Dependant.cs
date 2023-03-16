@@ -44,8 +44,26 @@ namespace WalimuV2.Models
 
 			}
 		}
+        public string Initials
+        {
+            get
+            {
+                string Initials = "";
 
-		public string StatusDescription
+                if (!string.IsNullOrEmpty(FirstName))
+                {
+                    Initials = FirstName.Substring(0, 1);
+                }
+
+                if (!string.IsNullOrEmpty(LastName))
+                {
+                    Initials += LastName.Substring(0, 1);
+                }
+                
+                return Initials;
+            }
+        }
+        public string StatusDescription
 		{
 			get
 			{

@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="WalimuV2.Views.Ecard.ECardPage"
-    x:Name="ECardPageView"
-    Title="E-Card"
-    BackgroundColor="{StaticResource HkBackground}">
+             x:Name="ECardPageView"
+             Title="E-Card"
+             BackgroundColor="{StaticResource HkBackground}">
     <ContentPage.Content>
         <StackLayout Padding="10">
 
-            <!--<CollectionView ItemsSource="{Binding Dependants}">
+            <CollectionView ItemsSource="{Binding Dependants}">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ContentView>-->
+                        <ContentView>
                             <Frame
                                 Margin="5"
                                 Padding="10"
@@ -30,7 +30,7 @@
                                             HorizontalOptions="CenterAndExpand"
                                             Size="50"
                                             Source="{Binding PhotoPath}"
-                                            Text="PK"
+                                            Text="{Binding Initials}"
                                             VerticalOptions="CenterAndExpand" />
 
                                         <StackLayout
@@ -40,13 +40,13 @@
                                             <Label
                                                 FontSize="14"
                                                 Style="{StaticResource MedBookLabelMedium}"
-                                                Text="Peter Kachezi"
+                                                Text="{Binding FullName}"
                                                 TextColor="{StaticResource Secondary}"
                                                 VerticalOptions="Center" />
                                             <Label
-                                                FontSize="10"
+                                                FontSize="12"
                                                 Style="{StaticResource MedBookLabelNormal}"
-                                                Text="Self"
+                                                Text="{Binding Relation}"
                                                 TextColor="{StaticResource Secondary}"
                                                 VerticalOptions="Center" />
                                         </StackLayout>
@@ -57,20 +57,20 @@
                                             Padding="0"
                                             Command="{Binding Path=BindingContext.ViewECardCommand, Source={x:Reference ECardPageView}}"
                                             CommandParameter="{Binding Id}"
-                                            HeightRequest="30"
+                                            HeightRequest="30"                                          
                                             HorizontalOptions="CenterAndExpand"
                                             Style="{StaticResource ButtonOutlineSecondary}"
-                                            Text=" View "
+                                            Text="View"
                                             VerticalOptions="CenterAndExpand" />
 
                                     </Grid>
 
                                 </StackLayout>
                             </Frame>
-                        <!--</ContentView>
+                        </ContentView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>-->
+            </CollectionView>
             <StackLayout  HorizontalOptions="CenterAndExpand">
 
                 <Label FontSize="10"  HorizontalOptions="CenterAndExpand"

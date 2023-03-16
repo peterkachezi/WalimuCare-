@@ -177,5 +177,18 @@ namespace WalimuV2.Views
 			}
 		}
 
-	}
+        private async void TapGestureRecognizer_Tapped_8(object sender, EventArgs e)
+        {
+            try
+            {
+                await Shell.Current.Navigation.PushAsync(new FindHospitalPage());
+
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "Something went wrong");
+
+            }
+        }
+    }
 }

@@ -50,10 +50,11 @@
             <Label
                 Grid.Row="2"
                 Margin="0,15,0,15"
+                HorizontalTextAlignment="Center"
                 FontSize="18"
                 HorizontalOptions="CenterAndExpand"
                 Style="{x:StaticResource MedBookLabel}"
-                Text="Already have an account?"
+                Text="Jambo Mwalimu, do you already have an account?"
                 TextColor="{x:StaticResource HkBackground}"
                 VerticalOptions="End" />
 

@@ -160,8 +160,6 @@
                                                     </Label.FormattedText>
                                                 </Label>
 
-
-
                                                 <Label
                                                     Grid.Row="2"
                                                     Grid.Column="0"

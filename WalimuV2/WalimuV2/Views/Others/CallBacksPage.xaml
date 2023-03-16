@@ -36,7 +36,6 @@
                         VerticalOptions="End" />
                 </StackLayout>
 
-
                 <ListView
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"
@@ -68,8 +67,8 @@
                                             HorizontalOptions="FillAndExpand" />
 
                                         <StackLayout Padding="5" MinimumHeightRequest="200">
-                                            <!--<Label Style="{StaticResource MedBookLabel}" Text="Your Complaint Description" />-->
                                             <Label Style="{StaticResource MedBookLabelNormal}" Text="{Binding PhoneNumber}" />
+                                            <!--<Label Style="{StaticResource MedBookLabel}" Text="Open" />-->
                                         </StackLayout>
 
                                     </StackLayout>

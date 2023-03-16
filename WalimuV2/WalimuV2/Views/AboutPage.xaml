@@ -288,7 +288,8 @@
                                         HorizontalOptions="FillAndExpand"
                                         VerticalOptions="FillAndExpand">
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding GoToFindHospital}" />
+                                            <!--<TapGestureRecognizer Command="{Binding GoToFindHospital}" />-->
+                                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_8" />
                                         </StackLayout.GestureRecognizers>
                                         <yummy:PancakeView
                                             Margin="5"

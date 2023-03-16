@@ -92,57 +92,37 @@ namespace WalimuV2.ViewModels
 		public ICommand GetMemberRequestsCommand { get; set; }
 		public ICommand SubmitCallBackRequest { get; set; }
 		public ICommand viewCallBackLstCommand { get; set; }
-
 		public ICommand AddNewRequestCommand { get; set; }
 
 		public RequestCallBackViewModel()
 		{
 			try
 			{
-				//IsPhnNoEditorEnabled = false;
+			
 				SubmitCallBackRequest = new Command(async () => await SaveCallBackRequests());
+
 				viewCallBackLstCommand = new Command(async () => await GoToLists());
+
 				GetMemberRequestsCommand = new Command(async () => await GetCallBackrequests());
-				AddNewRequestCommand = new Command(async () => await AddNewCallBackRequest());
-				//selectedRdoBtn = "Call my number";
-				Preferences.Set("rdbtnController", "owner");
+
+				AddNewRequestCommand = new Command(async () => await AddNewCallBackRequest());		
+
 				PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
-				MemberId = Preferences.Get(nameof(AspNetUsers.memberId), "");
-				//checkController = Preferences.Get("rdbtnController", "owner");
 
-				Task.Run(async () =>
-				{
-					await GetCallBackrequests();
-				});
+                PageTitle = "Request Call";
 
+                Task.Run(async () =>
+                {
+                    await GetCallBackrequests();
+                });
 
-				PageTitle = "Request Call";
 			}
 			catch (Exception ex)
 			{
-
 				SendErrorMessageToAppCenter(ex, "Request A call back", "acha jokes", PhoneNumber);
 			}
 		}
-		//public void rdBtnChecked()
-		//{
-		//	if (checkController == "owner")
-		//	{
-		//		IsPhnNoEditorEnabled = false;
 
-		//		PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
-		//		checkController = "Request";
-		//	}
-		//	else
-		//	{
-		//		IsPhnNoEditorEnabled = true;
-
-		//		PhoneNumber = "";
-
-		//		checkController = Preferences.Get("rdbtnController", "owner");
-
-		//	}
-		//}
 		public async Task AddNewCallBackRequest()
 		{
 			try

@@ -28,7 +28,7 @@ namespace WalimuV2
 
 				SetApiDetails();
 
-			    Preferences.Clear();
+			   // Preferences.Clear();
 
 				var firstName = Preferences.Get("firstName", string.Empty);
 
@@ -100,6 +100,8 @@ namespace WalimuV2
 			try
 			{
 				//view models 
+				DependencyService.Register<DependantService>();
+
 				DependencyService.Register<MockDataStore>();
 
 				DependencyService.Register<AppShellViewModel>();

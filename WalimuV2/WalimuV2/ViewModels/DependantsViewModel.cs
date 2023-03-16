@@ -58,6 +58,7 @@ namespace WalimuV2.ViewModels
 			set
 			{
 				isListViewVisible = value;
+
 				OnPropertyChanged();
 			}
 		}

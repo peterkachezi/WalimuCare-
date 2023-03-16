@@ -333,14 +333,17 @@ namespace WalimuV2.ViewModels
 			{
 				if (App.Current.MainPage.Navigation.NavigationStack.Count > 0)
 				{
-					MainThread.BeginInvokeOnMainThread(async () =>
-					{
-						await App.Current.MainPage.Navigation.PopAllPopupAsync();
-					});
-					
-				}
 
-			}
+                    await Application.Current.MainPage.Navigation.PopAllPopupAsync();
+
+                    //MainThread.BeginInvokeOnMainThread(async () =>
+                    //{
+                    //	await App.Current.MainPage.Navigation.PopAllPopupAsync();
+                    //});
+
+                }
+
+            }
 			catch (Exception ex)
 			{
 

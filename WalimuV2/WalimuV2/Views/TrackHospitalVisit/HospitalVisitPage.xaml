@@ -44,16 +44,18 @@
                         <BoxView BackgroundColor="{x:StaticResource PrimaryLight1}" WidthRequest="4" />
 
                         <Grid
+                            
                             Padding="10"
+                            
                             HorizontalOptions="FillAndExpand"
+                            
                             VerticalOptions="FillAndExpand">
+                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-
-
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -74,66 +76,79 @@
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding hospitalName}" />
 
+
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
-                                Text="Visit Date" />
+                                Text="Patient Name" />
                             <Label
                                 Grid.Row="1"
+                                Grid.Column="1"
+                                Style="{x:StaticResource Value}"
+                                Text="{Binding name}" />
+
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Style="{x:StaticResource Title}"
+                                Text="Visit Date" />
+                            <Label
+                                Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"                      
                                 Text="{Binding NewMvcDate}"/>
 
                             <Label
-                                Grid.Row="2"
+                                Grid.Row="3"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Department" />
 
                             <Label
-                                Grid.Row="2"
+                                Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding department}" />
 
                             <Label
-                                Grid.Row="3"
+                                Grid.Row="4"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="MVC Number" />
                             <Label
-                                Grid.Row="3"
+                                Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding mvcNumber}" />
 
                             
                             <Label
-                                Grid.Row="4"
+                                Grid.Row="5"
                                 Grid.Column="0"                           
                                 Style="{x:StaticResource MedBookLabelNormal}"
                                 Text="Request Amt"
                               />
                             <Label
-                                Grid.Row="4"
+                                Grid.Row="5"
                                 Grid.Column="1"                               
                                 Style="{x:StaticResource MedBookLabelNormal}"
                                 Text="{Binding totalRequestAmount, StringFormat='{0:#,0.#0}'}"                                            
                                 TextColor="{x:StaticResource Secondary}" />
 
                             <Label
-                                Grid.Row="5"
+                                Grid.Row="6"
                                 Grid.Column="0"                               
                                 Style="{x:StaticResource Title}"
                                 Text="Status"
                                />
                             <Label
-                                Grid.Row="5"
+                                Grid.Row="6"
                                 Grid.Column="1"                           
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding StatusDescription}"
                                 TextColor="{x:StaticResource Primary}" />
+
 
                         </Grid>
                     </StackLayout>

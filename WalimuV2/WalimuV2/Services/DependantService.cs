@@ -19,32 +19,11 @@ namespace WalimuV2.Services
 {
     public class DependantService : AppViewModel
     {
-
         public async Task<List<Dependant>> GetDependants()
         {
             try
             {
                 var memberNo = Preferences.Get("memberNumber", string.Empty);
-
-                //RestClient client = new RestClient(ApiDetail.ur);
-                ////{
-                ////    BaseUrl = new Uri()
-                ////};
-
-                //RestRequest restRequest = new RestRequest()
-                //{
-                //    Method = Method.Post,
-
-                //    Resource = "/Members/GetMemberDepedants"
-                //};
-
-                //restRequest.AddQueryParameter("PrincipalMbrId", MemberId);
-
-
-                //var response = await Task.Run(() =>
-                //{
-                //    return client.Execute(restRequest);
-                //});
 
                 var client = new HttpClient();
 
@@ -56,8 +35,7 @@ namespace WalimuV2.Services
 
                 if (getData.IsSuccessStatusCode)
                 {
-
-                    //IsRefreshing = false;
+                    IsRefreshing = false;
 
                     string results = getData.Content.ReadAsStringAsync().Result;
 

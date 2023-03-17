@@ -54,7 +54,7 @@
                         FontSize="15"
                         HorizontalOptions="StartAndExpand"
                         Style="{StaticResource MedBookLabelMedium}"
-                        Text="Download All E-Cards"
+                        Text="Policy Details"
                         TextColor="#3B3B3B"
                         VerticalOptions="Center" />
 

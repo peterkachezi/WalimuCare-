@@ -1,12 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WalimuV2.Views.Others.SubmitComplaintsPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             x:Class="WalimuV2.Views.Others.SubmitComplaintsPage"
+                Title="Submit Complaints">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout>
+
+                    <ScrollView Padding="10">
+                        <StackLayout Margin="10">
+                            <Button
+                        Command="{Binding GoToMyComplaintsCommand}"
+                        CornerRadius="7"
+                        FontSize="13"
+                        Style="{StaticResource ButtonFilledPrimary}"
+                        Text="View My Previous Complaints"
+                        TextTransform="None" />
+
+                            <Picker 
+                        Title="Select Complaint Type" 
+                        Style="{StaticResource BomaLabel}"
+                        TitleColor="bLACK"
+                        ItemsSource="{Binding ComplaintsType}"
+                        SelectedItem="{Binding SelectedComplaintType}" />
+
+                            <StackLayout Margin="10" IsVisible="{Binding IsPoorService}">
+                                <Label
+                        Margin="2"
+                        Style="{StaticResource BomaLabel}"
+                        Text="Hospital Name"
+                        TextColor="{StaticResource Secondary}" />
+                                <inputLayout:SfTextInputLayout
+                        Margin="0,0,0,0"
+                        Style="{x:StaticResource ButtonFilledPrimary}"
+                        VerticalOptions="FillAndExpand">
+                                    <Editor
+                            AutoSize="TextChanges"
+                            Text="{Binding HospitalName}"
+                            VerticalOptions="FillAndExpand" />
+                                </inputLayout:SfTextInputLayout>
+                                <Label
+                        Margin="2"
+                        Style="{StaticResource ButtonFilledPrimary}"
+                        Text="Hospital Department"
+                        TextColor="{StaticResource Secondary}" />
+                                <inputLayout:SfTextInputLayout
+                        Margin="0,0,0,0"
+                        Style="{x:StaticResource ButtonFilledPrimary}"
+                        VerticalOptions="FillAndExpand">
+                                    <Editor
+                            AutoSize="TextChanges"
+                            Text="{Binding HospitalDepartment}"
+                            VerticalOptions="FillAndExpand" />
+                                </inputLayout:SfTextInputLayout>
+                            </StackLayout>
+
+
+
+
+
+
+
+
+
+
+                        </StackLayout>
+
+                    </ScrollView>
+                </StackLayout>
+            </AbsoluteLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

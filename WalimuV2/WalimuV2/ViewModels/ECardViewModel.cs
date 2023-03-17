@@ -86,10 +86,6 @@ namespace WalimuV2.ViewModels
 
             PickPictureCommand = new Command(async () => await PickPicture());
 
-           // ShowUploadPopUpCommand = new Command(async () => await ShowUploadPopUp());
-
-            //UploadImageToServerCommand = new Command(async () => await UploadImageToServer());
-
             ClosePopUpCommand = new Command(async () => await RemoveLoadingMessage());
 
             Task.Run(async () => await GetDependants());
@@ -115,18 +111,27 @@ namespace WalimuV2.ViewModels
                     {
                         data.Insert(0, new Dependant()
                         {
-                            MemberNumber = Preferences.Get("MemberNumber", ""),
-                            FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
-                            LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
-                            Gender = Preferences.Get(nameof(AspNetUsers.Gender), ""),
-                            DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
-                            //MiddleName = Preferences.Get(nameof(AspNetUsers.userName), ""),
-                           // Relationship = "Principal",
-                            Id = Preferences.Get(nameof(AspNetUsers.id), ""),
-                            JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup), "")
-                        });
+                            PrincipalNumber = Preferences.Get("memberNumber", string.Empty),
 
-                        data = data.Select(p => { p.JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup), ""); return p; }).ToList();
+                            Gender = Preferences.Get("gender", string.Empty),
+
+                            Id = Preferences.Get("memberId", string.Empty),
+
+                            JobGroup = Preferences.Get("jobGroup", string.Empty),
+
+                            FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
+
+                            LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
+
+                            DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
+
+                            //Id = Preferences.Get(nameof(AspNetUsers.id), ""),
+
+                            Relation = "Self"
+
+                        }); ;
+
+                        data = data.ToList();
 
                         Dependants = data;
                     }
@@ -137,12 +142,17 @@ namespace WalimuV2.ViewModels
                             new Dependant()
                             {
                                 FirstName = Preferences.Get(nameof(AspNetUsers.firstName), ""),
+
                                 LastName = Preferences.Get(nameof(AspNetUsers.lastName), ""),
+
                                 MiddleName = Preferences.Get(nameof(AspNetUsers.userName), ""),
-                               // Relationship = "Principal",
+
                                 Id = Preferences.Get(nameof(AspNetUsers.id), ""),
+
                                 JobGroup = Preferences.Get(nameof(AspNetUsers.jobGroup),""),
+
                                 Gender = Preferences.Get(nameof(AspNetUsers.Gender), ""),
+
                                 DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
                             }
                         };

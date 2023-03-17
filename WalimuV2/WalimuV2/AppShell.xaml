@@ -171,9 +171,9 @@
         <ShellContent  Route="PolicyDetailsPage" ContentTemplate="{DataTemplate Policy:PolicyDetailsPage}" />
     </FlyoutItem>
 
-    <FlyoutItem  Title="Available Limits" Icon="policylimitsicon.png">
+    <!--<FlyoutItem  Title="Available Limits" Icon="policylimitsicon.png">
         <ShellContent  Route="PolicyLimitsPage" ContentTemplate="{DataTemplate Policy:PolicyLimitsPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <FlyoutItem  Title="E-Card" Icon="ecard.png" >
         <ShellContent  Route="ECardPage" ContentTemplate="{DataTemplate Ecard:ECardPage}" />
@@ -187,9 +187,9 @@
         <ShellContent  Route="TeleMedicineCallOrWebLinkPage" ContentTemplate="{DataTemplate Telemedicine:TeleMedicineCallOrWebLinkPage}" />
     </FlyoutItem>
 
-    <!--<FlyoutItem  Title="Reports Issues/Feedback" Icon="complaint.png" >
+    <FlyoutItem  Title="Reports Issues/Feedback" Icon="complaint.png" >
         <ShellContent  Route="SubmitComplaintsPage" ContentTemplate="{DataTemplate Others:SubmitComplaintsPage}" />
-    </FlyoutItem>-->
+    </FlyoutItem>
 
     <FlyoutItem  Title="Request Callback" Icon="callbackicon.png" >
         <ShellContent  Route="CallBacksPage" ContentTemplate="{DataTemplate Others:CallBacksPage}" />

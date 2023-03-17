@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuV2.Views.Others.ComplaintsPage"
+             Title="My Complaints"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+
+                <Frame
+                    Padding="0"
+                    AbsoluteLayout.LayoutBounds="0,0,1,0.09"
+                    AbsoluteLayout.LayoutFlags="All"
+                    BackgroundColor="{StaticResource Primary}"
+                    CornerRadius="0"
+                    HasShadow="True">
+                    <StackLayout Padding="10" Orientation="Horizontal">
+
+                        <Image
+                            Margin="10,0,0,0"
+                            HeightRequest="20"
+                            HorizontalOptions="Start"
+                            Source="backbutton.png"
+                            VerticalOptions="CenterAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackButtonCommand}" CommandParameter="SubmitComplaintsPage" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Label
+                            Margin="10,0,0,0"
+                            FontSize="20"
+                            HorizontalOptions="StartAndExpand"
+                            Style="{StaticResource MedBookLabel}"
+                            Text="My Complaint"
+                            TextColor="White"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+
+                </Frame>
+
+                <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsVisible="{Binding IsEmptyIllustrationVisible}"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetMemberComplaintsCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="empty"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabel}"
+                        Text="{Binding NoDataAvailableMessage}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalOptions="End" />
+                    <Label
+                        FontSize="Micro"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabelNormal}"
+                        Text="Tap to Refresh"
+                        VerticalOptions="End" />
+                </StackLayout>
+                <ListView
+                    AbsoluteLayout.LayoutBounds="0,0.5,1,0.8"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HasUnevenRows="True"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    IsVisible="{Binding IsListViewVisible}"
+                    ItemsSource="{Binding MemberComplaints}"
+                    RefreshCommand="{Binding GetMemberComplaintsCommand}"
+                    SelectionMode="None"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="10" Padding="0">
+                                    <StackLayout Margin="0" Padding="0">
+                                        <StackLayout
+                                            Margin="0"
+                                            Padding="5"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                Style="{StaticResource MedBookLabel}"
+                                                Text="{Binding topic}"
+                                                TextColor="{StaticResource Primary}" />
+
+                                            <Frame
+                                                Margin="0"
+                                                Padding="10,2,10,2"
+                                                BackgroundColor="{Binding statusColor}"
+                                                CornerRadius="10"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <Label
+                                                    Style="{StaticResource MedBookLabel}"
+                                                    Text="{Binding status}"
+                                                    TextColor="White"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    VerticalTextAlignment="Center" />
+
+                                            </Frame>
+
+                                        </StackLayout>
+                                       
+                                        <StackLayout Padding="5" MinimumHeightRequest="200">
+                                            <Label Style="{StaticResource MedBookLabelNormal}" Text="{Binding complaintDescription}" />
+                                        </StackLayout>
+
+
+                                        <StackLayout Padding="5" Orientation="Horizontal" MinimumHeightRequest="200">
+
+                                            <Label
+                                                FontSize="Micro"
+                                                HorizontalOptions="EndAndExpand"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="{Binding dateSubmitted, StringFormat='{}{0:dd-MMM-yyyy}'}"
+                                                VerticalOptions="CenterAndExpand" />
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>            
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

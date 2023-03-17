@@ -260,7 +260,9 @@ namespace WalimuV2.ViewModels
 
 							Preferences.Set("dateOfBirth", result.dateOfBirth);
 
-							Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
+                            Preferences.Set("jobGroup", result.jobGroup);
+
+                            Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
 
 							Device.BeginInvokeOnMainThread(() =>
 							{
@@ -414,33 +416,35 @@ namespace WalimuV2.ViewModels
 								return;
 							}
 
-							Preferences.Set("accessToken", result.access_token);// saving reponse locally in essesials for validation
+                            Preferences.Set("accessToken", result.access_token);// saving reponse locally in essesials for validation
 
-							Preferences.Set("userId", result.user_Id);
+                            Preferences.Set("userId", result.user_Id);
 
-							Preferences.Set("memberId", result.member_Id);
+                            Preferences.Set("memberId", result.member_Id);
 
-							Preferences.Set("memberNumber", result.user_name);
+                            Preferences.Set("memberNumber", result.user_name);
 
-							Preferences.Set("tokenExpirationTime", result.expiration_Time);
+                            Preferences.Set("tokenExpirationTime", result.expiration_Time);
 
-							Preferences.Set("firstName", result.firstName);
+                            Preferences.Set("firstName", result.firstName);
 
-							Preferences.Set("lastName", result.lastName);
+                            Preferences.Set("lastName", result.lastName);
 
-							Preferences.Set("phoneNumber", result.phoneNumber);
+                            Preferences.Set("phoneNumber", result.phoneNumber);
 
-							Preferences.Set("gender", result.gender);
+                            Preferences.Set("gender", result.gender);
 
-							Preferences.Set("accountStatus", result.accountStatus);
+                            Preferences.Set("accountStatus", result.accountStatus);
 
-							Preferences.Set("schemeStatus", result.schemeStatus);
+                            Preferences.Set("schemeStatus", result.schemeStatus);
 
-							Preferences.Set("dateOfBirth", result.dateOfBirth);
+                            Preferences.Set("dateOfBirth", result.dateOfBirth);
 
-							Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
+                            Preferences.Set("jobGroup", result.jobGroup);
 
-							Device.BeginInvokeOnMainThread(() =>
+                            Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
+
+                            Device.BeginInvokeOnMainThread(() =>
 							{
 								Application.Current.MainPage = new AppShell();
 
@@ -837,11 +841,8 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-
 				var aStringBuilder = new StringBuilder(theString);
 
-
-				//aStringBuilder.Remove(6,2); first argument represents position, next argument represents number of characters
 				aStringBuilder.Remove(4, 3);
 
 				aStringBuilder.Insert(4, "XXX");

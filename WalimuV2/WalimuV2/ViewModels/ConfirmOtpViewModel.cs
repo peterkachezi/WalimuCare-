@@ -250,7 +250,7 @@ namespace WalimuV2.ViewModels
 
 							MainThread.BeginInvokeOnMainThread(() =>
 							{
-								App.Current.MainPage = new NavigationPage(new FinalLoginPage());
+								App.Current.MainPage = new NavigationPage(new TheRealLoginPage());
 							});
 
 						}

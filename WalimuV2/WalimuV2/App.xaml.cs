@@ -12,159 +12,161 @@ using Xamarin.Forms.Xaml;
 
 namespace WalimuV2
 {
-	public partial class App : Application
-	{
-		public App()
-		{
-			try
-			{
-				InitializeComponent();
+    public partial class App : Application
+    {
+        public App()
+        {
+            try
+            {
+                InitializeComponent();
 
-				Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTI0Nzg0MkAzMjMwMmUzNDJlMzBHZS9Cdnl2ZHRKY3dZTmtIQnlJNDEzamJiK21nakxBbXRrUnFZd1p1ZHFjPQ==\r\n");
+                Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTI0Nzg0MkAzMjMwMmUzNDJlMzBHZS9Cdnl2ZHRKY3dZTmtIQnlJNDEzamJiK21nakxBbXRrUnFZd1p1ZHFjPQ==");
 
-				XF.Material.Forms.Material.Init(this);
+                XF.Material.Forms.Material.Init(this);
 
-				RegisterDependencyModels();
+                RegisterDependencyModels();
 
-				SetApiDetails();
+                SetApiDetails();
 
-			   // Preferences.Clear();
+                //Preferences.Clear();
 
-				var firstName = Preferences.Get("firstName", string.Empty);
+                var firstName = Preferences.Get("firstName", string.Empty);
 
-				var lastName = Preferences.Get("lastName", string.Empty);
+                var lastName = Preferences.Get("lastName", string.Empty);
 
-				var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
+                var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
-				var memberNumber = Preferences.Get("memberNumber", string.Empty);
+                var memberNumber = Preferences.Get("memberNumber", string.Empty);
 
-				var password = Preferences.Get("password", string.Empty);	
+                var password = Preferences.Get("password", string.Empty);
 
-				if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(phoneNumber) || string.IsNullOrEmpty(memberNumber))
-				{
-					MainPage = new WelcomeScreenPage();
+                if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(phoneNumber) || string.IsNullOrEmpty(memberNumber))
+                {
+                    MainPage = new WelcomeScreenPage();
 
-					return;
-				}
+                    return;
+                }
 
-				if (firstName != null || lastName != null || phoneNumber != null)
-				{
+                if (firstName != null || lastName != null || phoneNumber != null)
+                {
 
-					if(memberNumber ==null || memberNumber == "")
-					{
-						MainPage = new NavigationPage(new TheRealLoginPage());
+                    if (memberNumber == null || memberNumber == "")
+                    {
+                        MainPage = new NavigationPage(new TheRealLoginPage());
 
-						return;
-					}
-					MainPage = new NavigationPage(new FinalLoginPage());
+                        return;
+                    }
+                    MainPage = new NavigationPage(new FinalLoginPage());
 
-					return;
-				}				
+                    return;
+                }
 
-				else
-				{
-					MainPage = new NavigationPage(new TheRealLoginPage());
+                else
+                {
+                    MainPage = new NavigationPage(new TheRealLoginPage());
 
-					return;
-				}
+                    return;
+                }
 
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
 
-				MainPage = new TheRealLoginPage();
+                MainPage = new TheRealLoginPage();
 
-				Crashes.TrackError(ex);
+                Crashes.TrackError(ex);
 
-				Console.WriteLine(ex);
-			}
+                Console.WriteLine(ex);
+            }
 
-		}
+        }
 
-		public void SetApiDetails()
-		{
-			if (Debugger.IsAttached)
-			{
-				ApiDetail.EndPoint = ApiDetail.LocalEndPoint;
-			}
-			else
-			{
-				//means we are on production
-				ApiDetail.EndPoint = ApiDetail.PublicEndPoint;
-				//ApiDetail.EndPoint = ApiDetail.LocalEndPoint;
-			}
-		}
-		public void RegisterDependencyModels()
-		{
-			try
-			{
-				//view models 
-				DependencyService.Register<DependantService>();
+        public void SetApiDetails()
+        {
+            if (Debugger.IsAttached)
+            {
+                ApiDetail.EndPoint = ApiDetail.LocalEndPoint;
+            }
+            else
+            {
+                //means we are on production
+                ApiDetail.EndPoint = ApiDetail.PublicEndPoint;
+                //ApiDetail.EndPoint = ApiDetail.LocalEndPoint;
+            }
+        }
+        public void RegisterDependencyModels()
+        {
+            try
+            {
+                //view models 
+                DependencyService.Register<SubmitComplaintsViewModel>();
 
-				DependencyService.Register<MockDataStore>();
+                DependencyService.Register<DependantService>();
 
-				DependencyService.Register<AppShellViewModel>();
+                DependencyService.Register<MockDataStore>();
 
-				DependencyService.Register<PolicyLimitViewModel>();
+                DependencyService.Register<AppShellViewModel>();
 
-				DependencyService.Register<SignUpViewModel>();
+                DependencyService.Register<PolicyLimitViewModel>();
 
-				DependencyService.Register<ConfirmOtpViewModel>();
+                DependencyService.Register<SignUpViewModel>();
 
-				DependencyService.Register<ConfirmMemberDetailsViewModel>();
+                DependencyService.Register<ConfirmOtpViewModel>();
 
-				DependencyService.Register<TheRealLoginViewModel>();
+                DependencyService.Register<ConfirmMemberDetailsViewModel>();
 
-				DependencyService.Register<DependantsViewModel>();
+                DependencyService.Register<TheRealLoginViewModel>();
 
-				DependencyService.Register<HospitalVisitViewModel>();
+                DependencyService.Register<DependantsViewModel>();
 
-				DependencyService.Register<PolicyDetailsViewModel>();	
+                DependencyService.Register<HospitalVisitViewModel>();
 
-				DependencyService.Register<RequestCallBackViewModel>();
+                DependencyService.Register<PolicyDetailsViewModel>();
 
-				DependencyService.Register<FindHospitalViewModel>();
+                DependencyService.Register<RequestCallBackViewModel>();
 
-				DependencyService.Register<UserProfileViewModel>();
+                DependencyService.Register<FindHospitalViewModel>();
 
-				DependencyService.Register<RequestCallBackViewModel>();
+                DependencyService.Register<UserProfileViewModel>();
 
-				DependencyService.Register<EnableGpsViewModel>();
+                DependencyService.Register<RequestCallBackViewModel>();
 
-				DependencyService.Register<FAQPageViewModel>();
+                DependencyService.Register<EnableGpsViewModel>();
 
-				DependencyService.Register<ConfirmOtpViewModelReset>();
+                DependencyService.Register<FAQPageViewModel>();
 
-				DependencyService.Register<ResetPinPageViewModel>();
+                DependencyService.Register<ConfirmOtpViewModelReset>();
 
-				DependencyService.Register<Covid19ViewModel>();
+                DependencyService.Register<ResetPinPageViewModel>();
 
-				DependencyService.Register<UserLocationViewModel>();
+                DependencyService.Register<Covid19ViewModel>();
 
-				DependencyService.Register<ECardViewModel>();
+                DependencyService.Register<UserLocationViewModel>();
 
-				DependencyService.Register<DownloadsViewModel>();
+                DependencyService.Register<ECardViewModel>();
 
-				DependencyService.Register<IDownload>();
+                DependencyService.Register<DownloadsViewModel>();
 
-				DependencyService.Register<ILocSettings>();
+                DependencyService.Register<IDownload>();
 
-				DependencyService.Register<IFileSavePdf>();
-			}
-			catch (Exception ex)
-			{
-				Console.Write(ex);
-			}
-		}
-		protected override void OnStart()
-		{
-		}
-		protected override void OnSleep()
-		{
-		}
-		protected override void OnResume()
-		{
-		}
-	}
+                DependencyService.Register<ILocSettings>();
+
+                DependencyService.Register<IFileSavePdf>();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+        }
+        protected override void OnStart()
+        {
+        }
+        protected override void OnSleep()
+        {
+        }
+        protected override void OnResume()
+        {
+        }
+    }
 }

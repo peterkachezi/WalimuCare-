@@ -11,7 +11,7 @@ namespace WalimuV2.Views.Ecard
 		{
 			InitializeComponent();
 
-			BindingContext = DependencyService.Get<ECardViewModel>();
+			//BindingContext = DependencyService.Get<ECardViewModel>();
 
 		}
 
@@ -19,7 +19,7 @@ namespace WalimuV2.Views.Ecard
 		{
 			base.OnAppearing();
 
-		   // BindingContext = DependencyService.Get<ECardViewModel>();
+		   BindingContext = DependencyService.Get<ECardViewModel>();
 		}
 	}
 }

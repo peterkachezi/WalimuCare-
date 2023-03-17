@@ -1,19 +1,11 @@
-﻿
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WalimuV2.Views.Ecard.ViewECardPage"   
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              BackgroundColor="{StaticResource HkBackground}"
              Shell.NavBarIsVisible="False">
-
-
-    <!--<ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:DateOfBirthToAgeConverter x:Key="DateOfBirthToAgeConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>-->
-
+    
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <!---->
@@ -45,10 +37,9 @@
                         Text="E-Card Details"
                         TextColor="White"
                         VerticalOptions="CenterAndExpand" />
-
                 </StackLayout>
-
             </Frame>
+
             <StackLayout
                 Margin="0,50,0,0"
                 Padding="10"
@@ -57,8 +48,6 @@
                 HorizontalOptions="FillAndExpand"
                 Orientation="Vertical"
                 VerticalOptions="FillAndExpand">
-
-
                 <cards:CubeView
                     x:Name="newCards"
                     Margin="0,20,0,0"
@@ -70,13 +59,11 @@
                                     Margin="5"
                                     Padding="0"
                                     CornerRadius="10">
-
                                     <StackLayout>
                                         <StackLayout
                                             Margin="10"
                                             Orientation="Horizontal"
                                             VerticalOptions="Start">
-
                                             <StackLayout HorizontalOptions="StartAndExpand">
                                                 <Image
                                                     HeightRequest="50"
@@ -99,7 +86,6 @@
                                                     TextColor="Black"
                                                     VerticalOptions="EndAndExpand" />
                                             </StackLayout>
-
                                         </StackLayout>
 
                                         <StackLayout
@@ -130,14 +116,11 @@
                                                         <FormattedString>
                                                             <FormattedString.Spans>
                                                                 <Span Text=": " />
-                                                                <Span Text="20133" />
+                                                                <Span Text="{Binding SelectedDependant.PrincipalNumber}" />
                                                             </FormattedString.Spans>
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>
-
-
-
 
                                                 <Label
                                                     Grid.Row="1"
@@ -154,7 +137,7 @@
                                                         <FormattedString>
                                                             <FormattedString.Spans>
                                                                 <Span Text=": " />
-                                                                <Span Text="Peter Kachezi" />
+                                                                <Span Text="{Binding SelectedDependant.FullName}" />
                                                             </FormattedString.Spans>
                                                         </FormattedString>
                                                     </Label.FormattedText>
@@ -175,15 +158,12 @@
                                                         <FormattedString>
                                                             <FormattedString.Spans>
                                                                 <Span Text=": " />
-                                                                <Span Text="KD" />
+                                                                <Span Text="{Binding SelectedDependant.JobGroup}" />
 
                                                             </FormattedString.Spans>
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>
-
-
-
 
                                                 <Label
                                                     Grid.Row="3"
@@ -200,7 +180,7 @@
                                                         <FormattedString>
                                                             <FormattedString.Spans>
                                                                 <Span Text=": " />
-                                                                <Span Text="Self" />
+                                                                <Span Text="{Binding SelectedDependant.Relation}" />
                                                             </FormattedString.Spans>
                                                         </FormattedString>
                                                     </Label.FormattedText>
@@ -221,12 +201,11 @@
                                                         <FormattedString>
                                                             <FormattedString.Spans>
                                                                 <Span Text=": " />
-                                                                <Span Text="M" />
+                                                                <Span Text="{Binding SelectedDependant.Gender}" />
                                                             </FormattedString.Spans>
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>
-
 
                                                 <Label
                                                     Grid.Row="5"
@@ -244,30 +223,23 @@
                                                         <FormattedString>
                                                             <FormattedString.Spans>
                                                                 <Span Text=": " />
-                                                                <Span Text="18" />
+                                                                <Span Text="{Binding SelectedDependant.Age}" />
                                                                 <Span Text=" Yrs " />
 
                                                             </FormattedString.Spans>
                                                         </FormattedString>
                                                     </Label.FormattedText>
                                                 </Label>
-
                                             </Grid>
-
                                             <StackLayout HorizontalOptions="EndAndExpand">
-
                                                 <xct:AvatarView
                                                     Margin="0,0,0,0"
-                                                    HeightRequest="0"
                                                     CornerRadius="20"
                                                     HorizontalOptions="CenterAndExpand"
                                                     Size="80"
                                                     Source="{Binding PhotoPath}"
-                                                    Text="PK"
+                                                    Text="{Binding SelectedDependant.Initials}"
                                                     VerticalOptions="FillAndExpand" />
-
-
-
                                             </StackLayout>
                                         </StackLayout>
 
@@ -431,7 +403,11 @@
                         TextColor="{StaticResource Secondary}"
                         VerticalOptions="FillAndExpand" />
                 </StackLayout>
+
             </StackLayout>
         </AbsoluteLayout>
+
+
+
     </ContentPage.Content>
 </ContentPage>

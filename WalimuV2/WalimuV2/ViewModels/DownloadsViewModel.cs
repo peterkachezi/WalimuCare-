@@ -52,19 +52,21 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
+                await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
 
-				if (await CheckStoragePermisions())
-				{
-					string Url = ApiDetail.EndPoint + "/api/Reports/GenerateAllEcards?memberId=" + Preferences.Get(nameof(AspNetUsers.id), "");
 
-					string NameOfFile = "AllEcards.pdf";
+                //if (await CheckStoragePermisions())
+                //{
+                //	string Url = ApiDetail.EndPoint + "/api/Reports/GenerateAllEcards?memberId=" + Preferences.Get(nameof(AspNetUsers.id), "");
 
-					await DependencyService.Get<IDownload>().DownloadFile(Url, NameOfFile);
+                //	string NameOfFile = "AllEcards.pdf";
 
-				}
+                //	await DependencyService.Get<IDownload>().DownloadFile(Url, NameOfFile);
 
-			}
-			catch (Exception ex)
+                //}
+
+            }
+            catch (Exception ex)
 			{
 
 				SendErrorMessageToAppCenter(ex, "Policy Details");

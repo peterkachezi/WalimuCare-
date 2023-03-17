@@ -3,45 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WalimuV2.Views.Others.ComplaintsPage"
              Title="My Complaints"
-             Shell.NavBarIsVisible="False">
+ >
     <ContentPage.Content>
         <StackLayout>
 
             <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-
-                <Frame
-                    Padding="0"
-                    AbsoluteLayout.LayoutBounds="0,0,1,0.09"
-                    AbsoluteLayout.LayoutFlags="All"
-                    BackgroundColor="{StaticResource Primary}"
-                    CornerRadius="0"
-                    HasShadow="True">
-                    <StackLayout Padding="10" Orientation="Horizontal">
-
-                        <Image
-                            Margin="10,0,0,0"
-                            HeightRequest="20"
-                            HorizontalOptions="Start"
-                            Source="backbutton.png"
-                            VerticalOptions="CenterAndExpand">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BackButtonCommand}" CommandParameter="SubmitComplaintsPage" />
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Label
-                            Margin="10,0,0,0"
-                            FontSize="20"
-                            HorizontalOptions="StartAndExpand"
-                            Style="{StaticResource MedBookLabel}"
-                            Text="My Complaint"
-                            TextColor="White"
-                            VerticalOptions="CenterAndExpand" />
-                    </StackLayout>
-
-                </Frame>
-
+              
                 <StackLayout
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"

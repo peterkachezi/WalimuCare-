@@ -291,6 +291,7 @@ namespace WalimuV2.ViewModels
                 RestRequest restRequest = new RestRequest()
                 {
                     Resource = "/Complaints/GetComplaintTopics",
+
                     Method = Method.Get
                 };
 
@@ -462,23 +463,17 @@ namespace WalimuV2.ViewModels
 
                 await ShowLoadingMessage();
 
-                //RestClient client = new RestClient(ApiDetail.EndPoint);
-
-                //RestRequest restRequest = new RestRequest()
-                //{
-                //    Resource = "/Complaints/SubmitComplaint",
-
-                //    Method = Method.Post
-                //};
-
                 var complaint = new
                 {
+                    Topic = SelectedComplaintType.topic,
 
                     MemberNumber = Preferences.Get("memberNumber", string.Empty),
 
                     FirstName = Preferences.Get("firstName", string.Empty),
 
                     LastName = Preferences.Get("lastName", string.Empty),
+
+                    PhoneNumber = Preferences.Get("phoneNumber", string.Empty),
 
                     description = ComplaintDescription,
 
@@ -488,12 +483,9 @@ namespace WalimuV2.ViewModels
 
                     complaintType = ComplaintCategory,
 
-                    dependentName = DependentName
+                    dependentName = DependentName,
+                  
                 };
-
-                //restRequest.AddJsonBody(barry);
-
-                //var response = await client.ExecuteAsync(restRequest);
 
                 var json = JsonConvert.SerializeObject(complaint);
 
@@ -503,7 +495,7 @@ namespace WalimuV2.ViewModels
 
                 var client = new HttpClient();
 
-                var response = await client.PostAsync(ApiDetail.ApiUrl + "api/CallBack/SubmitRequest", httpContent);
+                var response = await client.PostAsync(ApiDetail.ApiUrl + "api/Complaints/SubmitComplaint", httpContent);
 
 
                 if (response.IsSuccessStatusCode)
@@ -547,78 +539,93 @@ namespace WalimuV2.ViewModels
 
                 await ShowLoadingMessage();
 
-                RestClient client = new RestClient(ApiDetail.EndPoint);
+                var memberNo = Preferences.Get("memberNumber", string.Empty);
 
-                RestRequest restRequest = new RestRequest()
+                var client = new HttpClient();
+
+                client.DefaultRequestHeaders.Accept.Clear();
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/Complaints/GetComplaints?MemberNumber=" + memberNo + "");
+
+                if (getData.IsSuccessStatusCode)
                 {
-                    Resource = "/Complaints/GetMemberComplaints",
-                    Method = Method.Get
-                };
 
-                var memberId = Preferences.Get(nameof(AspNetUsers.memberId), "");
+                    string results = getData.Content.ReadAsStringAsync().Result;
 
-                restRequest.AddQueryParameter("MemberId", memberId);
+                    var deserializedResponse = JsonConvert.DeserializeObject<List<MemberComplaint>>(results);
 
-                var response = await client.ExecuteAsync(restRequest);
-
-                if (response.IsSuccessful)
-                {
-                    var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<List<MemberComplaint>>>(response.Content);
-
-                    if (deserializedResponse.success)
+                    if (deserializedResponse.Count > 0)
                     {
-                        MemberComplaints = deserializedResponse.data.OrderByDescending(x => x.dateSubmitted).ToList();
+                        MemberComplaints = deserializedResponse.ToList();
+
                         await RemoveLoadingMessage();
 
-                        if (MemberComplaints.Count > 0)
-                        {
-                            IsListViewVisible = true;
-                            IsEmptyIllustrationVisible = false;
-                            NoDataAvailableMessage = "";
-                            IsRefreshing = false;
-                        }
-                        else
-                        {
-                            IsListViewVisible = false;
-                            IsEmptyIllustrationVisible = true;
-                            NoDataAvailableMessage = "Sorry you dont have any complaints lodged";
-                            IsRefreshing = false;
-                        }
-                    }
-                    else
-                    {
+                        IsListViewVisible = true;
 
-                        await RemoveLoadingMessage();
-                        IsListViewVisible = false;
-                        IsEmptyIllustrationVisible = true;
-                        NoDataAvailableMessage = "Something went wrong, Please try again";
+                        IsEmptyIllustrationVisible = false;
+
+                        NoDataAvailableMessage = "";
+
                         IsRefreshing = false;
                     }
 
+                    if (deserializedResponse.Count == 0)
+                    {
+                        IsListViewVisible = false;
+
+                        IsEmptyIllustrationVisible = true;
+
+                        NoDataAvailableMessage = "Sorry you dont have any complaints lodged";
+
+                        IsRefreshing = false;
+                    }
+
+                    //else
+                    //{
+                    //    await RemoveLoadingMessage();
+
+                    //    IsListViewVisible = false;
+
+                    //    IsEmptyIllustrationVisible = true;
+
+                    //    NoDataAvailableMessage = "Something went wrong, Please try again";
+
+                    //    IsRefreshing = false;
+                    //}
 
                 }
                 else
                 {
                     await RemoveLoadingMessage();
+
                     IsListViewVisible = false;
+
                     IsEmptyIllustrationVisible = true;
+
                     NoDataAvailableMessage = "Something went wrong, Please try again";
+
                     IsRefreshing = false;
                 }
-
 
             }
             catch (Exception ex)
             {
                 await ShowErrorMessage();
+
                 SendErrorMessageToAppCenter(ex, "Submit Complaints");
 
                 IsListViewVisible = false;
+
                 IsEmptyIllustrationVisible = true;
+
                 NoDataAvailableMessage = "Something went wrong, Please try again";
+
                 IsRefreshing = false;
             }
         }
+
 
         public async Task AddNewComplaint()
         {

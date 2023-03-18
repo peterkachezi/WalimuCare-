@@ -2,15 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WalimuV2.Views.Others.ComplaintsPage"
-             Title="My Complaints"
- >
+             Title="My Complaints">
     <ContentPage.Content>
         <StackLayout>
-
             <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
               
                 <StackLayout
+                    
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"
                     IsVisible="{Binding IsEmptyIllustrationVisible}"
@@ -38,7 +37,8 @@
                         VerticalOptions="End" />
                 </StackLayout>
                 <ListView
-                    AbsoluteLayout.LayoutBounds="0,0.5,1,0.8"
+                  
+                    AbsoluteLayout.LayoutBounds="0,0,1,0.8"
                     AbsoluteLayout.LayoutFlags="All"
                     HasUnevenRows="True"
                     IsPullToRefreshEnabled="True"
@@ -58,8 +58,9 @@
                                             Padding="5"
                                             Orientation="Horizontal">
                                             <Label
+                                                FontAttributes="Bold"
                                                 Style="{StaticResource MedBookLabel}"
-                                                Text="{Binding topic}"
+                                                Text="{Binding Topic}"
                                                 TextColor="{StaticResource Primary}" />
 
                                             <Frame
@@ -71,8 +72,9 @@
                                                 VerticalOptions="CenterAndExpand">
 
                                                 <Label
+                                                    FontAttributes="Bold"
                                                     Style="{StaticResource MedBookLabel}"
-                                                    Text="{Binding status}"
+                                                    Text="{Binding StatusDescription}"
                                                     TextColor="White"
                                                     VerticalOptions="CenterAndExpand"
                                                     VerticalTextAlignment="Center" />
@@ -82,7 +84,7 @@
                                         </StackLayout>
                                        
                                         <StackLayout Padding="5" MinimumHeightRequest="200">
-                                            <Label Style="{StaticResource MedBookLabelNormal}" Text="{Binding complaintDescription}" />
+                                            <Label Style="{StaticResource MedBookLabelNormal}" Text="{Binding Description}" />
                                         </StackLayout>
 
 
@@ -92,7 +94,7 @@
                                                 FontSize="Micro"
                                                 HorizontalOptions="EndAndExpand"
                                                 Style="{StaticResource MedBookLabelNormal}"
-                                                Text="{Binding dateSubmitted, StringFormat='{}{0:dd-MMM-yyyy}'}"
+                                                Text="{Binding CreateDate, StringFormat='{}{0:dd-MMM-yyyy}'}"
                                                 VerticalOptions="CenterAndExpand" />
                                         </StackLayout>
 

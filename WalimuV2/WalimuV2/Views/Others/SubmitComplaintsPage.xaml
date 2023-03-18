@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
     Title="Submit Complaints"
-    Shell.NavBarIsVisible="False">
+    Shell.NavBarIsVisible="true">
 
     <ContentPage.Content>
         <StackLayout>

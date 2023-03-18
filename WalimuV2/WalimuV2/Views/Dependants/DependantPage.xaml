@@ -109,13 +109,13 @@
                                 Text="{Binding Age}" />
 
 
-                            <!--<Label
+                            <Label
                                 Grid.Row="4"
                                 Grid.Column="0"                           
                                 Style="{x:StaticResource MedBookLabelNormal}"
                                 Text="Status"
                               />
-                            <Label
+                            <!--<Label
                                 Grid.Row="4"
                                 Grid.Column="1"                               
                                 Style="{x:StaticResource MedBookLabelNormal}"
@@ -130,7 +130,7 @@
                                                 Padding="10,2,10,2"
                                                 BackgroundColor="{Binding StatusDescriptionColor}"
                                                 CornerRadius="10"
-                                                HorizontalOptions="EndAndExpand"
+                                                HorizontalOptions="Start"
                                                 VerticalOptions="CenterAndExpand">
 
                                 <Label

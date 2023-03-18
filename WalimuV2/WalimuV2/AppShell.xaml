@@ -10,6 +10,7 @@
        xmlns:Telemedicine="clr-namespace:WalimuV2.Views.Telemedicine"
        xmlns:Others="clr-namespace:WalimuV2.Views.Others"
        xmlns:Ecard="clr-namespace:WalimuV2.Views.Ecard"
+       xmlns:Profile="clr-namespace:WalimuV2.Views.Profile"
        Title="WalimuV2"
        x:Class="WalimuV2.AppShell" 
        Visual="Material" >      
@@ -205,6 +206,10 @@
 
     <FlyoutItem  Title="Emergency Contacts" Icon="contactUsIcon.png" >
         <ShellContent  Route="ContactUsPage" ContentTemplate="{DataTemplate Others:ContactUsPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Profile" Icon="contactUsIcon.png" >
+        <ShellContent  Route="ContactUsPage" ContentTemplate="{DataTemplate Profile:FileUploadPage}" />
     </FlyoutItem>
 
 

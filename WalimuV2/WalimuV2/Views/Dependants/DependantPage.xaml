@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿
 <customRender:CustomContentPageRenderer
                                         xmlns:customRender="clr-namespace:WalimuV2.CustomRenderer"
                                         xmlns="http://xamarin.com/schemas/2014/forms"
@@ -7,9 +6,6 @@
                                         x:Class="WalimuV2.Views.Dependants.DependantPage"
                                         Title="Dependants"                                
                                         Shell.NavBarIsVisible="true" >
-
-
-
     <ContentPage.Resources>
 
         <Style

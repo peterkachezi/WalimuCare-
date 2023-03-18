@@ -63,6 +63,39 @@ namespace WalimuV2.Models
                 return Initials;
             }
         }
+
+
+        public string StatusDescriptionColor
+        {
+            get
+            {
+                if (Status == 0)
+                {
+                    return "Yellow";
+                }
+                else if (Status == 1)
+                {
+                    return "Green";
+                }    
+				
+				else if (Status == 2)
+                {
+                    return "#EA212A";
+                }		
+				
+				else if (Status == 3)
+                {
+                    return "#EA212A";
+                }
+                else
+                {
+                    return "Yellow";
+                }
+            }
+        }
+
+
+
         public string StatusDescription
 		{
 			get

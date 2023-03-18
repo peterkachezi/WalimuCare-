@@ -6,8 +6,8 @@
                                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                                         x:Class="WalimuV2.Views.Dependants.DependantPage"
                                         Title="Dependants"                                
-                                        Shell.NavBarIsVisible="true" >    
-   
+                                        Shell.NavBarIsVisible="true" >
+
 
 
     <ContentPage.Resources>
@@ -109,7 +109,7 @@
                                 Text="{Binding Age}" />
 
 
-                            <Label
+                            <!--<Label
                                 Grid.Row="4"
                                 Grid.Column="0"                           
                                 Style="{x:StaticResource MedBookLabelNormal}"
@@ -120,9 +120,28 @@
                                 Grid.Column="1"                               
                                 Style="{x:StaticResource MedBookLabelNormal}"
                                 Text="{Binding StatusDescription}"                                            
-                                TextColor="{x:StaticResource Primary}" />
+                                TextColor="{x:StaticResource Primary}" />-->
 
-                         
+                            <Frame
+
+                                                Grid.Row="4"
+                                                Grid.Column="1"       
+                                                Margin="0"
+                                                Padding="10,2,10,2"
+                                                BackgroundColor="{Binding StatusDescriptionColor}"
+                                                CornerRadius="10"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="CenterAndExpand">
+
+                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"                               
+                                                    Style="{x:StaticResource MedBookLabelNormal}"
+                                                    Text="{Binding StatusDescription}"                                            
+                                                    TextColor="white" />
+                            </Frame>
+
+
 
                         </Grid>
                     </StackLayout>

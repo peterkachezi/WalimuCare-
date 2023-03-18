@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,6 +15,7 @@ using WalimuV2.Services;
 using WalimuV2.Views.Others;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using static Android.Graphics.ColorSpace;
 
 namespace WalimuV2.ViewModels
 {
@@ -48,12 +51,6 @@ namespace WalimuV2.ViewModels
             get { return complaintCategory; }
             set { complaintCategory = value; OnPropertyChanged(); }
         }
-        //private string complaintType;
-        //public string ComplaintType
-        //{
-        //    get { return complaintType; }
-        //    set { complaintType = value; OnPropertyChanged(); }
-        //}
 
         private string hospitalName;
         public string HospitalName
@@ -70,7 +67,6 @@ namespace WalimuV2.ViewModels
         }
 
         private ObservableCollection<ComplaintsSelectList> selectionList;
-
         public ObservableCollection<ComplaintsSelectList> SelectionList
         {
             get { return selectionList; }
@@ -105,13 +101,11 @@ namespace WalimuV2.ViewModels
         {
             get { return isPoorService; }
             set { isPoorService = value; OnPropertyChanged(); }
-
         }
 
         private bool lessApproval;
         public bool LessApproval
         {
-
             get { return lessApproval; }
             set { lessApproval = value; OnPropertyChanged(); }
         }
@@ -243,12 +237,6 @@ namespace WalimuV2.ViewModels
             get { return dependentName; }
             set { dependentName = value; OnPropertyChanged(); }
         }
-        //private string otpCategory;
-        //public string OtpCategory
-        //{
-        //    get { return otpCategory; }
-        //    set { otpCategory = value; OnPropertyChanged(); }
-        //}
 
         public ICommand SubmitComplaintCommand { get; set; }
 
@@ -261,14 +249,23 @@ namespace WalimuV2.ViewModels
         public SubmitComplaintsViewModel()
         {
             IsOtpRequest = false;
+
             IsPoorService = false;
+
             IsPreAuth = false;
+
             IsDependents = false;
+
             IsMemberDetails = false;
+
             IsCustomNavBarVisible = true;
+
             SubmitComplaintCommand = new Command(async () => await SubmitComplaint());
+
             GetMemberComplaintsCommand = new Command(async () => await GetMemberComplaints());
+
             AddNewComplaintCommand = new Command(async () => await AddNewComplaint());
+
             GoToMyComplaintsCommand = new Command(async () => await GoToMyComplaints());
 
             Task.Run(async () =>
@@ -276,8 +273,6 @@ namespace WalimuV2.ViewModels
                 //await GetMemberComplaints();
                 await GetComplaintsTypes();
             });
-
-
         }
 
         public async Task GetComplaintsTypes()
@@ -299,8 +294,6 @@ namespace WalimuV2.ViewModels
                     Method = Method.Get
                 };
 
-
-
                 var response = await client.ExecuteAsync(restRequest);
 
                 if (response.IsSuccessful)
@@ -310,34 +303,34 @@ namespace WalimuV2.ViewModels
                     if (deserializedResponse.success)
                     {
                         ComplaintsType = deserializedResponse.data;
+
                         foreach (var item in ComplaintsType)
                         {
                             ComplaintsSelectList complaintsSelectList = new ComplaintsSelectList();
 
                             complaintsSelectList.id = item.id;
+
                             complaintsSelectList.topic = item.topic;
 
                             SelectionList.Add(complaintsSelectList);
                         }
+
                         await RemoveLoadingMessage();
                     }
                     else
                     {
                         await ShowErrorMessage("Sorry, no Complaint types were found");
                     }
-
-
                 }
                 else
                 {
                     await ShowErrorMessage();
                 }
-
-
             }
             catch (Exception ex)
             {
                 await ShowErrorMessage();
+
                 SendErrorMessageToAppCenter(ex, "Submit Complaints");
             }
         }
@@ -345,7 +338,6 @@ namespace WalimuV2.ViewModels
         {
             switch (SelectedComplaintType.topic)
             {
-
                 case "Wrong Member details":
                     IsMemberDetails = true;
                     IsOtpRequest = false;
@@ -457,41 +449,64 @@ namespace WalimuV2.ViewModels
                 if (SelectedComplaintType == null)
                 {
                     await ShowErrorMessage("Please Select one Complaint");
+
                     return;
                 }
 
                 if (ComplaintDescription == null || (ComplaintDescription != null && ComplaintDescription.Trim() == ""))
                 {
                     await ShowErrorMessage("Please Add Some Description to your complaint");
+
                     return;
                 }
 
                 await ShowLoadingMessage();
 
-                RestClient client = new RestClient(ApiDetail.EndPoint);
+                //RestClient client = new RestClient(ApiDetail.EndPoint);
 
-                RestRequest restRequest = new RestRequest()
-                {
-                    Resource = "/Complaints/SubmitComplaint",
-                    Method = Method.Post
-                };
+                //RestRequest restRequest = new RestRequest()
+                //{
+                //    Resource = "/Complaints/SubmitComplaint",
 
-                var barry = new
+                //    Method = Method.Post
+                //};
+
+                var complaint = new
                 {
-                    memberId = Preferences.Get(nameof(AspNetUsers.memberId), ""),
-                    topicId = SelectedComplaintType.id,
+
+                    MemberNumber = Preferences.Get("memberNumber", string.Empty),
+
+                    FirstName = Preferences.Get("firstName", string.Empty),
+
+                    LastName = Preferences.Get("lastName", string.Empty),
+
                     description = ComplaintDescription,
+
                     hospitalName = HospitalName,
+
                     hospitalDepartment = HospitalDepartment,
+
                     complaintType = ComplaintCategory,
+
                     dependentName = DependentName
                 };
 
-                restRequest.AddJsonBody(barry);
+                //restRequest.AddJsonBody(barry);
 
-                var response = await client.ExecuteAsync(restRequest);
+                //var response = await client.ExecuteAsync(restRequest);
 
-                if (response.IsSuccessful)
+                var json = JsonConvert.SerializeObject(complaint);
+
+                HttpContent httpContent = new StringContent(json);
+
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                var client = new HttpClient();
+
+                var response = await client.PostAsync(ApiDetail.ApiUrl + "api/CallBack/SubmitRequest", httpContent);
+
+
+                if (response.IsSuccessStatusCode)
                 {
                     await ShowSuccessMessage("Your Issue has been Submitted successfully kindly await a call in 30 minutes");
 
@@ -504,19 +519,16 @@ namespace WalimuV2.ViewModels
                     await GetMemberComplaints();
 
                     await Shell.Current.GoToAsync(nameof(ComplaintsPage));
-
-
                 }
                 else
                 {
                     await ShowErrorMessage();
                 }
-
-
             }
             catch (Exception ex)
             {
                 await ShowErrorMessage();
+
                 SendErrorMessageToAppCenter(ex, "Submit Complaints");
             }
         }
@@ -525,10 +537,12 @@ namespace WalimuV2.ViewModels
         {
             try
             {
-
                 IsListViewVisible = true;
+
                 IsEmptyIllustrationVisible = false;
+
                 NoDataAvailableMessage = "";
+
                 IsRefreshing = true;
 
                 await ShowLoadingMessage();

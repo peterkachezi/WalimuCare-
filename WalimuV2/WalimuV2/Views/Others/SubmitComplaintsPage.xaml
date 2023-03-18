@@ -18,53 +18,25 @@
                         Command="{Binding GoToMyComplaintsCommand}"
                         CornerRadius="7"
                         FontSize="13"
-                        Style="{StaticResource ButtonMaterialFilledPrimary2}"
+                        Style="{x:StaticResource ButtonMaterialFilledPrimary2}"     
                         Text="View My Previous Complaints"
                         TextTransform="None" />
 
-
                             <Picker 
                         Title="Select Complaint Type" 
-                        Style="{StaticResource BomaLabel}"
+                        Style="{x:StaticResource BaseLabel}" 
                         TitleColor="bLACK"
                         ItemsSource="{Binding ComplaintsType}"
                         SelectedItem="{Binding SelectedComplaintType}" />
-                            <!--<Label Text="{Binding SelectedComplaintType}" />-->
 
-                            <!--<buttons:SfChipGroup
-                        x:Name="sfChipGroupSearchOptions"
-                        ChipPadding="2,2,0,0"
-                        ItemsSource="{Binding ComplaintsType}"
-                        SelectedChipBackgroundColor="{StaticResource Primary}"
-                        SelectedChipTextColor="{StaticResource HkBackground}"
-                        SelectedItem="{Binding SelectedComplaintType}"
-                        Type="Choice"
-                        VerticalOptions="Start">
-
-                        <buttons:SfChipGroup.ChipLayout>
-
-
-                            <StackLayout
-                                Margin="0"
-                                Padding="0"
-                                HorizontalOptions="FillAndExpand"
-                                Orientation="Vertical"
-                                Spacing="10"
-                                VerticalOptions="FillAndExpand" />
-
-                        </buttons:SfChipGroup.ChipLayout>
-                    </buttons:SfChipGroup>-->
-
-                            <!--<ListView ItemsSource="{Binding ComplaintsType}" />-->
                             <StackLayout Margin="10" IsVisible="{Binding IsPoorService}">
+
                                 <Label
-                        Margin="2"
-                        Style="{StaticResource BomaLabel}"
-                        Text="Hospital Name"
-                        TextColor="{StaticResource Secondary}" />
+                                Margin="2"                       
+                                Text="Hospital Name"
+                                TextColor="{StaticResource Secondary}" />
                                 <inputLayout:SfTextInputLayout
-                        Margin="0,0,0,0"
-                        Style="{x:StaticResource BomaContainerOutline}"
+                        Margin="0,0,0,0"                       
                         VerticalOptions="FillAndExpand">
                                     <Editor
                             AutoSize="TextChanges"
@@ -73,13 +45,14 @@
                                 </inputLayout:SfTextInputLayout>
                                 <Label
                         Margin="2"
-                        Style="{StaticResource BomaLabel}"
+                       
                         Text="Hospital Department"
                         TextColor="{StaticResource Secondary}" />
                                 <inputLayout:SfTextInputLayout
                         Margin="0,0,0,0"
-                        Style="{x:StaticResource BomaContainerOutline}"
+                       
                         VerticalOptions="FillAndExpand">
+
                                     <Editor
                             AutoSize="TextChanges"
                             Text="{Binding HospitalDepartment}"
@@ -98,83 +71,77 @@
                             </StackLayout>
 
                             <StackLayout 
-                        Margin="10"
-                        IsVisible="{Binding IsPreAuth}"
-                        RadioButtonGroup.GroupName="{Binding PreAuthGroup}"
-                        RadioButtonGroup.SelectedValue="{Binding PreAuthCategory}">
+                                        Margin="10"
+                                        IsVisible="{Binding IsPreAuth}"
+                                        RadioButtonGroup.GroupName="{Binding PreAuthGroup}"
+                                        RadioButtonGroup.SelectedValue="{Binding PreAuthCategory}">
                                 <Label Text="Select Type?" />
                                 <RadioButton Content="Less Approval" Value="Less Approval" IsChecked="{Binding LessApproval}"/>
                                 <RadioButton Content="Rejected" Value="Rejected" IsChecked="{Binding Rejected}"/>
                             </StackLayout>
+
                             <StackLayout 
-                        Margin="10"
-                        IsVisible="{Binding IsDependents}"
-                        RadioButtonGroup.GroupName="{Binding DependentsGroup}"
-                        RadioButtonGroup.SelectedValue="{Binding DependentCategory}">
+                                        Margin="10"
+                                        IsVisible="{Binding IsDependents}"
+                                        RadioButtonGroup.GroupName="{Binding DependentsGroup}"
+                                        RadioButtonGroup.SelectedValue="{Binding DependentCategory}">
                                 <Label Text="Select Relationship?" />
                                 <RadioButton Content="Son" Value="Son" IsChecked="{Binding Son}"/>
                                 <RadioButton Content="Daughter" Value="Daughter" IsChecked="{Binding Daughter}"/>
                                 <RadioButton Content="Spouse" Value="Spouse" IsChecked="{Binding Spouse}"/>
+
                                 <Label
-                        Margin="2"
-                        Style="{StaticResource BomaLabel}"
-                        Text="Dependent Name"
-                        TextColor="{StaticResource Secondary}" />
+                                     Margin="2"                       
+                                     Text="Dependent Name"
+                                     TextColor="{StaticResource Secondary}" />
+
                                 <inputLayout:SfTextInputLayout
-                        Margin="0,0,0,0"
-                        Style="{x:StaticResource BomaContainerOutline}"
-                        VerticalOptions="FillAndExpand">
+                                                               Margin="0,0,0,0"                      
+                                                               VerticalOptions="FillAndExpand">
                                     <Editor
-                            AutoSize="TextChanges"
-                            Text="{Binding DependentName}"
-                            VerticalOptions="FillAndExpand" />
+                                            AutoSize="TextChanges"
+                                            Text="{Binding DependentName}"
+                                            VerticalOptions="FillAndExpand" />
                                 </inputLayout:SfTextInputLayout>
                             </StackLayout>
+
+
                             <StackLayout 
-                        Margin="10"
-                        IsVisible="{Binding IsMemberDetails}"
-                        RadioButtonGroup.GroupName="{Binding MemberGroup}"
-                        RadioButtonGroup.SelectedValue="{Binding MemberCategory}">
+                                            Margin="10"
+                                            IsVisible="{Binding IsMemberDetails}"
+                                            RadioButtonGroup.GroupName="{Binding MemberGroup}"
+                                            RadioButtonGroup.SelectedValue="{Binding MemberCategory}">
                                 <Label Text="Select Type?" />
                                 <RadioButton Content="Incorrect Name" Value="Incorrect Details" IsChecked="{Binding IncorrectDetails}"/>
                                 <RadioButton Content="Incorrect Date of Birth" Value="Member Update " IsChecked="{Binding MemberUpdate}"/>
                                 <RadioButton Content="Incorrect Job Group" Value="Incorrect Details" IsChecked="{Binding IncorrectJob}"/>
                                 <RadioButton Content="Incorrect Gender" Value="Member Update " IsChecked="{Binding IncorrectGender}"/>
+
                             </StackLayout>
 
                             <Label
-                        Margin="2"
-                        Style="{StaticResource BomaLabel}"
-                        Text="Description"
-                        TextColor="{StaticResource Secondary}" />
+                                    Margin="2"                       
+                                    Text="Description"
+                                    TextColor="{StaticResource Secondary}" />
 
-                            <inputLayout:SfTextInputLayout
-                        Margin="0,0,0,0"
-                        Style="{x:StaticResource BomaContainerOutline}"
-                        VerticalOptions="FillAndExpand">
+                            <inputLayout:SfTextInputLayout                                
+                                                            Margin="0,0,0,0"                       
+                                                            VerticalOptions="FillAndExpand">
                                 <Editor
-                            AutoSize="TextChanges"
-                            Text="{Binding ComplaintDescription}"
-                            VerticalOptions="FillAndExpand" />
+                                        AutoSize="TextChanges"
+                                        Text="{Binding ComplaintDescription}"
+                                        VerticalOptions="FillAndExpand" />
                             </inputLayout:SfTextInputLayout>
 
-
-
-
-
-
-
-
                             <Button
-                        Margin="0,0,0,0"
-                        Command="{Binding SubmitComplaintCommand}"
-                        FontSize="13"
-                        HorizontalOptions="FillAndExpand"
-                        Style="{StaticResource ButtonMaterialFilledSecondary}"
-                        Text="Submit Complaint"
-                        TextTransform="None"
-                        VerticalOptions="StartAndExpand" />
-
+                                        Margin="0,0,0,0"
+                                        Command="{Binding SubmitComplaintCommand}"
+                                        FontSize="13"
+                                        HorizontalOptions="FillAndExpand"
+                                        Style="{x:StaticResource ButtonFilledPrimary}"
+                                        Text="Submit Complaint"
+                                        TextTransform="None"
+                                        VerticalOptions="StartAndExpand" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>

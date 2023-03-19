@@ -31,11 +31,11 @@ namespace WalimuV2.Models
             {
                 if (approvalStatus == "In Progress")
                 {
-                    return "Yellow";
+                    return "#f29a29";
                 }
                 else if (approvalStatus == "Approved")
                 {
-                    return "Green";
+                    return "#008000";
                 }           
                 else
                 {

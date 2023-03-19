@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <customrenderer:CustomContentPageRenderer
-            xmlns:customrenderer="clr-namespace:WalimuV2.CustomRenderer"
-            xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:customrenderer="clr-namespace:WalimuV2.CustomRenderer"
+    xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WalimuV2.Views.ProfilePage">
+             x:Class="WalimuV2.Views.Dependants.DependantDetailPage"
+             Title="Profile"
+             SubTitle="Update profile picture , Phone Number , Account Pin"
+    >
+
 
     <Shell.TitleView>
         <StackLayout
@@ -365,4 +369,4 @@
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>
-</customrenderer:CustomContentPageRenderer>
+    </customrenderer:CustomContentPageRenderer>

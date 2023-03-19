@@ -13,6 +13,7 @@ using WalimuV2.Services;
 using WalimuV2.Views;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using WalimuV2.Views.Dependants;
 
 namespace WalimuV2.ViewModels
 {
@@ -41,6 +42,7 @@ namespace WalimuV2.ViewModels
 		}
 
 		public ICommand RefreshCommand { get; set; }
+		public ICommand ViewDependantDetailsCommand { get; set; }
 
 		private bool isActive;
 		public bool IsActive
@@ -69,7 +71,13 @@ namespace WalimuV2.ViewModels
 			{
 				RefreshCommand = new Command(async () => await GetDependant());
 
-				Task.Run(async () =>
+                ViewDependantDetailsCommand = new Command(async () => await ShowDependantDetails());
+
+                PageTitle = "View Dependant Details";
+
+                PageSubTitle = "Upload Dependant Passport Photo";
+
+                Task.Run(async () =>
 				{
 					await GetDependant();
 				});
@@ -170,5 +178,22 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "Track Hospital Visits", MemberNo, PhoneNumber);
 			}
 		}
-	}
+
+        public async Task ShowDependantDetails()
+        {
+            try
+            {
+                Shell.Current.FlyoutIsPresented = false;
+                //App.Current.MainPage = new NavigationPage(new ProfilePage());
+                await Shell.Current.GoToAsync(nameof(DependantDetailPage));
+
+            }
+            catch (Exception ex)
+            {
+
+                SendErrorMessageToAppCenter(ex, "App View Model", "", "");
+            }
+        }
+
+    }
 }

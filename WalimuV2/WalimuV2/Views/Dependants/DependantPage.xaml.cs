@@ -1,5 +1,10 @@
-﻿using WalimuV2.CustomRenderer;
+﻿using Microsoft.AppCenter.Crashes;
+using System;
+using System.Collections.Generic;
+using WalimuV2.CustomRenderer;
+using WalimuV2.Models;
 using WalimuV2.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,5 +24,39 @@ namespace WalimuV2.Views.Dependants
 		{
 
 		}
-	}
+
+		private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				Shell.Current.FlyoutIsPresented = false;
+				//App.Current.MainPage = new NavigationPage(new ProfilePage());
+				await Shell.Current.GoToAsync(nameof(DependantDetailPage));
+			}
+			catch (Exception ex)
+			{
+				SendErrorMessageToAppCenter(ex, "App View Model", "", "");
+				throw;
+			}
+		}
+
+        public void SendErrorMessageToAppCenter(Exception ex, string NameOfModule = "", string MemberNumber = "", string PhoneNumber = "")
+        {
+            MemberNumber = Preferences.Get("MemberNumber", "");
+
+            PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
+
+            string ErrorMessage = ex.Message;
+
+            var properties = new Dictionary<string, string>
+                                    {
+                                        { "NameOfModule", NameOfModule },
+                                        { "MemberNumber", MemberNumber},
+                                        { "PhoneNumber", PhoneNumber},
+                                        { "ErrorMessage", ErrorMessage}
+
+                                    };
+            Crashes.TrackError(ex, properties);
+        }
+    }
 }

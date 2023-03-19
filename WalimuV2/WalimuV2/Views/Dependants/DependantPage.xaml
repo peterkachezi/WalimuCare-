@@ -3,6 +3,7 @@
                                         xmlns="http://xamarin.com/schemas/2014/forms"
                                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                                         x:Class="WalimuV2.Views.Dependants.DependantPage"
+                                        xmlns:Dependants="clr-namespace:WalimuV2.Views.Dependants" 
                                         Title="Dependants"                                
                                         Shell.NavBarIsVisible="true" >
     <ContentPage.Resources>
@@ -103,7 +104,6 @@
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding Age}" />
 
-
                             <Label
                                 Grid.Row="4"
                                 Grid.Column="0"                           
@@ -113,7 +113,6 @@
 
 
                             <Frame
-
                                                 Grid.Row="4"
                                                 Grid.Column="1"       
                                                 Margin="0"
@@ -131,6 +130,22 @@
                                                     TextColor="white" />
                             </Frame>
 
+
+
+                            <Label
+                            Grid.Row="4"
+                            Grid.Column="1"                               
+                            FontAttributes="bold"                          
+                            HorizontalTextAlignment="End"
+                            Style="{StaticResource MedBookLabelNormal}"
+                            Text="View Details"
+                            TextColor="Black"
+                            VerticalTextAlignment="End">
+                                <Label.GestureRecognizers>
+                                    <!--<TapGestureRecognizer Command="{Binding ViewDependantDetailsCommand}" />-->
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  />
+                                </Label.GestureRecognizers>
+                            </Label>
 
 
                         </Grid>

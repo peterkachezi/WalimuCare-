@@ -10,7 +10,9 @@
        xmlns:Telemedicine="clr-namespace:WalimuV2.Views.Telemedicine"
        xmlns:Others="clr-namespace:WalimuV2.Views.Others"
        xmlns:Ecard="clr-namespace:WalimuV2.Views.Ecard"
-       xmlns:Profile="clr-namespace:WalimuV2.Views.Profile" xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:magicGradients="http://magic.com/schemas/gradients"
+       xmlns:Profile="clr-namespace:WalimuV2.Views.Profile" 
+       xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+       xmlns:magicGradients="http://magic.com/schemas/gradients"
        Title="WalimuV2"
        x:Class="WalimuV2.AppShell" 
        Visual="Material" >      

@@ -25,7 +25,27 @@ namespace WalimuV2.Models
 			}
 		}
 
-		public string StatusDescription
+        public string StatusDescriptionColor
+        {
+            get
+            {
+                if (approvalStatus == "In Progress")
+                {
+                    return "Yellow";
+                }
+                else if (approvalStatus == "Approved")
+                {
+                    return "Green";
+                }           
+                else
+                {
+                    return "#EA212A";
+                }
+            }
+        }
+
+
+        public string StatusDescription
 		{
 			get
 			{

@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WalimuV2.Views.ProfilePage"
         Title="Profile"
-        SubTitle="Update profile picture , Phone Number , Account Pin">     
+        SubTitle="Update profile picture , Phone Number , Account Pin">
 
 
 
@@ -14,6 +14,7 @@
             BackgroundColor="{StaticResource Primary}"
             HorizontalOptions="FillAndExpand"
             Spacing="0"
+
             VerticalOptions="FillAndExpand">
             <Label
                 Margin="0"
@@ -75,7 +76,7 @@
             <Grid
                 BackgroundColor="{x:StaticResource Primary}"
                 ColumnDefinitions="0.1*,0.8*,0.1*"
-                HeightRequest="200"
+                HeightRequest="100"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
 
@@ -164,7 +165,7 @@
                             Style="{StaticResource MedBookLabel}"
                             Text="Password"
                             TextColor="{StaticResource Primary}" />
-                        
+
                         <!--<StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Email *" />
                             <StackLayout Orientation="Horizontal">
@@ -181,8 +182,8 @@
                             </StackLayout>
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>-->
-                        
-                        
+
+
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Password" />
                             <StackLayout Orientation="Horizontal">
@@ -247,7 +248,7 @@
                                 <Image
                                     HeightRequest="20"
                                     HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
+                                    
                                     VerticalOptions="CenterAndExpand">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding ShowChangeDoBCommand}" />
@@ -262,7 +263,7 @@
                             <Label Style="{StaticResource DetailLabel}" Text="{Binding Gender}" />
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
-                        
+
                         <!--<StackLayout>
                             <Label Style="{StaticResource  DescriptionLabel}" Text="Station Name*" />
                             <StackLayout Orientation="Horizontal">
@@ -368,4 +369,4 @@
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>
-    </customrenderer:CustomContentPageRenderer>
+</customrenderer:CustomContentPageRenderer>

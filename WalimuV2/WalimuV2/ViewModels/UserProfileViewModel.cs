@@ -11,6 +11,7 @@ using WalimuV2.ApiResponses;
 using WalimuV2.Models;
 using WalimuV2.Services;
 using WalimuV2.Views;
+using WalimuV2.Views.PopUps;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -233,7 +234,7 @@ namespace WalimuV2.ViewModels
             {
                 SetData();
                 //ShowChangeSchoolNameCommand = new Command(async () => await ShowChangeSchoolNamePage());
-                ShowChangeIdNumberCommand = new Command(async () => await ShowChangeIdNumberPage());
+                //ShowChangeIdNumberCommand = new Command(async () => ShowChangeIdNumberPage());
                 //ShowChangePhoneNumberCommand = new Command(async () => await ShowChangePhoneNumberPage());
                 TakePhotoCommand = new Command(async () => await TakePhoto());
                 ReturnToHomePageCommand = new Command(ReturnToHomePage);
@@ -267,18 +268,18 @@ namespace WalimuV2.ViewModels
 
             }
         }
-        public async Task ShowChangeIdNumberPage()
-        {
-            try
-            {
-                //await App.Current.MainPage.Navigation.PushAsync(new ChangePhoneNumber());
-                //await Shell.Current.GoToAsync(nameof(ChangeIdNumber));
-            }
-            catch (Exception ex)
-            {
-                SendErrorMessageToAppCenter(ex, "User Profile", "", "");
-            }
-        }
+        //public void ShowChangeIdNumberPage()
+        //{
+        //    try
+        //    {
+        //        //await App.Current.MainPage.Navigation.PushAsync(new ChangePhoneNumber());
+        //        //await Shell.Current.GoToAsync(nameof(ChangeIdNumber));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        SendErrorMessageToAppCenter(ex, "User Profile", "", "");
+        //    }
+        //}
         //public async Task ShowChangeSchoolNamePage()
         //{
         //	try
@@ -368,9 +369,9 @@ namespace WalimuV2.ViewModels
 
                 string firstName = Preferences.Get("firstName", string.Empty);
 
-                string SecondName = Preferences.Get("SecondName", string.Empty);
+                string lastName = Preferences.Get("lastName", string.Empty);
 
-                FullName = firstName + " " + SecondName;
+                FullName = firstName + " " + lastName;
 
                 PhoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
@@ -378,9 +379,9 @@ namespace WalimuV2.ViewModels
 
                 Gender = Preferences.Get("gender", string.Empty);
 
-                DateOfBirth = Preferences.Get("dateOfBirth", string.Empty);
+                dateOfBirth = Preferences.Get("dateOfBirth", string.Empty);
 
-                JobGroup = Preferences.Get("jobGroup", string.Empty);
+                jobGroup = Preferences.Get("jobGroup", string.Empty);
 
                 // string theDateOfBirth = Preferences.Get("dateofbirth", "");
 
@@ -499,7 +500,7 @@ namespace WalimuV2.ViewModels
 
                 //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
 
-                //DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
 
                 await RemoveLoadingMessage();
             }
@@ -751,7 +752,7 @@ namespace WalimuV2.ViewModels
                 //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
 
 
-                //DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
 
                 await RemoveLoadingMessage();
             }
@@ -783,7 +784,7 @@ namespace WalimuV2.ViewModels
                 PhotoPath = "avator.png";
 
                 //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
-                //DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
                 await RemoveLoadingMessage();
             }
             catch (Exception ex)

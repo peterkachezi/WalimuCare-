@@ -136,7 +136,7 @@
                                 Text="{Binding totalRequestAmount, StringFormat='{0:#,0.#0}'}"                                            
                                 TextColor="{x:StaticResource Secondary}" />
 
-                            <Label
+                            <!--<Label
                                 Grid.Row="6"
                                 Grid.Column="0"                               
                                 Style="{x:StaticResource Title}"
@@ -147,7 +147,34 @@
                                 Grid.Column="1"                           
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding StatusDescription}"
-                                TextColor="{x:StaticResource Primary}" />
+                                TextColor="{x:StaticResource Primary}" />-->
+
+
+                            <Frame
+
+                                                Grid.Row="6"
+                                                Grid.Column="1"       
+                                                Margin="0"
+                                                Padding="10,2,10,2"
+                                                BackgroundColor="{Binding StatusDescriptionColor}"
+                                                CornerRadius="10"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="CenterAndExpand">
+
+                                <Label
+                                                    Grid.Row="6"
+                                                    Grid.Column="1"                               
+                                                    Style="{x:StaticResource MedBookLabelNormal}"
+                                                    Text="{Binding StatusDescription}"                                            
+                                                    TextColor="white" />
+                            </Frame>
+
+
+
+
+
+
+
 
 
                         </Grid>

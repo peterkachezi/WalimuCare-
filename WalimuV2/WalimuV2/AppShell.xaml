@@ -10,7 +10,7 @@
        xmlns:Telemedicine="clr-namespace:WalimuV2.Views.Telemedicine"
        xmlns:Others="clr-namespace:WalimuV2.Views.Others"
        xmlns:Ecard="clr-namespace:WalimuV2.Views.Ecard"
-       xmlns:Profile="clr-namespace:WalimuV2.Views.Profile"
+       xmlns:Profile="clr-namespace:WalimuV2.Views.Profile" xmlns:xct="http://xamarin.com/schemas/2020/toolkit" xmlns:magicGradients="http://magic.com/schemas/gradients"
        Title="WalimuV2"
        x:Class="WalimuV2.AppShell" 
        Visual="Material" >      
@@ -75,7 +75,76 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
+
+
     <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid
+                Margin="0"
+                Padding="0"
+                HeightRequest="100">
+
+                <magicGradients:GradientView VerticalOptions="FillAndExpand">
+                    <magicGradients:GradientView.GradientSource>
+                        <magicGradients:CssGradientSource>
+                            <x:String>
+                                <![CDATA[
+                                    
+                               linear-gradient(74deg, rgba(246, 246, 246, 0.03) 0%, rgba(246, 246, 246, 0.03) 4%,rgba(152, 152, 152, 0.03) 4%, rgba(152, 152, 152, 0.03) 32%,rgba(123, 123, 123, 0.03) 32%, rgba(123, 123, 123, 0.03) 41%,rgba(189, 189, 189, 0.03) 41%, rgba(189, 189, 189, 0.03) 45%,rgba(151, 151, 151, 0.03) 45%, rgba(151, 151, 151, 0.03) 47%,rgba(61, 61, 61, 0.03) 47%, rgba(61, 61, 61, 0.03) 77%,rgba(34, 34, 34, 0.03) 77%, rgba(34, 34, 34, 0.03) 100%),linear-gradient(117deg, rgba(222, 222, 222, 0.03) 0%, rgba(222, 222, 222, 0.03) 7%,rgba(67, 67, 67, 0.03) 7%, rgba(67, 67, 67, 0.03) 18%,rgba(61, 61, 61, 0.03) 18%, rgba(61, 61, 61, 0.03) 26%,rgba(32, 32, 32, 0.03) 26%, rgba(32, 32, 32, 0.03) 52%,rgba(119, 119, 119, 0.03) 52%, rgba(119, 119, 119, 0.03) 60%,rgba(252, 252, 252, 0.03) 60%, rgba(252, 252, 252, 0.03) 68%,rgba(9, 9, 9, 0.03) 68%, rgba(9, 9, 9, 0.03) 100%),linear-gradient(313deg, rgba(193, 193, 193, 0.03) 0%, rgba(193, 193, 193, 0.03) 12%,rgba(184, 184, 184, 0.03) 12%, rgba(184, 184, 184, 0.03) 24%,rgba(194, 194, 194, 0.03) 24%, rgba(194, 194, 194, 0.03) 43%,rgba(128, 128, 128, 0.03) 43%, rgba(128, 128, 128, 0.03) 54%,rgba(87, 87, 87, 0.03) 54%, rgba(87, 87, 87, 0.03) 71%,rgba(169, 169, 169, 0.03) 71%, rgba(169, 169, 169, 0.03) 93%,rgba(83, 83, 83, 0.03) 93%, rgba(83, 83, 83, 0.03) 100%),linear-gradient(19deg, rgba(186, 186, 186, 0.03) 0%, rgba(186, 186, 186, 0.03) 9%,rgba(77, 77, 77, 0.03) 9%, rgba(77, 77, 77, 0.03) 19%,rgba(38, 38, 38, 0.03) 19%, rgba(38, 38, 38, 0.03) 27%,rgba(203, 203, 203, 0.03) 27%, rgba(203, 203, 203, 0.03) 39%,rgba(130, 130, 130, 0.03) 39%, rgba(130, 130, 130, 0.03) 43%,rgba(184, 184, 184, 0.03) 43%, rgba(184, 184, 184, 0.03) 81%,rgba(108, 108, 108, 0.03) 81%, rgba(108, 108, 108, 0.03) 100%),linear-gradient(90deg, rgb(107, 4, 15),rgb(240, 4, 35))
+                                        
+                                ]]>
+                            </x:String>
+                        </magicGradients:CssGradientSource>
+                    </magicGradients:GradientView.GradientSource>
+                </magicGradients:GradientView>
+
+
+                <StackLayout
+                    Margin="20,0,0,0"
+                    Padding="5"    
+                     HorizontalOptions="Start"
+                    Orientation="Horizontal">
+
+                    <xct:AvatarView
+                        Margin="0"
+                        HorizontalOptions="StartAndExpand"
+                        Source="{Binding ImageUrl}"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <StackLayout                                         
+                        Spacing="0"
+                          Margin="50,0,0,0"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                           
+                            HorizontalTextAlignment="Center"                            
+                            Style="{StaticResource MedBookLabel}"
+                            Text="{Binding ProfileName}"
+                            TextColor="White"
+                            VerticalTextAlignment="End" />
+
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource MedBookLabelNormal}"
+                            Text="View Profile"
+                            TextColor="White"
+                            VerticalTextAlignment="End">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ViewProfileCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Grid>
+
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+
+
+    <!--<Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid HorizontalOptions="FillAndExpand" HeightRequest="100" 
               VerticalOptions="FillAndExpand" >
@@ -149,7 +218,7 @@
                 </StackLayout>
             </Grid>
         </DataTemplate>
-    </Shell.FlyoutHeaderTemplate>    
+    </Shell.FlyoutHeaderTemplate>-->    
     
 
     <FlyoutItem  Title="Dashboard" Icon="dashboardIcon.png" >

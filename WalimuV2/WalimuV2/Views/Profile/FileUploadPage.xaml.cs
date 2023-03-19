@@ -1,6 +1,4 @@
-﻿using Android.Media;
-using Java.Time.Temporal;
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using Xamarin.Essentials;

@@ -116,6 +116,7 @@
                             HorizontalOptions="StartAndExpand"
                             Style="{StaticResource MedBookLabel}"
                             Text="{Binding FullName}"
+                            FontAttributes="Bold"
                             TextColor="{StaticResource HkBackground}"
                             VerticalOptions="CenterAndExpand" />
                         <Label
@@ -161,9 +162,10 @@
                         <Label
                             Margin="0,0,0,20"
                             Style="{StaticResource MedBookLabel}"
-                            Text="Cover Details"
+                            Text="Password"
                             TextColor="{StaticResource Primary}" />
-                        <StackLayout>
+                        
+                        <!--<StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Email *" />
                             <StackLayout Orientation="Horizontal">
                                 <Label  HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding Email}" />
@@ -177,12 +179,12 @@
                                     </Image.GestureRecognizers>
                                 </Image>
                             </StackLayout>
-
-
                             <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
+                        </StackLayout>-->
+                        
+                        
                         <StackLayout>
-                            <Label Style="{StaticResource DescriptionLabel}" Text="Account Pin" />
+                            <Label Style="{StaticResource DescriptionLabel}" Text="Password" />
                             <StackLayout Orientation="Horizontal">
                                 <Label
                                     HorizontalOptions="StartAndExpand"
@@ -207,7 +209,7 @@
                         <Label
                             Margin="0,10,0,20"
                             Style="{StaticResource MedBookLabel}"
-                            Text="Scheme Details"
+                            Text="Member Details"
                             TextColor="{StaticResource Primary}" />
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Member Number" />
@@ -227,48 +229,10 @@
                                     HorizontalOptions="StartAndExpand"
                                     Style="{StaticResource DetailLabel}"
                                     Text="{Binding PhoneNumber}" />
-
                             </StackLayout>
-
 
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
-
-
-
-
-                        <!--<StackLayout>
-                            <Label Style="{StaticResource DescriptionLabel}" Text="Name" />
-                            <StackLayout Orientation="Horizontal"></StackLayout>
-                            <Label
-                                 HorizontalOptions="StartAndExpand"
-                                Style="{StaticResource DetailLabel}"
-                                Text="{Binding UserName}" />
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>-->
-
-
-
-
-
-
-
-
-
-
-
-                        <!--<StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="School Name*" />
-                            <inputLayout:SfTextInputLayout Style="{x:StaticResource BomaContainerOutline}">
-                                <Entry
-                                HorizontalOptions="FillAndExpand"
-                                Keyboard="Chat"
-                                Style="{StaticResource DetailLabel}"
-                                Text="{Binding IdNumber}"
-                                VerticalOptions="CenterAndExpand"
-                                VerticalTextAlignment="Center" />
-                            </inputLayout:SfTextInputLayout>
-                        </StackLayout>-->
 
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Job Group" />
@@ -279,7 +243,7 @@
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Date of Birth" />
                             <StackLayout Orientation="Horizontal">
-                                <Label HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding DateOfBirth}" />
+                                <Label HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding dateOfBirth}" />
                                 <Image
                                     HeightRequest="20"
                                     HorizontalOptions="EndAndExpand"
@@ -298,7 +262,8 @@
                             <Label Style="{StaticResource DetailLabel}" Text="{Binding Gender}" />
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
-                        <StackLayout>
+                        
+                        <!--<StackLayout>
                             <Label Style="{StaticResource  DescriptionLabel}" Text="Station Name*" />
                             <StackLayout Orientation="Horizontal">
                                 <Label HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding StationName}" />
@@ -394,7 +359,7 @@
                                 </Image>
                             </StackLayout>
                             <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
+                        </StackLayout>-->
 
 
                     </StackLayout>

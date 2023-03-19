@@ -6,6 +6,8 @@ using Rg.Plugins.Popup.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -239,7 +241,115 @@ namespace WalimuV2.Views
 			}
 		}
 
-		public async void SetPin()
+        public async void SetPin()
+        {
+            try
+            {
+                var userId = Preferences.Get("userId", string.Empty);
+
+                var model = new Register
+                {
+                    Id = Guid.Parse(userId),
+
+                    Password = Pin,
+                };
+
+                var json = JsonConvert.SerializeObject(model);
+
+                HttpContent httpContent = new StringContent(json);
+
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                var client = new HttpClient();
+
+                var response = await client.PostAsync(ApiDetail.ApiUrl + "api/MemberAuth/UpdatePassword", httpContent);
+
+                try
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var JsonResult = await response.Content.ReadAsStringAsync();
+
+                        var result = JsonConvert.DeserializeObject<IsLoggedIn>(JsonResult);
+
+                        var memberNo = result.member_number;
+
+                        var status = result.status;
+
+
+                        if (status == "true")
+                        {
+                            await Navigation.PopAllPopupAsync();
+
+                            await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuSuccessPage("Pin Set Successfully"));
+
+                            Thread.Sleep(1000);
+
+                            MainThread.BeginInvokeOnMainThread(async () =>
+                            {
+                                try
+                                {
+                                    await Navigation.PopAllPopupAsync();
+                                }
+                                catch (Exception)
+                                {
+
+
+                                }
+
+                                if (!IsChangePasswordRequest)
+                                {
+
+                                    await Task.Run(async () => await SubmitLogin());
+                                }
+                                else
+                                {
+                                    App.Current.MainPage = new AppShell();
+                                    await Shell.Current.GoToAsync(nameof(ProfilePage));
+
+                                }
+
+
+                            });
+
+                        }
+
+                        else
+                        {
+                            await Navigation.PopAllPopupAsync();
+                            await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+
+                        }
+                    }
+                    else
+                    {
+                        await Navigation.PopAllPopupAsync();
+                        await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    SendErrorMessageToAppCenter(ex, "Set Pin", "", PhoneNumber);
+                    await Navigation.PopAllPopupAsync();
+                    await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                await Navigation.PopAllPopupAsync();
+                await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+            }
+        }
+
+
+
+
+
+
+        public async void SetPin1()
 		{
 			try
 			{

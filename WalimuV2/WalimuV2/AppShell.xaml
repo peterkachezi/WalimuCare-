@@ -119,7 +119,7 @@
                            
                             HorizontalTextAlignment="Center"                            
                             Style="{StaticResource MedBookLabel}"
-                            Text="{Binding ProfileName}"
+                            Text="{Binding FullName}"
                             TextColor="White"
                             VerticalTextAlignment="End" />
 

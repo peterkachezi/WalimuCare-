@@ -57,6 +57,8 @@ namespace WalimuV2
 
 				Routing.RegisterRoute(nameof(FAQPage), typeof(FAQPage));
 
+				Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
+
 				Routing.RegisterRoute(nameof(SubmitComplaintsPage), typeof(SubmitComplaintsPage));
 
                 Routing.RegisterRoute(nameof(ComplaintsPage), typeof(ComplaintsPage));

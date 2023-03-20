@@ -15,6 +15,8 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using WalimuV2.Views.Dependants;
 using static Android.Provider.ContactsContract.CommonDataKinds;
+using WalimuV2.Views.PopUps;
+using System.IO;
 
 namespace WalimuV2.ViewModels
 {
@@ -42,6 +44,10 @@ namespace WalimuV2.ViewModels
         public int Age { get; set; }
         public ICommand RefreshCommand { get; set; }
         public ICommand ViewDependantDetailsCommand { get; set; }
+        public ICommand SelectOptionsCommand { get; set; }
+        public ICommand TakePhotoCommand { get; set; }
+        public ICommand PickPictureCommand { get; set; }
+        public ICommand RemovePhotoCommand { get; set; }
         public ICommand ViewProfileCommand
         {
             get
@@ -60,6 +66,18 @@ namespace WalimuV2.ViewModels
             set { isActive = value; OnPropertyChanged(nameof(IsActive)); }
         }
 
+        private string photoPath;
+        public string PhotoPath
+        {
+            get { return photoPath; }
+            set
+            {
+                photoPath = value;
+
+                OnPropertyChanged(nameof(PhotoPath));
+            }
+        }
+
         private string fullName;
         public string FullName
         {
@@ -72,10 +90,18 @@ namespace WalimuV2.ViewModels
             }
         }
 
+        private string imageUrl;
 
-
+        public string ImageUrl
+        {
+            get { return imageUrl; }
+            set
+            {
+                imageUrl = value;
+                OnPropertyChanged(nameof(ImageUrl));
+            }
+        }
         private bool isListViewVisible;
-
         public bool IsListViewVisible
         {
             get { return isListViewVisible; }
@@ -94,7 +120,13 @@ namespace WalimuV2.ViewModels
             {
                 RefreshCommand = new Command(async () => await GetDependant());
 
-                // ViewProfileCommand = new Command(async () => await ShowDependantDetails());
+                SelectOptionsCommand = new Command(async () => await SelectOptions());
+
+                PickPictureCommand = new Command(async () => await PickPicture());
+
+                TakePhotoCommand = new Command(async () => await TakePhoto());
+
+                RemovePhotoCommand = new Command(RemovePhoto);
 
                 PageTitle = "Dependant's Details";
 
@@ -112,7 +144,148 @@ namespace WalimuV2.ViewModels
                 Console.WriteLine(ex);
             }
         }
+        public async Task TakePhoto()
+        {
+            try
+            {
+                var photo = await MediaPicker.CapturePhotoAsync();
+                //var photo = await MediaPicker.PickPhotoAsync();
+                // canceled
+                if (photo == null)
+                {
+                    PhotoPath = null;
+                    return;
+                }
+                long FileSize = 0;
 
+                // save the file into local storage
+                var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+                using (var stream = await photo.OpenReadAsync())
+                using (var newStream = File.OpenWrite(newFile))
+                {
+                    await stream.CopyToAsync(newStream);
+
+                    FileSize = stream.Length;
+                }
+
+
+                if (FileSize > 5000000)
+                {
+                    await ShowInfoMessage("File should be less than 5 mbz");
+                    return;
+                }
+
+                Preferences.Set("ProfilePhoto", newFile);
+
+                PhotoPath = newFile;
+
+                //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
+
+                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+
+                await RemoveLoadingMessage();
+            }
+            catch (Exception ex)
+            {
+
+                SendErrorMessageToAppCenter(ex, "User Profile", memberNo, PhoneNumber);
+            }
+        }
+        public async Task PickPicture()
+        {
+            try
+            {
+                //var photo = await MediaPicker.CapturePhotoAsync();
+                var photo = await MediaPicker.PickPhotoAsync();
+                // canceled
+                if (photo == null)
+                {
+                    PhotoPath = null;
+
+                    return;
+                }
+
+                long FileSize = 0;
+
+                // save the file into local storage
+                var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
+                using (var stream = await photo.OpenReadAsync())
+
+                using (var newStream = File.OpenWrite(newFile))
+                {
+                    await stream.CopyToAsync(newStream);
+
+                    FileSize = stream.Length;
+                }
+
+                if (FileSize > 5000000)
+                {
+                    await ShowInfoMessage("File should be less than 5 mbz");
+                    return;
+                }
+
+                Preferences.Set("ProfilePhoto", newFile);
+
+                PhotoPath = newFile;
+
+                //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
+
+
+                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+
+                await RemoveLoadingMessage();
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "User Profile");
+            }
+        }
+        public async void RemovePhoto()
+        {
+            try
+            {
+                Preferences.Set("ProfilePhoto", "avator.png");
+
+                PhotoPath = "avator.png";
+
+                //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
+                DependencyService.Get<DependantsViewModel>().GetProfilePicture();
+                await RemoveLoadingMessage();
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "User Profile");
+            }
+        }
+        public void GetProfilePicture()
+        {
+            try
+            {
+                string theImageUrl = Preferences.Get("ProfilePhoto", "avator.png");
+
+                ImageUrl = theImageUrl;
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "App Shell");
+            }
+        }
+
+
+
+        public async Task SelectOptions()
+        {
+            try
+            {
+                await Application.Current.MainPage.Navigation.PushPopupAsync(new SelectMediaPage());
+            }
+            catch (Exception ex)
+            {
+
+                SendErrorMessageToAppCenter(ex, "User Profile");
+            }
+        }
         public async Task GetDependant()
         {
             try
@@ -137,6 +310,8 @@ namespace WalimuV2.ViewModels
                         IsEmptyIllustrationVisible = false;
 
                         IsListViewVisible = true;
+
+                        await ShowLoadingMessage("Please wait as we sign you in");
 
                         var client = new HttpClient();
 
@@ -164,6 +339,8 @@ namespace WalimuV2.ViewModels
                             IsRefreshing = false;
 
                             IsActive = false;
+
+                            await RemoveLoadingMessage();
                         }
 
                         if (getData.IsSuccessStatusCode == false)

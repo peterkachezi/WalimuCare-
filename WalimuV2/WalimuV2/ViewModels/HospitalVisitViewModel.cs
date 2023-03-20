@@ -121,7 +121,9 @@ namespace WalimuV2.ViewModels
 
 						IsListViewVisible = true;
 
-						var client = new HttpClient();
+                        await ShowLoadingMessage("Please wait as we sign you in");
+
+                        var client = new HttpClient();
 
 						client.DefaultRequestHeaders.Accept.Clear();
 
@@ -149,8 +151,10 @@ namespace WalimuV2.ViewModels
 
 							IsActive = false;
 
-						}
-						if (getData.IsSuccessStatusCode == false)
+                            await RemoveLoadingMessage();
+
+                        }
+                        if (getData.IsSuccessStatusCode == false)
 						{
 							IsEmptyIllustrationVisible = true;
 

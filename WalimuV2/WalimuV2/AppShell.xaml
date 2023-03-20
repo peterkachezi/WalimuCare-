@@ -253,7 +253,7 @@
         <ShellContent  Route="TeleMedicineCallOrWebLinkPage" ContentTemplate="{DataTemplate Telemedicine:TeleMedicineCallOrWebLinkPage}" />
     </FlyoutItem>
 
-    <FlyoutItem  Title="Reports Issues/Feedback" Icon="complaint.png" >
+    <FlyoutItem  Title="Report Issues/Feedback" Icon="complaint.png" >
         <ShellContent  Route="SubmitComplaintsPage" ContentTemplate="{DataTemplate Others:SubmitComplaintsPage}" />
     </FlyoutItem>
 

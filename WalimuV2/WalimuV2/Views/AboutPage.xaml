@@ -609,6 +609,49 @@
                                         VerticalOptions="CenterAndExpand" />
                                 </Grid>
                             </Frame>
+                            
+                            
+                            
+                            <Frame
+                                Margin="2,10,2,10"
+                                Padding="10"
+                                CornerRadius="5">
+                                <Frame.GestureRecognizers>
+                                    <!--<TapGestureRecognizer Command="{Binding GoToSubmitComplaintsCommand}" />-->
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_9" />
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="0.2*,0.8*" HorizontalOptions="CenterAndExpand">
+                                    <yummy:PancakeView
+                                        Grid.Column="0"
+                                        Padding="0"
+                                        BackgroundColor="{StaticResource PrimaryLight4}"
+                                        CornerRadius="30"
+                                        HeightRequest="40"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="40">
+                                        <ffimageloading:CachedImage
+                                            Margin="0"
+                                            CacheDuration="90"
+                                            HeightRequest="20"
+                                            HorizontalOptions="CenterAndExpand"
+                                            RetryCount="3"
+                                            RetryDelay="600"
+                                            Source="complaint"
+                                            VerticalOptions="CenterAndExpand">
+                                            <ffimageloading:CachedImage.Transformations>
+                                                <fftransformations:CircleTransformation />
+                                            </ffimageloading:CachedImage.Transformations>
+                                        </ffimageloading:CachedImage>
+                                    </yummy:PancakeView>
+                                    <Label
+                                        Grid.Column="1"
+                                        Style="{StaticResource MedBookLabelNormal}"
+                                        Text="Report Issues/Feedback"
+                                        TextColor="{StaticResource Secondary}"                                        
+                                        VerticalOptions="CenterAndExpand" />
+                                </Grid>
+                            </Frame>
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>

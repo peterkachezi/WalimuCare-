@@ -20,7 +20,10 @@ namespace WalimuV2.Views
             get { return greetings; }
 
             set { greetings = value; }
-        }
+        }      
+        
+        
+    
 
         private string _lblText;
         public string LblText
@@ -35,6 +38,21 @@ namespace WalimuV2.Views
                 OnPropertyChanged();
             }
         }
+
+        private string _fullName;
+        public string FullName
+        {
+            get
+            {
+                return _fullName;
+            }
+            set
+            {
+                _fullName = value;
+
+                OnPropertyChanged();
+            }
+        }
         public AboutPage()
         {
             InitializeComponent();
@@ -46,14 +64,13 @@ namespace WalimuV2.Views
         {
             base.OnAppearing();
 
-            //SetGreetings();
+            SetGreetings();
 
-            this.LblText = "Ciao!!";
+            this.LblText =Greetings;
 
+            this.FullName= Preferences.Get("firstName", string.Empty);
         }
 
-
-        public string myProperty { get; } = "MY TEXT";
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             try
@@ -216,6 +233,20 @@ namespace WalimuV2.Views
                 SendErrorMessageToAppCenter(ex, "Something went wrong");
 
             }
+        }
+
+        private async void TapGestureRecognizer_Tapped_9(object sender, EventArgs e)
+        {
+            try
+            {
+                await Shell.Current.Navigation.PushAsync(new SubmitComplaintsPage());
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "Something went wrong");
+
+            }
+            
         }
     }
 }

@@ -149,7 +149,7 @@ namespace WalimuV2.ViewModels
 
 			var lastName = Preferences.Get("lastName", string.Empty);
 
-			FullName = firstName + " " + lastName;
+			FullName = firstName;
 
 			PhoneNumber = Preferences.Get("phoneNumber", string.Empty);
 

@@ -249,8 +249,8 @@ namespace WalimuV2.ViewModels
 
                 PhotoPath = "avator.png";
 
-                //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
                 DependencyService.Get<DependantsViewModel>().GetProfilePicture();
+
                 await RemoveLoadingMessage();
             }
             catch (Exception ex)
@@ -271,9 +271,6 @@ namespace WalimuV2.ViewModels
                 SendErrorMessageToAppCenter(ex, "App Shell");
             }
         }
-
-
-
         public async Task SelectOptions()
         {
             try

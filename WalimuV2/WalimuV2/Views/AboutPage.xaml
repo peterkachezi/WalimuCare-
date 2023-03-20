@@ -142,7 +142,7 @@
                                 <Label
                                     FontSize="15"
                                     Style="{StaticResource MedBookLabelNormal}"
-                                    Text="{Binding Greetings}"
+                                    Text="{Binding LblText}"
                                     TextColor="White" />
 
                                 <Label

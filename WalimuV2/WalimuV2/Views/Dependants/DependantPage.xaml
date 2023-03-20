@@ -4,7 +4,8 @@
                                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                                         x:Class="WalimuV2.Views.Dependants.DependantPage"
                                         xmlns:Dependants="clr-namespace:WalimuV2.Views.Dependants" 
-                                        Title="Dependants"                                
+                                        Title="Dependants"  
+      x:Name="page"
                                         Shell.NavBarIsVisible="true" >
     <ContentPage.Resources>
 
@@ -36,7 +37,6 @@
                         HorizontalOptions="FillAndExpand"
                         Orientation="Horizontal"
                         VerticalOptions="FillAndExpand">
-
                         <BoxView BackgroundColor="{x:StaticResource PrimaryLight1}" WidthRequest="4" />
 
                         <Grid
@@ -48,16 +48,12 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-
-
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.30*" />
                                 <ColumnDefinition Width="0.70*" />
-
                             </Grid.ColumnDefinitions>
-
 
                             <Label
                                 Grid.Row="0"
@@ -130,6 +126,13 @@
                                                     TextColor="white" />
                             </Frame>
 
+                            <!--<StackLayout 
+                                Padding="10,0,10,0" 
+                                VerticalOptions="Center"
+                                >
+
+                                <Button VerticalOptions="Center" Text="Login"  CommandParameter="{Binding Id}"  Command="{Binding BindingContext.ViewProfileCommand, Source={x:Reference page}}"/>
+                            </StackLayout>-->
 
 
                             <Label
@@ -142,8 +145,10 @@
                             TextColor="Black"
                             VerticalTextAlignment="End">
                                 <Label.GestureRecognizers>
-                                    <!--<TapGestureRecognizer Command="{Binding ViewDependantDetailsCommand}" />-->
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  />
+                                    <TapGestureRecognizer CommandParameter="{Binding Id}"  Command="{Binding BindingContext.ViewProfileCommand, Source={x:Reference page}}"/>
+
+                                    <!--<TapGestureRecognizer Command="{Binding ViewDependantDetailsCommand}" CommandParameter="{Binding Id}"  />-->
+                                    <!--<TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  CommandParameter="{Binding Id}"  />-->
                                 </Label.GestureRecognizers>
                             </Label>
 

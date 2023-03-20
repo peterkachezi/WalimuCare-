@@ -10,35 +10,68 @@ using Xamarin.Forms.Xaml;
 
 namespace WalimuV2.Views.Dependants
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DependantPage : CustomContentPageRenderer
-	{
-		public DependantPage ()
-		{
-			InitializeComponent ();
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DependantPage : CustomContentPageRenderer
+    {
+        public DependantPage()
+        {
+            InitializeComponent();
 
-			BindingContext = DependencyService.Get<DependantsViewModel>();
-		}
+            BindingContext = DependencyService.Get<DependantsViewModel>();
+        }
 
-		private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-		{
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
 
-		}
+        }
 
-		private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
-		{
-			try
-			{
-				Shell.Current.FlyoutIsPresented = false;
-				//App.Current.MainPage = new NavigationPage(new ProfilePage());
-				await Shell.Current.GoToAsync(nameof(DependantDetailPage));
-			}
-			catch (Exception ex)
-			{
-				SendErrorMessageToAppCenter(ex, "App View Model", "", "");
-				throw;
-			}
-		}
+        private string fullName;
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                fullName = value;
+
+                OnPropertyChanged(nameof(FullName));
+            }
+        }
+        //private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var dependantId = ((TappedEventArgs)e).Parameter;
+
+        //        var client = new HttpClient();
+
+        //        client.DefaultRequestHeaders.Accept.Clear();
+
+        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //        HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/Dependants/" + dependantId + "");
+
+        //        if (getData.IsSuccessStatusCode)
+        //        {
+        //            string results = getData.Content.ReadAsStringAsync().Result;
+
+        //            var getDependants = JsonConvert.DeserializeObject<Dependant>(results);
+
+        //            FullName = getDependants.FullName;
+
+        //            //IsRefreshing = false;
+
+        //            //IsActive = false;
+        //        }
+
+        //        Shell.Current.FlyoutIsPresented = false;
+        //        await Shell.Current.GoToAsync(nameof(DependantDetailPage));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        SendErrorMessageToAppCenter(ex, "App View Model", "", "");
+        //        throw;
+        //    }
+        //}
 
         public void SendErrorMessageToAppCenter(Exception ex, string NameOfModule = "", string MemberNumber = "", string PhoneNumber = "")
         {

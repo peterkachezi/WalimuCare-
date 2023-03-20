@@ -27,6 +27,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 fullName = value;
+
                 OnPropertyChanged(nameof(FullName));
             }
         }
@@ -37,6 +38,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 memberNumber = value;
+
                 OnPropertyChanged(nameof(MemberNumber));
             }
         }
@@ -47,6 +49,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 idNumber = value;
+
                 OnPropertyChanged(nameof(IdNumber));
             }
         }
@@ -58,6 +61,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 phoneNumber = value;
+
                 OnPropertyChanged(nameof(PhoneNumber));
             }
         }
@@ -69,6 +73,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 email = value;
+
                 OnPropertyChanged(nameof(Email));
             }
         }
@@ -80,6 +85,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 userName = value;
+
                 OnPropertyChanged(nameof(UserName));
             }
         }
@@ -90,6 +96,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 schemeName = value;
+
                 OnPropertyChanged(nameof(SchemeName));
             }
         }
@@ -100,6 +107,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 jobGroup = value;
+
                 OnPropertyChanged(nameof(JobGroup));
             }
         }
@@ -110,6 +118,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 photoPath = value;
+
                 OnPropertyChanged(nameof(PhotoPath));
             }
         }
@@ -118,6 +127,7 @@ namespace WalimuV2.ViewModels
         public string NewPhoneNumber
         {
             get { return newPhoneNumber; }
+
             set { newPhoneNumber = value; OnPropertyChanged(nameof(NewPhoneNumber)); CheckIfPhoneNumberIsCorrect(); }
         }
 
@@ -126,6 +136,7 @@ namespace WalimuV2.ViewModels
         public string SchoolName
         {
             get { return schoolName; }
+
             set { schoolName = value; OnPropertyChanged(nameof(SchoolName)); }
         }
 
@@ -134,6 +145,7 @@ namespace WalimuV2.ViewModels
         public string StationName
         {
             get { return stationName; }
+
             set { stationName = value; OnPropertyChanged(nameof(StationName)); }
         }
 
@@ -152,6 +164,7 @@ namespace WalimuV2.ViewModels
         public string CountyOfResidence
         {
             get { return countyOfResidence; }
+
             set { countyOfResidence = value; OnPropertyChanged(nameof(CountyOfResidence)); }
         }
 
@@ -160,6 +173,7 @@ namespace WalimuV2.ViewModels
         public string PostalAddress
         {
             get { return postalAddress; }
+
             set { postalAddress = value; OnPropertyChanged(nameof(PostalAddress)); }
         }
 
@@ -172,6 +186,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 dateOfBirth = value;
+
                 OnPropertyChanged(nameof(DateOfBirth));
             }
         }
@@ -184,6 +199,7 @@ namespace WalimuV2.ViewModels
             set
             {
                 gender = value;
+
                 OnPropertyChanged(nameof(Gender));
             }
         }

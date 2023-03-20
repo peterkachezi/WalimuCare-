@@ -52,7 +52,6 @@
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="FontSize" Value="Default" />
             </Style>
-
             <Style
                 x:Key="DescriptionLabel"
                 BasedOn="{StaticResource MedBookLabelNormal}"
@@ -60,14 +59,12 @@
                 <Setter Property="FontSize" Value="Micro" />
                 <Setter Property="Margin" Value="0,-2,0,0" />
             </Style>
-
             <Style x:Key="Line" TargetType="BoxView">
                 <Setter Property="Color" Value="LightGray" />
                 <Setter Property="Margin" Value="0,0,0,10" />
                 <Setter Property="HeightRequest" Value="1" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
-
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -105,8 +102,6 @@
                             VerticalOptions="FillAndExpand" />
                     </Frame>
 
-
-
                     <StackLayout
                         Grid.Column="1"
                         Padding="0"
@@ -124,13 +119,11 @@
                             Padding="0"
                             HorizontalOptions="StartAndExpand"
                             Style="{StaticResource MedBookLabelNormal}"
-                            Text="{Binding MemberNumber}"
+                            Text="{Binding MemberNo}"
                             TextColor="{StaticResource HkBackground}"
                             VerticalOptions="CenterAndExpand" />
                     </StackLayout>
-
                 </Grid>
-
             </Grid>
 
 
@@ -156,73 +149,19 @@
             </Frame>
 
             <ScrollView Margin="0,-10,0,0">
-
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
                     <StackLayout Margin="20,0,20,0">
-                        <Label
-                            Margin="0,0,0,20"
-                            Style="{StaticResource MedBookLabel}"
-                            Text="Password"
-                            TextColor="{StaticResource Primary}" />
-
-                        <!--<StackLayout>
-                            <Label Style="{StaticResource DescriptionLabel}" Text="Email *" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label  HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding Email}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangeEmailCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>-->
-
-
-                        <StackLayout>
-                            <Label Style="{StaticResource DescriptionLabel}" Text="Password" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label
-                                    HorizontalOptions="StartAndExpand"
-                                    Style="{StaticResource DetailLabel}"
-                                    Text="****" />
-
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangePinPageCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-
-                            </StackLayout>
-
-
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
                         <Label
                             Margin="0,10,0,20"
                             Style="{StaticResource MedBookLabel}"
-                            Text="Member Details"
+                            Text="Details"
                             TextColor="{StaticResource Primary}" />
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Member Number" />
-                            <Label Style="{StaticResource DetailLabel}" Text="{Binding MemberNumber}" />
+                            <Label Style="{StaticResource DetailLabel}" Text="{Binding MemberNo}" />
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
-                        <StackLayout>
-                            <Label Style="{StaticResource DescriptionLabel}" Text="Scheme" />
-                            <Label Style="{StaticResource DetailLabel}" Text="{Binding SchemeName}" />
 
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Phone number" />
                             <StackLayout Orientation="Horizontal">
@@ -231,7 +170,6 @@
                                     Style="{StaticResource DetailLabel}"
                                     Text="{Binding PhoneNumber}" />
                             </StackLayout>
-
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
 
@@ -240,133 +178,41 @@
                             <Label Style="{StaticResource DetailLabel}" Text="{Binding JobGroup}" />
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
+                       
 
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Date of Birth" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding dateOfBirth}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangeDoBCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
+                            <Label Style="{StaticResource DetailLabel}" Text="{Binding DateOfBirth}" />
                             <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
-
+                        </StackLayout>   
+                        
+                        <StackLayout>
+                            <Label Style="{StaticResource DescriptionLabel}" Text="Age" />
+                            <Label Style="{StaticResource DetailLabel}" Text="{Binding Age}" />
+                            <BoxView Style="{StaticResource Line}" />
+                        </StackLayout>   
+                        
                         <StackLayout>
                             <Label Style="{StaticResource DescriptionLabel}" Text="Gender" />
                             <Label Style="{StaticResource DetailLabel}" Text="{Binding Gender}" />
                             <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
-
-                        <!--<StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="Station Name*" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding StationName}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangeStationCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
+                        </StackLayout>   
+                        
                         <StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="School Name*" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label HorizontalOptions="StartAndExpand" Style="{StaticResource DetailLabel}" Text="{Binding SchoolName}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding  ShowChangeSchoolNameCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
+                            <Label Style="{StaticResource DescriptionLabel}" Text="Relation" />
+                            <Label Style="{StaticResource DetailLabel}" Text="{Binding Relationship}" />
+                            <BoxView Style="{StaticResource Line}" />
+                        </StackLayout>      
+                        
+                        <StackLayout>
+                            <Label Style="{StaticResource DescriptionLabel}" Text="Status" />
+                            <Label Style="{StaticResource DetailLabel}" Text="{Binding Status}" />
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
-                        <StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="NHIF no*" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Style="{StaticResource DetailLabel}" Text="{Binding NhifNo}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangeNhifCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
-                        <StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="ID / Passport Number*" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Style="{StaticResource DetailLabel}" Text="{Binding IdNumber}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangeIdNumberCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
-                        <StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="County of Residence" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Style="{StaticResource DetailLabel}" Text="{Binding CountyOfResidence}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangeCountyCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>
-                        <StackLayout>
-                            <Label Style="{StaticResource  DescriptionLabel}" Text="Postal Address" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Style="{StaticResource DetailLabel}" Text="{Binding PostalAddress}" />
-                                <Image
-                                    HeightRequest="20"
-                                    HorizontalOptions="EndAndExpand"
-                                    Source="editicon.png"
-                                    VerticalOptions="CenterAndExpand">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding ShowChangePostalCommand}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                            <BoxView Style="{StaticResource Line}" />
-                        </StackLayout>-->
-
 
                     </StackLayout>
-
                 </StackLayout>
             </ScrollView>
         </StackLayout>
     </ContentPage.Content>
-    </customrenderer:CustomContentPageRenderer>
+</customrenderer:CustomContentPageRenderer>

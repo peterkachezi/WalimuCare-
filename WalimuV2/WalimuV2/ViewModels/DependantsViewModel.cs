@@ -154,20 +154,22 @@ namespace WalimuV2.ViewModels
                 if (photo == null)
                 {
                     PhotoPath = null;
+
                     return;
                 }
                 long FileSize = 0;
 
                 // save the file into local storage
                 var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
+
                 using (var stream = await photo.OpenReadAsync())
+
                 using (var newStream = File.OpenWrite(newFile))
                 {
                     await stream.CopyToAsync(newStream);
 
                     FileSize = stream.Length;
                 }
-
 
                 if (FileSize > 5000000)
                 {
@@ -181,7 +183,34 @@ namespace WalimuV2.ViewModels
 
                 //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
 
-                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+                //DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+
+                await ShowLoadingMessage("Uploading photo");
+
+                if (photo != null)
+                {
+                    var content = new MultipartFormDataContent
+                {
+                    { new StreamContent(await photo.OpenReadAsync()), "file", photo.FileName }
+                };
+
+                    var httClient = new HttpClient();
+
+                    string Url = ApiDetail.ApiUrl + "api/MemberAuth/Upload";
+
+                    httClient.BaseAddress = new Uri(Url);
+
+                    var response = await httClient.PostAsync("", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await ShowSuccessMessage("Photo uploaded successfully");
+                    }
+                }
+
+                Preferences.Set("ProfilePhoto", newFile);
+
+                PhotoPath = newFile;
 
                 await RemoveLoadingMessage();
             }
@@ -195,7 +224,6 @@ namespace WalimuV2.ViewModels
         {
             try
             {
-                //var photo = await MediaPicker.CapturePhotoAsync();
                 var photo = await MediaPicker.PickPhotoAsync();
                 // canceled
                 if (photo == null)
@@ -222,19 +250,43 @@ namespace WalimuV2.ViewModels
                 if (FileSize > 5000000)
                 {
                     await ShowInfoMessage("File should be less than 5 mbz");
+
                     return;
+                }
+
+                //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
+
+                //DependencyService.Get<AppShellViewModel>().GetProfilePicture();
+                //
+                await ShowLoadingMessage("Uploading photo");
+
+                if (photo != null)
+                {
+                    var content = new MultipartFormDataContent
+                {
+                    { new StreamContent(await photo.OpenReadAsync()), "file", photo.FileName }
+                };
+
+                    var httClient = new HttpClient();
+
+                    string Url = ApiDetail.ApiUrl + "api/MemberAuth/Upload";
+
+                    httClient.BaseAddress = new Uri(Url);
+
+                    var response = await httClient.PostAsync("", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await ShowSuccessMessage("Photo uploaded successfully");
+                    }
                 }
 
                 Preferences.Set("ProfilePhoto", newFile);
 
                 PhotoPath = newFile;
 
-                //DependencyService.Get<HomePageViewModel>().GetProfilePicture();
-
-
-                DependencyService.Get<AppShellViewModel>().GetProfilePicture();
-
                 await RemoveLoadingMessage();
+
             }
             catch (Exception ex)
             {
@@ -275,7 +327,7 @@ namespace WalimuV2.ViewModels
         {
             try
             {
-                await Application.Current.MainPage.Navigation.PushPopupAsync(new SelectMediaPage());
+                await Application.Current.MainPage.Navigation.PushPopupAsync(new SelectDependantMediaPage());
             }
             catch (Exception ex)
             {
@@ -308,7 +360,7 @@ namespace WalimuV2.ViewModels
 
                         IsListViewVisible = true;
 
-                        await ShowLoadingMessage("Please wait as we sign you in");
+                        await ShowLoadingMessage("Please wait as we fetch data..");
 
                         var client = new HttpClient();
 
@@ -380,7 +432,7 @@ namespace WalimuV2.ViewModels
         {
             try
             {
-                await ShowLoadingMessage("Please wait as we sign you in");
+                await ShowLoadingMessage("Please wait as we fetch data..");
 
                 var client = new HttpClient();
 

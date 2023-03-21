@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using WalimuV2.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -35,7 +36,7 @@ namespace WalimuV2.Views.Profile
 
                     var httClient = new HttpClient();
 
-                    string Url = "https://c4ba-154-70-3-144.eu.ngrok.io/api/MemberAuth/Upload";
+                    string Url = ApiDetail.ApiUrl + "api/MemberAuth/Upload";
 
                     httClient.BaseAddress = new Uri(Url);
 
@@ -63,7 +64,7 @@ namespace WalimuV2.Views.Profile
 
                 var httClient = new HttpClient();
 
-                string Url = "https://c4ba-154-70-3-144.eu.ngrok.io/api/MemberAuth/GetImage?Name=1811_800.jpg";
+                string Url = ApiDetail.ApiUrl + "api/MemberAuth/GetImage?Name=1811_800.jpg";
 
                 httClient.BaseAddress = new Uri(Url);
 

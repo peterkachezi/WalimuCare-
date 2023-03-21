@@ -20,11 +20,8 @@ namespace WalimuV2.Views
             get { return greetings; }
 
             set { greetings = value; }
-        }      
+        }    
         
-        
-    
-
         private string _lblText;
         public string LblText
         {
@@ -88,7 +85,9 @@ namespace WalimuV2.Views
             var properties = new Dictionary<string, string>
                                     {
                                         { "NameOfModule", NameOfModule },
+
                                         { "MemberNumber", MemberNumber},
+
                                         { "PhoneNumber", PhoneNumber}
 
                                     };

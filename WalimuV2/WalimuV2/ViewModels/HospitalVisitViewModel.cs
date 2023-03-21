@@ -121,7 +121,7 @@ namespace WalimuV2.ViewModels
 
 						IsListViewVisible = true;
 
-                        await ShowLoadingMessage("Please wait as we sign you in");
+                        await ShowLoadingMessage("Please wait as we fetch data..");
 
                         var client = new HttpClient();
 

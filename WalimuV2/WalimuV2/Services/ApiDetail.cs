@@ -9,7 +9,7 @@ namespace WalimuV2.Services
 
 		public static string ApiUrl = "https://collaboration.makl-psms.com/";
 
-		//public static string ApiUrl = "https://d2d6-102-216-69-228.in.ngrok.io/";
+		//public static string ApiUrl = "https://eef1-154-70-3-144.ap.ngrok.io/";
 
 		public static string LocalEndPoint = "https://demo.healthierkenya.com/";
 	}

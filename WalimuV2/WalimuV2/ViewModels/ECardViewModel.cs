@@ -66,7 +66,15 @@ namespace WalimuV2.ViewModels
         }
         public ICommand GetDependantsCommand { get; set; }
         public ICommand ViewECardCommand { get; set; }
-        public ICommand DownloadECardCommand { get; set; }
+        //public ICommand DownloadECardCommand { get; set; }
+
+        public ICommand DownloadECardCommand
+        {
+            get
+            {
+                return new Command<string>(async (Id) => await DownloadECard(Id));
+            }
+        }
         public ICommand TakePhotoCommand { get; set; }
         public ICommand PickPictureCommand { get; set; }
         public ICommand ShowUploadPopUpCommand { get; set; }
@@ -80,7 +88,7 @@ namespace WalimuV2.ViewModels
 
             ViewECardCommand = new Command<string>(async x => await ViewECard(x));
 
-            DownloadECardCommand = new Command(async () => await DownloadECard());
+            //DownloadECardCommand = new Command(async () => await DownloadECard());
 
             TakePhotoCommand = new Command(async () => await TakePhoto());
 
@@ -183,54 +191,56 @@ namespace WalimuV2.ViewModels
                 SendErrorMessageToAppCenter(ex, "E Card");
             }
         }
-
-
-        public async Task DownloadECard()
+        public async Task DownloadECard(string Id)
         {
             try
             {
-                var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
 
-                var storageWriteStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
-                PermissionStatus storageReadIsAllowed = PermissionStatus.Denied;
+                await Browser.OpenAsync("https://ecard.makl-psms.com/Home/GenerateEcard/" + Id + "", BrowserLaunchMode.SystemPreferred);
 
-                PermissionStatus storageWriteIsAllowed = PermissionStatus.Denied;
+                //var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
 
-                if (storageReadStatus == PermissionStatus.Denied)
-                {
-                    storageReadIsAllowed = await Permissions.RequestAsync<Permissions.StorageRead>();
-                }
-                else
-                {
-                    storageReadIsAllowed = PermissionStatus.Granted;
-                }
+                //var storageWriteStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
-                if (storageWriteStatus == PermissionStatus.Denied)
-                {
-                    storageWriteIsAllowed = await Permissions.RequestAsync<Permissions.StorageWrite>();
-                }
-                else
-                {
-                    storageWriteIsAllowed = PermissionStatus.Granted;
-                }
-                if (await CheckStoragePermisions())
-                {
-                    string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
+                //PermissionStatus storageReadIsAllowed = PermissionStatus.Denied;
 
-                    string NameOfFile = SelectedDependant.FullName + ".pdf";
-                    //try
-                    //{
-                    //    await Browser.OpenAsync(url + "/" + NameOfFile);
+                //PermissionStatus storageWriteIsAllowed = PermissionStatus.Denied;
 
-                    //}
-                    //catch (Exception ex)
-                    //{
+                //if (storageReadStatus == PermissionStatus.Denied)
+                //{
+                //    storageReadIsAllowed = await Permissions.RequestAsync<Permissions.StorageRead>();
+                //}
+                //else
+                //{
+                //    storageReadIsAllowed = PermissionStatus.Granted;
+                //}
 
-                    //    SendErrorMessageToAppCenter(ex, "Policy Details");
-                    //}
-                    await DependencyService.Get<IDownload>().DownloadFileAsync(url, NameOfFile);
-                }
+                //if (storageWriteStatus == PermissionStatus.Denied)
+                //{
+                //    storageWriteIsAllowed = await Permissions.RequestAsync<Permissions.StorageWrite>();
+                //}
+                //else
+                //{
+                //    storageWriteIsAllowed = PermissionStatus.Granted;
+                //}
+                //if (await CheckStoragePermisions())
+                //{
+                //    string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
+
+                //    string NameOfFile = SelectedDependant.FullName + ".pdf";
+                //    //try
+                //    //{
+                //    //    await Browser.OpenAsync(url + "/" + NameOfFile);
+
+                //    //}
+                //    //catch (Exception ex)
+                //    //{
+
+                //    //    SendErrorMessageToAppCenter(ex, "Policy Details");
+                //    //}
+                //    await DependencyService.Get<IDownload>().DownloadFileAsync(url, NameOfFile);
+                //}
             }
             catch (Exception ex)
             {

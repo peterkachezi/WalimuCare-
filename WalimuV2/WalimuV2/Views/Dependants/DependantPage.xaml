@@ -147,8 +147,6 @@
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding Id}"  Command="{Binding BindingContext.ViewProfileCommand, Source={x:Reference page}}"/>
 
-                                    <!--<TapGestureRecognizer Command="{Binding ViewDependantDetailsCommand}" CommandParameter="{Binding Id}"  />-->
-                                    <!--<TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  CommandParameter="{Binding Id}"  />-->
                                 </Label.GestureRecognizers>
                             </Label>
 

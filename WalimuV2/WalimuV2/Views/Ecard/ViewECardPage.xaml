@@ -5,7 +5,7 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              BackgroundColor="{StaticResource HkBackground}"
              Shell.NavBarIsVisible="False">
-    
+
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <!---->
@@ -378,9 +378,9 @@
                             Style="{StaticResource ButtonOutlineSecondary}"
                             Text="Upload Photo"
                             VerticalOptions="EndAndExpand" />-->
-
                         <Button
                             Grid.Column="1"
+                            CommandParameter="{Binding SelectedDependant.Id}"
                             Command="{Binding DownloadECardCommand}"
                             HorizontalOptions="FillAndExpand"
                             Style="{StaticResource ButtonOutlineSecondary}"

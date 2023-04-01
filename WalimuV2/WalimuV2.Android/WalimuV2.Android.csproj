@@ -638,5 +638,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\welcomeScreen.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\afya.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

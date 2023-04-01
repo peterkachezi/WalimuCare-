@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using WalimuV2.Views.Dependants;
+using WalimuV2.Views.Ecard;
 using WalimuV2.Views.hospitals;
 using WalimuV2.Views.Others;
 using WalimuV2.Views.Policy;
@@ -124,7 +125,7 @@ namespace WalimuV2.Views
         {
             try
             {
-                await Shell.Current.Navigation.PushAsync(new PolicyLimitsPage());
+                await Shell.Current.Navigation.PushAsync(new ECardPage());
 
             }
             catch (Exception ex)

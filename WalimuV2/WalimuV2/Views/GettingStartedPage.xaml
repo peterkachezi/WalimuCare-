@@ -49,7 +49,7 @@
                                     CommandParameter="{Binding PreviousPosition}"
                                     HeightRequest="30"
                                     HorizontalOptions="StartAndExpand" 
-                                    BackgroundColor="#EA212A"
+                                    BackgroundColor="{StaticResource Primary}"
                                     Text="{Binding PreviousBtnText}" />
 
                                 <Button
@@ -60,7 +60,7 @@
                                     CommandParameter="{Binding NextPosition}"                                 
                                     HeightRequest="30"
                                     HorizontalOptions="EndAndExpand"   
-                                    BackgroundColor="#EA212A"
+                                    BackgroundColor="{StaticResource Primary}"
                                     Text="{Binding NextBtnText}" />
                             </StackLayout>
                         </StackLayout>

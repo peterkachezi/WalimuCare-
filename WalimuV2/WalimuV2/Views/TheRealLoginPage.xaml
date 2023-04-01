@@ -34,7 +34,7 @@
                 ClearButtonVisibility="WhileEditing"
                 Keyboard="Numeric"
                 Placeholder="Enter Member Number "
-                PlaceholderColor="#F16C70"
+                PlaceholderColor="#c3a22e"
                 Style="{x:StaticResource MedBookEntryNormal}"
                 Text="{Binding MemberNumber}"
                 TextColor="White">
@@ -53,7 +53,7 @@
                 Keyboard="Numeric"
                 MaxLength="10"
                 Placeholder="Enter Pin"
-                PlaceholderColor="#F16C70"
+                PlaceholderColor="#c3a22e"
                 Style="{x:StaticResource MedBookEntryNormal}"
                 Text="{Binding Pin}"
                 TextColor="White">

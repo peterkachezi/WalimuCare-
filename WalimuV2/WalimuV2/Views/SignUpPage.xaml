@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WalimuV2.CustomRenderer"
              x:Class="WalimuV2.Views.SignUpPage"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             BackgroundColor="#EA212A"
+             BackgroundColor="{StaticResource Primary}"
              NavigationPage.HasNavigationBar="False"
              Style="{StaticResource MyContentPageStyle}">    
 
@@ -32,8 +32,8 @@
                     Margin="0,10,0,10"
                     ClearButtonVisibility="WhileEditing"
                     Keyboard="Numeric"
-                    Placeholder="Enter Tsc Member No"
-                    PlaceholderColor="#d9a4a4"
+                    Placeholder="TSC No"
+                    PlaceholderColor="#c3a22e"
                     Style="{x:StaticResource MedBookEntryNormal}"
                     Text="{Binding MemberNumber}"
                     TextColor="White">
@@ -51,8 +51,8 @@
                     ClearButtonVisibility="WhileEditing"
                     Keyboard="Telephone"
                     MaxLength="10"
-                    Placeholder="Enter Phone Number"
-                    PlaceholderColor="#d9a4a4"
+                    Placeholder="Phone Number"
+                    PlaceholderColor="#c3a22e"
                     Style="{x:StaticResource MedBookEntryNormal}"
                     Text="{Binding PhoneNumber}"
                     TextColor="White">
@@ -70,7 +70,7 @@
                     Keyboard="Telephone"
                     MaxLength="10"
                     Placeholder="Password"
-                    PlaceholderColor="#d9a4a4"
+                    PlaceholderColor="#c3a22e"
                     Style="{x:StaticResource MedBookEntryNormal}"
                     Text="{Binding Password}"
                     TextColor="White">
@@ -87,18 +87,16 @@
                     FontSize="13"
                     Style="{StaticResource MedBookLabelNormal}"
                     Text="*Please enter your scheme registered member number and phone number"
-                    TextColor="White" />
+                    TextColor="white" />
 
                 <Button
-                    TextColor="#EA212A" 
                     x:Name="btnSignUp"
                     Margin="0,60,0,10"
                     Command="{Binding SignUpCommand}"
                     HorizontalOptions="FillAndExpand"
                     IsEnabled="{Binding EnableSubmitBtn}"
-                    Style="{x:StaticResource SecondaryLight4}"
-                    BackgroundColor="white"
-                    CornerRadius="20"
+                    Style="{x:StaticResource ButtonStyleLogin}"
+                    CornerRadius="20"               
                     Text="Next" />
 
                 <Label

@@ -6,8 +6,8 @@
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="WalimuV2.Views.AboutPage"
              Title="Walimu Care"
-        BackgroundColor="#F8F8F8"
-     NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F8F8F8"
+             NavigationPage.HasNavigationBar="False"
     Style="{StaticResource MyContentPageStyle}">
 
     <Shell.TitleView>
@@ -19,25 +19,27 @@
             Spacing="0"
             VerticalOptions="FillAndExpand">
 
-            <Image
+            <!--<Image
                 HeightRequest="25"
                 HorizontalOptions="Start"
                 Source="WhiteHkLogoWithBlueBackground"
-                VerticalOptions="CenterAndExpand" />
+                VerticalOptions="CenterAndExpand" />-->
+            
+            
             <Label
                 Margin="10,0,0,0"
                 Padding="0,0,0,0"
                 FontSize="Medium"
                 HorizontalOptions="StartAndExpand"
                 Style="{StaticResource MedBookLabel}"
-                Text="WalimuCare"
+                Text="Walimu Care"
                 TextColor="{StaticResource HkBackground}"
                 VerticalOptions="CenterAndExpand"
                 VerticalTextAlignment="Center" />
         </StackLayout>
     </Shell.TitleView>
 
-    <ContentPage.Resources>
+    <!--<ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="medicalcovertemplate">
                 <Frame
@@ -111,7 +113,7 @@
 
             </DataTemplate>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
 
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -232,7 +234,7 @@
                                             FontSize="Small"
                                             HorizontalOptions="CenterAndExpand"
                                             Style="{StaticResource MedBookLabelNormal}"
-                                            Text="Policy Limits"
+                                            Text="E-Card"
                                             TextColor="{StaticResource Secondary}" />
                                     </StackLayout>
 

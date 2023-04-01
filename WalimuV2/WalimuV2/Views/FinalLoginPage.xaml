@@ -18,7 +18,7 @@
                 Grid.Row="0"
                 AbsoluteLayout.LayoutBounds="0.5,0.01,0.2,0.3"
                 AbsoluteLayout.LayoutFlags="PositionProportional, SizeProportional"
-                Source="icon.png" />
+                Source="afya.png" />
 
             <Label
                 AbsoluteLayout.LayoutBounds="0.5,0.21"

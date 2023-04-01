@@ -173,7 +173,6 @@ namespace WalimuV2.ViewModels
                 SendErrorMessageToAppCenter(ex, "E-Card");
             }
         }
-
         public async Task ViewECard(string Id)
         {
             try

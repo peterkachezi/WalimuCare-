@@ -2,13 +2,11 @@
 using System;
 using System.Diagnostics;
 using WalimuV2.Interfaces;
-using WalimuV2.Models;
 using WalimuV2.Services;
 using WalimuV2.ViewModels;
 using WalimuV2.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace WalimuV2
 {

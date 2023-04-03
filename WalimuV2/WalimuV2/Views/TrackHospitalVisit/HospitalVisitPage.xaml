@@ -50,7 +50,7 @@
                             HorizontalOptions="FillAndExpand"
                             
                             VerticalOptions="FillAndExpand">
-                            
+
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -68,9 +68,11 @@
                             <Label
                                 Grid.Row="0"
                                 Grid.Column="0"
+                                FontSize="Small"
                                 Style="{x:StaticResource Title}"
                                 Text="Hospital Name" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
@@ -78,79 +80,63 @@
 
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Patient Name" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding name}" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="2"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Visit Date" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"                      
                                 Text="{Binding NewMvcDate}"/>
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="3"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Department" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding department}" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="4"
-                                Grid.Column="0"
+                                Grid.Column="0"                           
                                 Style="{x:StaticResource Title}"
-                                Text="MVC Number" />
+                                Text="Mvc No" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding mvcNumber}" />
 
-                            
-                            <Label
-                                Grid.Row="5"
-                                Grid.Column="0"                           
-                                Style="{x:StaticResource MedBookLabelNormal}"
-                                Text="Request Amt"
-                              />
-                            <Label
-                                Grid.Row="5"
-                                Grid.Column="1"                               
-                                Style="{x:StaticResource MedBookLabelNormal}"
-                                Text="{Binding totalRequestAmount, StringFormat='{0:#,0.#0}'}"                                            
-                                TextColor="{x:StaticResource Secondary}" />
-
-                            <!--<Label
-                                Grid.Row="6"
-                                Grid.Column="0"                               
-                                Style="{x:StaticResource Title}"
-                                Text="Status"
-                               />
-                            <Label
-                                Grid.Row="6"
-                                Grid.Column="1"                           
-                                Style="{x:StaticResource Value}"
-                                Text="{Binding StatusDescription}"
-                                TextColor="{x:StaticResource Primary}" />-->
+  
 
                             <Label
-                                Grid.Row="6"
+                                FontSize="Small"
+                                Grid.Row="5"
                                 Grid.Column="0"                           
                                 Style="{x:StaticResource MedBookLabelNormal}"
                                 Text="Status"
@@ -158,7 +144,8 @@
 
 
                             <Frame
-                                                Grid.Row="6"
+                                
+                                                Grid.Row="5"
                                                 Grid.Column="1"       
                                                 Margin="0"
                                                 Padding="10,2,10,2"
@@ -168,18 +155,14 @@
                                                 VerticalOptions="CenterAndExpand">
 
                                 <Label
-                                                Grid.Row="6"
-                                                Grid.Column="1"                               
-                                                Style="{x:StaticResource MedBookLabelNormal}"
-                                                Text="{Binding StatusDescription}"                                            
-                                                TextColor="white" />
+                                                    Grid.Row="5"
+                                                    Grid.Column="1"                               
+                                                    Style="{x:StaticResource MedBookLabelNormal}"
+                                                    Text="{Binding StatusDescription}"                                            
+                                                    TextColor="white" />
                             </Frame>
 
-                            
-                            
-                            
-                            
-                            
+
                         </Grid>
                     </StackLayout>
                 </Frame>

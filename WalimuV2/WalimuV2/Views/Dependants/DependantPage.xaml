@@ -56,51 +56,60 @@
                             </Grid.ColumnDefinitions>
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Name" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding FullName}" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Relation" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"                      
                                 Text="{Binding Relation}"/>
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="2"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Gender" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding Gender}" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="3"
                                 Grid.Column="0"
                                 Style="{x:StaticResource Title}"
                                 Text="Age" />
                             <Label
+                                FontSize="Small"
                                 Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{x:StaticResource Value}"
                                 Text="{Binding Age}" />
 
                             <Label
+                                FontSize="Small"
                                 Grid.Row="4"
                                 Grid.Column="0"                           
                                 Style="{x:StaticResource MedBookLabelNormal}"
@@ -109,6 +118,7 @@
 
 
                             <Frame
+                                
                                                 Grid.Row="4"
                                                 Grid.Column="1"       
                                                 Margin="0"
@@ -146,7 +156,6 @@
                             VerticalTextAlignment="End">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer CommandParameter="{Binding Id}"  Command="{Binding BindingContext.ViewProfileCommand, Source={x:Reference page}}"/>
-
                                 </Label.GestureRecognizers>
                             </Label>
 

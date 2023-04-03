@@ -190,13 +190,13 @@ namespace WalimuV2.ViewModels
                 SendErrorMessageToAppCenter(ex, "E Card");
             }
         }
-        public async Task DownloadECard(string Id)
+        public async Task DownloadECard(string MemberId)
         {
             try
             {
 
 
-                await Browser.OpenAsync("https://ecard.makl-psms.com/Home/GenerateEcard/" + Id + "", BrowserLaunchMode.SystemPreferred);
+                await Browser.OpenAsync("https://ecard.makl-psms.com/DownloadEcard/Download/?MemberId=8C804F42-A02D-44B1-9859-C052B0CC6319", BrowserLaunchMode.SystemPreferred);
 
                 //var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
 

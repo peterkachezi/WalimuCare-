@@ -66,9 +66,9 @@
                                             VerticalOptions="Start">
                                             <StackLayout HorizontalOptions="StartAndExpand">
                                                 <Image
-                                                    HeightRequest="50"
+                                                    HeightRequest="60"
                                                     HorizontalOptions="EndAndExpand"
-                                                    Source="minetlogo.png"
+                                                    Source="afya.png"
                                                     VerticalOptions="StartAndExpand" />
                                             </StackLayout>
 
@@ -234,9 +234,9 @@
                                             <StackLayout HorizontalOptions="EndAndExpand">
                                                 <xct:AvatarView
                                                     Margin="0,0,0,0"
-                                                    CornerRadius="20"
+                                                    CornerRadius="20"                                                
                                                     HorizontalOptions="CenterAndExpand"
-                                                    Size="80"
+                                                    Size="70"
                                                     Source="{Binding PhotoPath}"
                                                     Text="{Binding SelectedDependant.Initials}"
                                                     VerticalOptions="FillAndExpand" />
@@ -259,12 +259,12 @@
                                                     TextColor="White"
                                                     VerticalOptions="CenterAndExpand" />
 
-                                                <Label
+                                                <!--<Label
                                                     HorizontalOptions="EndAndExpand"
                                                     Style="{StaticResource MedBookLabelNormal}"
                                                     Text="Valid Until: 28/04/2022"
                                                     TextColor="White"
-                                                    VerticalOptions="CenterAndExpand" />
+                                                    VerticalOptions="CenterAndExpand" />-->
 
                                             </StackLayout>
                                         </StackLayout>

@@ -6,7 +6,7 @@
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="WalimuV2.Views.AboutPage"
              Title="Walimu Care"
-             BackgroundColor="#F8F8F8"
+             BackgroundColor="{StaticResource PrimaryLight1}"
              NavigationPage.HasNavigationBar="False"
     Style="{StaticResource MyContentPageStyle}">
 
@@ -220,7 +220,7 @@
                                                 HeightRequest="40"
                                                 RetryCount="3"
                                                 RetryDelay="600"
-                                                Source="buymedicalcover.png"
+                                                Source="ecard.png"
                                                 VerticalOptions="CenterAndExpand">
                                                 <ffimageloading:CachedImage.Transformations>
                                                     <fftransformations:CircleTransformation />

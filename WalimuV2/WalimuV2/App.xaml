@@ -9,9 +9,9 @@
         <ResourceDictionary>
             <Color x:Key="Primary">#0A0037</Color>
             <Color x:Key="PrimaryLight1">#C3A22E</Color>
-            <Color x:Key="PrimaryLight2">#7FEA212A</Color>
+            <Color x:Key="PrimaryLight2">#87cefa</Color>
             <Color x:Key="PrimaryLight3">#40EA212A</Color>
-            <Color x:Key="PrimaryLight4">#1AEA212A</Color>
+            <Color x:Key="PrimaryLight4">#b6e1fc</Color>
             <Color x:Key="Secondary">#212121</Color>
             <Color x:Key="SecondaryLight">#BF212121</Color>
             <Color x:Key="SecondaryLight2">#7F212121</Color>

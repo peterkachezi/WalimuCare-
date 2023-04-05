@@ -43,6 +43,7 @@
                         Style="{StaticResource MedBookLabel}"
                         Text="{Binding SelectedHospitalDetails.HospitalName}"
                         TextColor="White"
+                           FontAttributes="Bold"
                         VerticalOptions="CenterAndExpand" />
 
                 </StackLayout>
@@ -64,7 +65,7 @@
 
                 <labelWithIcon:LabelWithIcon
                     x:Name="lblWorkingHours"
-                    ImageSize="20"
+                    ImageSize="20"            
                     ImageUrl="workingHoursIcon.png" />
 
 
@@ -94,6 +95,7 @@
                     <Label
                         Style="{x:StaticResource MedBookLabel}"
                         Text="Medical Services Offered"
+                        FontAttributes="Bold"
                         TextColor="{StaticResource Primary}" />
                     <BoxView
                         BackgroundColor="{StaticResource Primary}"

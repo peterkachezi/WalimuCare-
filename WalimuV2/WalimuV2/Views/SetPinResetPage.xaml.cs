@@ -286,7 +286,6 @@ namespace WalimuV2.Views
 
 						var status = result.status;
 
-
 						if (status == "true")
 						{
 							await Navigation.PopAllPopupAsync();
@@ -314,43 +313,43 @@ namespace WalimuV2.Views
 								}
 								else
 								{
-									App.Current.MainPage = new AppShell();
+                                    Application.Current.MainPage = new AppShell();
+
 									await Shell.Current.GoToAsync(nameof(ProfilePage));
-
 								}
-
-
 							});
-
 						}
 
 						else
 						{
 							await Navigation.PopAllPopupAsync();
-							await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
 
+							await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
 						}
 					}
 					else
 					{
 						await Navigation.PopAllPopupAsync();
-						await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+
+						await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
 					}
-
-
 				}
 				catch (Exception ex)
 				{
 					SendErrorMessageToAppCenter(ex, "Set Pin", "", PhoneNumber);
+
 					await Navigation.PopAllPopupAsync();
-					await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+
+					await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
 				}
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
+
 				await Navigation.PopAllPopupAsync();
-				await App.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
+
+				await Application.Current.MainPage.Navigation.PushPopupAsync(new WalimuErrorPage("Sorry something went wrong when setting pin"));
 			}
 		}
 
@@ -359,20 +358,21 @@ namespace WalimuV2.Views
 			try
 			{
 				Pin = "";
+
 				Pin = txtPin1.Text.Trim() + txtPin2.Text.Trim() + txtPin3.Text.Trim() + txtPin4.Text.Trim();
 
 				ConfirmPin = "";
-				ConfirmPin = txtConfirmPin1.Text.Trim() + txtConfirmPin2.Text.Trim() + txtConfirmPin3.Text.Trim() + txtConfirmPin4.Text.Trim();
 
+				ConfirmPin = txtConfirmPin1.Text.Trim() + txtConfirmPin2.Text.Trim() + txtConfirmPin3.Text.Trim() + txtConfirmPin4.Text.Trim();
 
 				if (Pin != ConfirmPin)
 				{
 					await DependencyService.Get<AppViewModel>().ShowErrorMessage("Pin and Confirm Pin Do Not Match");
+
 					return;
 				}
 
 				await DependencyService.Get<AppViewModel>().ShowLoadingMessage("Please wait as we set up your Pin");
-
 
 				await Task.Run(() =>
 				{

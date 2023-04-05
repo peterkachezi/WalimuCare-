@@ -162,10 +162,10 @@
                                 HeightRequest="60"
                                 RetryCount="3"
                                 RetryDelay="600"
-                                Source="{Binding AvatorUrl}"
+                                Source="afya.png"
                                 VerticalOptions="CenterAndExpand">
                                 <ffimageloading:CachedImage.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding GoToUserProfileCommand}" />
+                                    <TapGestureRecognizer  />
                                 </ffimageloading:CachedImage.GestureRecognizers>
 
                                 <ffimageloading:CachedImage.Transformations>

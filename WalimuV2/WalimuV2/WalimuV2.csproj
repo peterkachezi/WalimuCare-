@@ -23,11 +23,11 @@
     <PackageReference Include="PanCardView" Version="1.0.0" />
     <PackageReference Include="RestSharp" Version="108.0.3" />
     <PackageReference Include="SkorXam.Pin" Version="1.0.4" />
-    <PackageReference Include="Syncfusion.Licensing" Version="20.4.0.52" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="20.4.0.52" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="20.4.0.52" />
-    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="20.4.0.52" />
-    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="20.4.0.52" />
+    <PackageReference Include="Syncfusion.Licensing" Version="21.1.35" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="21.1.35" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="21.1.35" />
+    <PackageReference Include="Syncfusion.Xamarin.Expander" Version="21.1.35" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="21.1.35" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />

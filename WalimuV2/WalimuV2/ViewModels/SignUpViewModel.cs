@@ -264,10 +264,7 @@ namespace WalimuV2.ViewModels
 
 						}
 					}
-
 				}
-
-
 			}
 			catch (Exception ex)
 			{
@@ -312,7 +309,6 @@ namespace WalimuV2.ViewModels
 					return client.Execute(restRequest);
 
 				});
-
 
 				var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<object>>(response.Content);
 

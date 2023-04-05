@@ -142,7 +142,9 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-				var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
+                await ShowLoadingMessage();
+
+                var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
 				var MemberNo = Preferences.Get("memberNumber", string.Empty);
 
@@ -156,7 +158,7 @@ namespace WalimuV2.ViewModels
 
 				CallBackrequests = new List<CallBackrequests>();
 
-				var client = new HttpClient();
+                var client = new HttpClient();
 
 				client.DefaultRequestHeaders.Accept.Clear();
 
@@ -166,17 +168,16 @@ namespace WalimuV2.ViewModels
 
 				if (getData.IsSuccessStatusCode)
 				{
-					string results = getData.Content.ReadAsStringAsync().Result;
+                    await RemoveLoadingMessage();
+
+                    string results = getData.Content.ReadAsStringAsync().Result;
 
 					var deserializedResponse = JsonConvert.DeserializeObject<List<CallBackrequests>>(results);
 
-					CallBackrequests = deserializedResponse;
-
-					await RemoveLoadingMessage();
-
 					if (CallBackrequests.Count > 0)
 					{
-						IsListViewVisible = true;
+
+                        IsListViewVisible = true;
 
 						IsEmptyIllustrationVisible = false;
 
@@ -186,7 +187,9 @@ namespace WalimuV2.ViewModels
 					}
 					else
 					{
-						IsListViewVisible = false;
+                        await RemoveLoadingMessage();
+
+                        IsListViewVisible = false;
 
 						IsEmptyIllustrationVisible = true;
 
@@ -194,7 +197,6 @@ namespace WalimuV2.ViewModels
 
 						IsRefreshing = false;
 					}
-
 				}
 				if (getData.IsSuccessStatusCode == false)
 				{

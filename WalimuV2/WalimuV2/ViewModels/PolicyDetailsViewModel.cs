@@ -76,7 +76,7 @@ namespace WalimuV2.ViewModels
 				{
 					if (await CheckIfApiDetailsAreSetUp())
 					{
-						//await ShowLoadingMessage();
+						await ShowLoadingMessage();
 
 						IsRefreshing = true;
 						IsEmptyIllustrationVisible = false;
@@ -127,7 +127,7 @@ namespace WalimuV2.ViewModels
 
 								}
 
-								//await RemoveLoadingMessage();
+								await RemoveLoadingMessage();
 							}
 							else
 							{
@@ -135,8 +135,8 @@ namespace WalimuV2.ViewModels
 								IsEmptyIllustrationVisible = true;
 								NoDataAvailableMessage = "Sorry Something went wrong";
 								IsListViewVisible = false;
-								//await RemoveLoadingMessage();
-								//await ShowErrorMessage();
+								await RemoveLoadingMessage();
+								await ShowErrorMessage();
 							}
 						}
 						else

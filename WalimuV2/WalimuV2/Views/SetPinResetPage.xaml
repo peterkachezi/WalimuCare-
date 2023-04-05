@@ -93,7 +93,7 @@
                     Grid.Row="0"
                     Grid.ColumnSpan="4"
                     Style="{StaticResource MedBookLabel}"
-                    Text="Pin"
+                    Text="Pin3"
                     TextColor="{StaticResource Primary}" />
 
                 <Frame
@@ -124,6 +124,7 @@
                     <local:EntryNoBottomBorder x:Name="txtPin4" Style="{StaticResource Pin}" />
                 </Frame>
 
+                
                 <Label
                     Grid.Row="2"
                     Grid.ColumnSpan="4"

@@ -22,9 +22,11 @@
 
                     <Image
                         Margin="0,0,0,0"
-                        Source="WhiteHkLogoWithBlueBackground.PNG"
+                        HeightRequest="190"
+                        WidthRequest="190"                        
+                        Source="afya.PNG"
                         VerticalOptions="Start" />
-                    <Label
+                    <!--<Label
                         FontAttributes="Italic"
                         FontSize="18"
                         HorizontalOptions="CenterAndExpand"
@@ -33,7 +35,7 @@
                         Text="AFYA KWA WALIMU"
                         TextColor="White"
                         VerticalOptions="Start"
-                        WidthRequest="200" />
+                        WidthRequest="200" />-->
                 </StackLayout>
             </StackLayout>
             <Button

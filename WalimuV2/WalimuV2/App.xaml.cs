@@ -54,6 +54,7 @@ namespace WalimuV2
 
                         return;
                     }
+
                     MainPage = new NavigationPage(new FinalLoginPage());
 
                     return;

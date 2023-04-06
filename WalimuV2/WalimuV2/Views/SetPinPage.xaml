@@ -33,7 +33,7 @@
             <Grid
                 BackgroundColor="{x:StaticResource Primary}"
                 ColumnDefinitions="0.1*,0.9*"
-                HeightRequest="70"
+                HeightRequest="80"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
 
@@ -50,7 +50,7 @@
                     </Image.GestureRecognizers>
                 </Image>
 
-                <StackLayout Grid.Column="1" Margin="0,20,20,20">
+                <StackLayout Grid.Column="1" Margin="0,20,20,20" >
                     <Label
                         FontSize="20"
                         HorizontalOptions="StartAndExpand"

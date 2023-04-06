@@ -438,11 +438,16 @@ namespace WalimuV2.ViewModels
 
                             Preferences.Set("schemeStatus", result.schemeStatus);
 
-                            Preferences.Set("dateOfBirth", result.dateOfBirth);
+                            Preferences.Set("dateOfBirth", result.dateOfBirth.ToShortDateString());
 
                             Preferences.Set("jobGroup", result.jobGroup);
 
                             Preferences.Set("currentTime", DateTimeOffset.Now.ToUnixTimeSeconds());
+
+
+
+
+
 
                             Device.BeginInvokeOnMainThread(() =>
 							{

@@ -39,7 +39,31 @@ namespace WalimuV2.ViewModels
 
                 OnPropertyChanged(nameof(MemberNumber));
             }
+        }  
+        
+        private int age;
+        public int Age
+        {
+            get { return age; }
+            set
+            {
+                age = value;
+
+                OnPropertyChanged(nameof(Age));
+            }
         }
+        private DateTime dob;
+        public DateTime DOB
+        {
+            get { return dob; }
+            set
+            {
+                dob = value;
+
+                OnPropertyChanged(nameof(DOB));
+            }
+        }
+
         private string idNumber;
         public string IdNumber
         {
@@ -109,6 +133,7 @@ namespace WalimuV2.ViewModels
                 OnPropertyChanged(nameof(JobGroup));
             }
         }
+
         private string photoPath;
         public string PhotoPath
         {
@@ -393,9 +418,14 @@ namespace WalimuV2.ViewModels
 
                 Gender = Preferences.Get("gender", string.Empty);
 
-                dateOfBirth = Preferences.Get("dateOfBirth", string.Empty);
+                DOB = Convert.ToDateTime(Preferences.Get("dateOfBirth", string.Empty));
 
-                jobGroup = Preferences.Get("jobGroup", string.Empty);
+                JobGroup = Preferences.Get("jobGroup", string.Empty);
+
+                int age = DateTime.Now.Subtract(DOB).Days;
+
+                Age = (age / 365);
+
 
                 // string theDateOfBirth = Preferences.Get("dateofbirth", "");
 

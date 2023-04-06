@@ -65,11 +65,66 @@
                         Text="Set a 4 digit PIN to be used for Identifying you"
                         TextColor="White" />
                 </StackLayout>
-
-
-
             </Grid>
+            
             <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical" />
+            <Grid
+                Padding="10"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition Height="0.7*" />
+                    <RowDefinition Height="0*" />
+                    <RowDefinition Height="0*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+
+
+                <Label
+                    Grid.Row="0"
+                    Grid.ColumnSpan="4"
+                    Style="{StaticResource MedBookLabel}"
+                    Text="Current Pin"
+                    TextColor="{StaticResource Primary}" />
+
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource MyFrame}">
+                    <local:EntryNoBottomBorder x:Name="txtCurrentPin1" Style="{StaticResource Pin}" />
+                </Frame>
+
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Style="{StaticResource MyFrame}">
+                    <local:EntryNoBottomBorder x:Name="txtCurrentPin2" Style="{StaticResource Pin}" />
+                </Frame>
+
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Style="{StaticResource MyFrame}">
+                    <local:EntryNoBottomBorder x:Name="txtCurrentPin3" Style="{StaticResource Pin}" />
+                </Frame>
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Style="{StaticResource MyFrame}">
+                    <local:EntryNoBottomBorder x:Name="txtCurrentPin4" Style="{StaticResource Pin}" />
+                </Frame>
+            </Grid>         
+                                  
+            
+            
             <Grid
                 Padding="10"
                 HorizontalOptions="FillAndExpand"
@@ -110,7 +165,6 @@
                     <local:EntryNoBottomBorder x:Name="txtPin2" Style="{StaticResource Pin}" />
                 </Frame>
 
-
                 <Frame
                     Grid.Row="1"
                     Grid.Column="2"
@@ -144,7 +198,6 @@
                     Style="{StaticResource MyFrame}">
                     <local:EntryNoBottomBorder x:Name="txtConfirmPin2" Style="{StaticResource Pin}" />
                 </Frame>
-
 
                 <Frame
                     Grid.Row="3"

@@ -97,8 +97,7 @@ namespace WalimuV2.ViewModels
 		public RequestCallBackViewModel()
 		{
 			try
-			{
-			
+			{			
 				SubmitCallBackRequest = new Command(async () => await SaveCallBackRequests());
 
 				viewCallBackLstCommand = new Command(async () => await GoToLists());

@@ -303,7 +303,7 @@ namespace WalimuV2.ViewModels
         {
             try
             {
-                if (App.Current.MainPage.Navigation.NavigationStack.Count > 0)
+                if (Application.Current.MainPage.Navigation.NavigationStack.Count > 0)
                 {
 
                     await Application.Current.MainPage.Navigation.PopAllPopupAsync();

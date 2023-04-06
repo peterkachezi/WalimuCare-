@@ -142,7 +142,7 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-                await ShowLoadingMessage();
+                
 
                 var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
@@ -163,20 +163,20 @@ namespace WalimuV2.ViewModels
 				client.DefaultRequestHeaders.Accept.Clear();
 
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-				HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/CallBack/GetCallBacks?MemberNumber=" + MemberNo + "&PhoneNumber=" + phoneNumber + "");
+				              
+                HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/CallBack/GetCallBacks?MemberNumber=" + MemberNo + "&PhoneNumber=" + phoneNumber + "");
 
 				if (getData.IsSuccessStatusCode)
-				{
-                    await RemoveLoadingMessage();
+				{               
 
                     string results = getData.Content.ReadAsStringAsync().Result;
 
 					var deserializedResponse = JsonConvert.DeserializeObject<List<CallBackrequests>>(results);
 
-					if (CallBackrequests.Count > 0)
-					{
+					CallBackrequests = deserializedResponse;
 
+                    if (CallBackrequests.Count > 0)
+					{
                         IsListViewVisible = true;
 
 						IsEmptyIllustrationVisible = false;
@@ -187,8 +187,6 @@ namespace WalimuV2.ViewModels
 					}
 					else
 					{
-                        await RemoveLoadingMessage();
-
                         IsListViewVisible = false;
 
 						IsEmptyIllustrationVisible = true;
@@ -200,8 +198,7 @@ namespace WalimuV2.ViewModels
 				}
 				if (getData.IsSuccessStatusCode == false)
 				{
-					await RemoveLoadingMessage();
-
+			
 					IsListViewVisible = false;
 
 					IsEmptyIllustrationVisible = true;
@@ -213,7 +210,6 @@ namespace WalimuV2.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await ShowErrorMessage();
 
 				SendErrorMessageToAppCenter(ex, "Request Call Back");
 

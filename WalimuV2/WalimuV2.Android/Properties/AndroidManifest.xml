@@ -1,28 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.walimuv2">
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
-    <!--<application android:label="WalimuV2.Android" android:theme="@style/MainTheme">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.walimuv2" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
+	<!--<application android:label="WalimuV2.Android" android:theme="@style/MainTheme">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDV_F3Q2cIWws40ratZ7PhvlTUo-2xZNXk"/>
 
 		<uses-library	android:name="org.apache.http.legacy" android:required="false"></uses-library>
 		
 	</application>-->
-
-	<application android:theme="@style/MainTheme" android:icon="@drawable/icon" android:label="WalimuCare" android:requestLegacyExternalStorage="true">
+	<application android:theme="@style/MainTheme" android:icon="@drawable/afya" android:label="WalimuCare" android:requestLegacyExternalStorage="true">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDV_F3Q2cIWws40ratZ7PhvlTUo-2xZNXk" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-		<uses-library	android:name="org.apache.http.legacy" android:required="false"></uses-library>
-
+		<uses-library android:name="org.apache.http.legacy" android:required="false"></uses-library>
 	</application>
-	
-	
-	
-    <!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARESE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
-
-
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.INTERNET" />

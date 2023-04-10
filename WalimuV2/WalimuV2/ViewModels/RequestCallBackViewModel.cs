@@ -19,94 +19,94 @@ using System.Collections.ObjectModel;
 
 namespace WalimuV2.ViewModels
 {
-	public class RequestCallBackViewModel : AppViewModel
-	{
-		public string MemberId { get; set; }
-		//public string checkController { get; set; }
+    public class RequestCallBackViewModel : AppViewModel
+    {
+        public string MemberId { get; set; }
+        //public string checkController { get; set; }
 
-		private string phoneNumber;
+        private string phoneNumber;
 
-		public string PhoneNumber
-		{
-			get { return phoneNumber; }
-			set
-			{
-				phoneNumber = value;
-				OnPropertyChanged(nameof(PhoneNumber));
-			}
-		}
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set
+            {
+                phoneNumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
+            }
+        }
 
-		private string remarks;
+        private string remarks;
 
-		public string Remarks
-		{
-			get { return remarks; }
-			set
-			{
-				remarks = value;
-				OnPropertyChanged(nameof(Remarks));
-			}
-		}
+        public string Remarks
+        {
+            get { return remarks; }
+            set
+            {
+                remarks = value;
+                OnPropertyChanged(nameof(Remarks));
+            }
+        }
 
-		private List<CallBackrequests> callBackrequests;
+        private List<CallBackrequests> callBackrequests;
 
-		public List<CallBackrequests> CallBackrequests
-		{
-			get { return callBackrequests; }
-			set { callBackrequests = value; OnPropertyChanged(); }
-		}
-
-
-
-		//private string selectedRdoBtn;
-
-		//public string SelectedRdoBtn
-		//{
-		//	get { return selectedRdoBtn; }
-		//	set
-		//	{
+        public List<CallBackrequests> CallBackrequests
+        {
+            get { return callBackrequests; }
+            set { callBackrequests = value; OnPropertyChanged(); }
+        }
 
 
-		//		selectedRdoBtn = value;
-		//		OnPropertyChanged(nameof(SelectedRdoBtn));
-		//		rdBtnChecked();
-		//	}
-		//}
 
-		private bool isPhnNoEditorEnabled;
+        //private string selectedRdoBtn;
 
-		public bool IsPhnNoEditorEnabled
-		{
-			get { return isPhnNoEditorEnabled; }
-			set
-			{
-				isPhnNoEditorEnabled = value;
-				OnPropertyChanged(nameof(IsPhnNoEditorEnabled));
-			}
-		}
+        //public string SelectedRdoBtn
+        //{
+        //	get { return selectedRdoBtn; }
+        //	set
+        //	{
 
-		public int MyProperty { get; set; }
 
-		public ICommand GetMyNumber { get; set; }
-		public ICommand GetOtherNumber { get; set; }
-		public ICommand GetMemberRequestsCommand { get; set; }
-		public ICommand SubmitCallBackRequest { get; set; }
-		public ICommand viewCallBackLstCommand { get; set; }
-		public ICommand AddNewRequestCommand { get; set; }
+        //		selectedRdoBtn = value;
+        //		OnPropertyChanged(nameof(SelectedRdoBtn));
+        //		rdBtnChecked();
+        //	}
+        //}
 
-		public RequestCallBackViewModel()
-		{
-			try
-			{			
-				SubmitCallBackRequest = new Command(async () => await SaveCallBackRequests());
+        private bool isPhnNoEditorEnabled;
 
-				viewCallBackLstCommand = new Command(async () => await GoToLists());
+        public bool IsPhnNoEditorEnabled
+        {
+            get { return isPhnNoEditorEnabled; }
+            set
+            {
+                isPhnNoEditorEnabled = value;
+                OnPropertyChanged(nameof(IsPhnNoEditorEnabled));
+            }
+        }
 
-				GetMemberRequestsCommand = new Command(async () => await GetCallBackrequests());
+        public int MyProperty { get; set; }
 
-				AddNewRequestCommand = new Command(async () => await AddNewCallBackRequest());		
+        public ICommand GetMyNumber { get; set; }
+        public ICommand GetOtherNumber { get; set; }
+        public ICommand GetMemberRequestsCommand { get; set; }
+        public ICommand SubmitCallBackRequest { get; set; }
+        public ICommand viewCallBackLstCommand { get; set; }
+        public ICommand AddNewRequestCommand { get; set; }
 
-				PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
+        public RequestCallBackViewModel()
+        {
+            try
+            {
+                SubmitCallBackRequest = new Command(async () => await SaveCallBackRequests());
+
+                viewCallBackLstCommand = new Command(async () => await GoToLists());
+
+                GetMemberRequestsCommand = new Command(async () => await GetCallBackrequests());
+
+                AddNewRequestCommand = new Command(async () => await AddNewCallBackRequest());
+
+                PhoneNumber = Preferences.Get(nameof(AspNetUsers.phoneNumber), "");
 
                 PageTitle = "Request Call";
 
@@ -115,196 +115,195 @@ namespace WalimuV2.ViewModels
                     await GetCallBackrequests();
                 });
 
-			}
-			catch (Exception ex)
-			{
-				SendErrorMessageToAppCenter(ex, "Request A call back", "acha jokes", PhoneNumber);
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                SendErrorMessageToAppCenter(ex, "Request A call back", "acha jokes", PhoneNumber);
+            }
+        }
 
-		public async Task AddNewCallBackRequest()
-		{
-			try
-			{
-				//await Shell.Current.GoToAsync(nameof(RequestCallBack));
-				await Shell.Current.Navigation.PushAsync(new RequestCallBack());
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
+        public async Task AddNewCallBackRequest()
+        {
+            try
+            {
+                //await Shell.Current.GoToAsync(nameof(RequestCallBack));
+                await Shell.Current.Navigation.PushAsync(new RequestCallBack());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
 
-				SendErrorMessageToAppCenter(ex, "Request Call Back");
-			}
-		}
+                SendErrorMessageToAppCenter(ex, "Request Call Back");
+            }
+        }
 
-		public async Task GetCallBackrequests()
-		{
-			try
-			{
-                
-
+        public async Task GetCallBackrequests()
+        {
+            try
+            {
                 var phoneNumber = Preferences.Get("phoneNumber", string.Empty);
 
-				var MemberNo = Preferences.Get("memberNumber", string.Empty);
+                var MemberNo = Preferences.Get("memberNumber", string.Empty);
 
-				IsListViewVisible = true;
+                IsListViewVisible = true;
 
-				IsEmptyIllustrationVisible = false;
+                IsEmptyIllustrationVisible = false;
 
-				NoDataAvailableMessage = "";
+                NoDataAvailableMessage = "";
 
-				IsRefreshing = true;
+                IsRefreshing = true;
 
-				CallBackrequests = new List<CallBackrequests>();
+                CallBackrequests = new List<CallBackrequests>();
 
                 var client = new HttpClient();
 
-				client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Clear();
 
-				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-				              
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                 HttpResponseMessage getData = await client.GetAsync(ApiDetail.ApiUrl + "api/CallBack/GetCallBacks?MemberNumber=" + MemberNo + "&PhoneNumber=" + phoneNumber + "");
 
-				if (getData.IsSuccessStatusCode)
-				{               
+                if (getData.IsSuccessStatusCode)
+                {
 
                     string results = getData.Content.ReadAsStringAsync().Result;
 
-					var deserializedResponse = JsonConvert.DeserializeObject<List<CallBackrequests>>(results);
+                    var deserializedResponse = JsonConvert.DeserializeObject<List<CallBackrequests>>(results);
 
-					CallBackrequests = deserializedResponse;
+                    CallBackrequests = deserializedResponse;
 
                     if (CallBackrequests.Count > 0)
-					{
+                    {
                         IsListViewVisible = true;
 
-						IsEmptyIllustrationVisible = false;
+                        IsEmptyIllustrationVisible = false;
 
-						NoDataAvailableMessage = "";
+                        NoDataAvailableMessage = "";
 
-						IsRefreshing = false;
-					}
-					else
-					{
+                        IsRefreshing = false;
+                    }
+                    else
+                    {
                         IsListViewVisible = false;
 
-						IsEmptyIllustrationVisible = true;
+                        IsEmptyIllustrationVisible = true;
 
-						NoDataAvailableMessage = "Sorry you dont have any call requests lodged";
+                        NoDataAvailableMessage = "Sorry you dont have any call requests lodged";
 
-						IsRefreshing = false;
-					}
-				}
-				if (getData.IsSuccessStatusCode == false)
-				{
-			
-					IsListViewVisible = false;
+                        IsRefreshing = false;
+                    }
+                }
+                if (getData.IsSuccessStatusCode == false)
+                {
 
-					IsEmptyIllustrationVisible = true;
+                    IsListViewVisible = false;
 
-					NoDataAvailableMessage = "Something went wrong, Please try again";
+                    IsEmptyIllustrationVisible = true;
 
-					IsRefreshing = false;
-				}
-			}
-			catch (Exception ex)
-			{
+                    NoDataAvailableMessage = "Something went wrong, Please try again";
 
-				SendErrorMessageToAppCenter(ex, "Request Call Back");
+                    IsRefreshing = false;
+                }
+            }
+            catch (Exception ex)
+            {
 
-				IsListViewVisible = false;
+                SendErrorMessageToAppCenter(ex, "Request Call Back");
 
-				IsEmptyIllustrationVisible = true;
+                IsListViewVisible = false;
 
-				NoDataAvailableMessage = "Something went wrong, Please try again";
+                IsEmptyIllustrationVisible = true;
 
-				IsRefreshing = false;
-			}
-		}
+                NoDataAvailableMessage = "Something went wrong, Please try again";
 
-		public async Task SaveCallBackRequests()
-		{
-			try
-			{
-				if (await CheckInternetConnectivity())
-				{
-					if (!await CheckIfApiDetailsAreSetUp())
-					{
+                IsRefreshing = false;
+            }
+        }
 
-					}
-					else
-					{
-						var firstName = Preferences.Get("firstName", string.Empty);
+        public async Task SaveCallBackRequests()
+        {
+            try
+            {
+                if (await CheckInternetConnectivity())
+                {
+                    if (!await CheckIfApiDetailsAreSetUp())
+                    {
 
-						var lastName = Preferences.Get("lastName", string.Empty);
+                    }
+                    else
+                    {
+                        var firstName = Preferences.Get("firstName", string.Empty);
 
-						var MemberNo = Preferences.Get("memberNumber", string.Empty);
+                        var lastName = Preferences.Get("lastName", string.Empty);
 
-						var model = new CallBackrequests
-						{
-							PhoneNumber = phoneNumber,
+                        var MemberNo = Preferences.Get("memberNumber", string.Empty);
 
-							Remarks = remarks,
+                        var model = new CallBackrequests
+                        {
+                            PhoneNumber = phoneNumber,
 
-							MemberName = firstName + " " + lastName,
+                            Remarks = remarks,
 
-							MemberNumber = MemberNo
-						};
+                            MemberName = firstName + " " + lastName,
 
-						var json = JsonConvert.SerializeObject(model);
+                            MemberNumber = MemberNo
+                        };
 
-						HttpContent httpContent = new StringContent(json);
+                        await ShowLoadingMessage();
 
-						httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        var json = JsonConvert.SerializeObject(model);
 
-						var client = new HttpClient();
+                        HttpContent httpContent = new StringContent(json);
 
-						var response = await client.PostAsync(ApiDetail.ApiUrl + "api/CallBack/SubmitRequest", httpContent);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-						try
-						{
-							if (response.IsSuccessStatusCode)
-							{
+                        var client = new HttpClient();
 
-								await ShowSuccessMessage("Call Back request Submitted successfuly");
+                        var response = await client.PostAsync(ApiDetail.ApiUrl + "api/CallBack/SubmitRequest", httpContent);
 
-								Thread.Sleep(2000);
+                        try
+                        {
+                            if (response.IsSuccessStatusCode)
+                            {
+                                await ShowSuccessMessage("Call Back request Submitted successfuly");
 
-								await Shell.Current.Navigation.PopAsync();
+                                Thread.Sleep(2000);
 
-							}
-						}
-						catch (Exception e)
-						{
-							await ShowErrorMessage();
+                                await Shell.Current.Navigation.PopAsync();
 
-							SendErrorMessageToAppCenter(e, "Request CallBack ", MemberId, PhoneNumber);
-						}
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            await ShowErrorMessage();
 
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				await ShowErrorMessage();
+                            SendErrorMessageToAppCenter(e, "Request CallBack ", MemberId, PhoneNumber);
+                        }
 
-				SendErrorMessageToAppCenter(ex, "Request Call back", MemberId, PhoneNumber);
-			}
-		}
-		public async Task GoToLists()
-		{
-			try
-			{
-				await Shell.Current.GoToAsync(nameof(CallBackList), true);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await ShowErrorMessage();
 
-				SendErrorMessageToAppCenter(ex, "Request A call back", "Error", PhoneNumber);
-			}
-		}
+                SendErrorMessageToAppCenter(ex, "Request Call back", MemberId, PhoneNumber);
+            }
+        }
+        public async Task GoToLists()
+        {
+            try
+            {
+                await Shell.Current.GoToAsync(nameof(CallBackList), true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+                SendErrorMessageToAppCenter(ex, "Request A call back", "Error", PhoneNumber);
+            }
+        }
 
 
-	}
+    }
 }

@@ -194,9 +194,9 @@ namespace WalimuV2.ViewModels
         {
             try
             {
+                await Browser.OpenAsync("https://ecard.makl-psms.com/DownloadEcard/Download/?MemberId=" + MemberId + "", BrowserLaunchMode.SystemPreferred);
 
-
-                await Browser.OpenAsync("https://ecard.makl-psms.com/DownloadEcard/Download/?MemberId=8C804F42-A02D-44B1-9859-C052B0CC6319", BrowserLaunchMode.SystemPreferred);
+                //await Browser.OpenAsync("https://ecard.makl-psms.com/DownloadEcard/Download/?MemberId=8C804F42-A02D-44B1-9859-C052B0CC6319", BrowserLaunchMode.SystemPreferred);
 
                 //var storageReadStatus = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
 

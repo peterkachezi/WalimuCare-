@@ -26,7 +26,7 @@ namespace WalimuV2
 
                 SetApiDetails();
 
-                //Preferences.Clear();
+                Preferences.Clear();
 
                 var firstName = Preferences.Get("firstName", string.Empty);
 

@@ -20,7 +20,7 @@ namespace WalimuV2.Views
 					 ImageUrl = "claimspreauth.png",
 					Title="Track Hospital Visits",
 					SubTitle="Track your preauth status, policy utilization and hospital visits",
-					PreviousBtnText = "Skip",
+					PreviousBtnText = "Skip",					
 					NextBtnText = "Next",
 					lblPreviousCommand = new Command<int>((x)=>SetCurrentItem(x)),
 					lblNextCommand = new Command<int>((x)=>SetCurrentItem(x)),

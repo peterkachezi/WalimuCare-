@@ -21,7 +21,8 @@
                 VerticalOptions="FillAndExpand">
 
                 <Label
-                    FontSize="20"
+                    FontSize="15"
+                    HorizontalTextAlignment="Center"
                     Style="{x:StaticResource MedBookLabelMedium}"
                     Text="Welcome to Teachers Medical Scheme Mobile Experience"
                     TextColor="{x:StaticResource HkBackground}"

@@ -249,7 +249,7 @@ namespace WalimuV2.ViewModels
                             MemberNumber = MemberNo
                         };
 
-                        await ShowLoadingMessage();
+                        await ShowLoadingMessage("Submitting request ,please wait..");
 
                         var json = JsonConvert.SerializeObject(model);
 
@@ -265,9 +265,13 @@ namespace WalimuV2.ViewModels
                         {
                             if (response.IsSuccessStatusCode)
                             {
+                                IsRefreshing = true;
+
                                 await ShowSuccessMessage("Call Back request Submitted successfuly");
 
                                 Thread.Sleep(2000);
+
+                                await GetCallBackrequests();
 
                                 await Shell.Current.Navigation.PopAsync();
 

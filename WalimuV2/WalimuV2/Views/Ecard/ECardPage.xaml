@@ -8,19 +8,28 @@
              BackgroundColor="{StaticResource HkBackground}">
     <ContentPage.Content>
         <StackLayout Padding="10">
+
+
+
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
+
             <CollectionView ItemsSource="{Binding Dependants}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <ContentView>
+                            
                             <Frame
                                 Margin="5"
                                 Padding="10"
-                                HasShadow="True">
+                                HasShadow="True">                                
                                 <StackLayout>
                                     <Grid
+                                        
                                         Margin="0"
                                         ColumnDefinitions="0.2*,0.6*,0.2*"
                                         HorizontalOptions="FillAndExpand">
+                                        
                                         <xct:AvatarView
                                             Grid.Column="0"
                                             Margin="0,0,0,0"
@@ -29,6 +38,7 @@
                                             Source="{Binding PhotoPath}"
                                             Text="{Binding Initials}"
                                             VerticalOptions="CenterAndExpand" />
+                                        
                                         <StackLayout
                                             Grid.Column="1"
                                             Spacing="0"
@@ -46,6 +56,7 @@
                                                 TextColor="{StaticResource Secondary}"
                                                 VerticalOptions="Center" />
                                         </StackLayout>
+                                        
                                         <Button
                                             Grid.Column="2"
                                             Padding="0"
@@ -65,16 +76,18 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </RefreshView>
+        
+        
             <StackLayout  HorizontalOptions="CenterAndExpand">
-
-                <Label FontSize="10"  HorizontalOptions="CenterAndExpand"
-        Style="{StaticResource MedBookLabelNormal}"
-        Text="*Ecard photos can only be uploaded once, If you need to chnage afterwards kindly contact +254730604000 "
-        TextColor="{StaticResource Secondary}"
-        VerticalOptions="Center" />
+                <Label 
+                    FontSize="10" 
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource MedBookLabelNormal}"
+                    Text="*Ecard photos can only be uploaded once, If you need to chnage afterwards kindly contact +254730604000 "
+                    TextColor="{StaticResource Secondary}"
+                    VerticalOptions="Center" />
             </StackLayout>
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

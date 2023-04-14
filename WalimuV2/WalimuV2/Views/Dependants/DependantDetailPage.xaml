@@ -5,8 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WalimuV2.Views.Dependants.DependantDetailPage"
              Title="Profile"
-             SubTitle="Update profile picture , Phone Number , Account Pin"
-    >
+             SubTitle="Update profile picture , Phone Number , Account Pin" >   
 
 
     <Shell.TitleView>
@@ -127,7 +126,7 @@
             </Grid>
 
 
-            <Frame
+            <!--<Frame
                 Margin="0,-30,10,0"
                 Padding="0"
                 BorderColor="{StaticResource HkBackground}"
@@ -146,7 +145,7 @@
                         <TapGestureRecognizer Command="{Binding SelectOptionsCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-            </Frame>
+            </Frame>-->
 
             <ScrollView Margin="0,-10,0,0">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

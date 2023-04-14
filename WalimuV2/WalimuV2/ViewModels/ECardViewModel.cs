@@ -67,7 +67,7 @@ namespace WalimuV2.ViewModels
         public ICommand GetDependantsCommand { get; set; }
         public ICommand ViewECardCommand { get; set; }
         //public ICommand DownloadECardCommand { get; set; }
-
+        public ICommand RefreshCommand { get; set; }
         public ICommand DownloadECardCommand
         {
             get
@@ -82,6 +82,9 @@ namespace WalimuV2.ViewModels
         public ICommand ClosePopUpCommand { get; set; }
         public ECardViewModel()
         {
+
+            RefreshCommand = new Command(async () => await GetDependants());
+
             dependantService = DependencyService.Get<DependantService>();
 
             GetDependantsCommand = new Command(async () => await GetDependants());
@@ -105,7 +108,7 @@ namespace WalimuV2.ViewModels
             {
                 if (await CheckInternetConnectivity())
                 {
-                    await ShowLoadingMessage();
+                    await ShowLoadingMessage("Please wait as we fetch data..");
 
                     string MemberId = Preferences.Get(nameof(AspNetUsers.memberId), "");
 
@@ -440,6 +443,8 @@ namespace WalimuV2.ViewModels
         //        await ShowErrorMessage();
         //    }
         //}
+
+              
 
     }
 }

@@ -53,11 +53,11 @@ namespace WalimuV2.ViewModels
 
 						await Task.Delay(2000);
 
-						//MyCovid19 = new List<Covid19>();
+                        //MyCovid19 = new List<Covid19>();
 
-						await ShowLoadingMessage();
-						
-						var client = new HttpClient();
+                        await ShowLoadingMessage("Please wait as we fetch data..");
+
+                        var client = new HttpClient();
 
 						HttpResponseMessage getData = await client.GetAsync(ApiDetail.PublicEndPoint + "Complaints/GetCovidQuestions");
 
@@ -131,7 +131,8 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-				await Browser.OpenAsync("http://stage.healthierkenya.com/Assesment/index", BrowserLaunchMode.SystemPreferred);
+				await Browser.OpenAsync("https://www.healthdirect.gov.au/symptom-checker/tool?symptom=CORO", BrowserLaunchMode.SystemPreferred);
+				//await Browser.OpenAsync("http://stage.healthierkenya.com/Assesment/index", BrowserLaunchMode.SystemPreferred);
 
 			}
 			catch (Exception ex)

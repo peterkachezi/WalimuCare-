@@ -21,5 +21,7 @@ namespace WalimuV2.Views.Ecard
 
 		   BindingContext = DependencyService.Get<ECardViewModel>();
 		}
-	}
+
+     
+    }
 }

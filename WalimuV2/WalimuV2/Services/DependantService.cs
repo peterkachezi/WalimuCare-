@@ -35,13 +35,13 @@ namespace WalimuV2.Services
 
                 if (getData.IsSuccessStatusCode)
                 {
-                    IsRefreshing = false;
+                    IsRefreshing = true;
 
                     string results = getData.Content.ReadAsStringAsync().Result;
 
                     var getDependants = JsonConvert.DeserializeObject<List<Dependant>>(results);
 
-                    return getDependants.ToList();
+                    return getDependants.Where(x => x.Status != 2 && x.Status != 3).ToList();
                 }
                 else
                 {

@@ -16,14 +16,12 @@ namespace WalimuV2.Views.Others
 		public RequestCallBack()
 		{
 			InitializeComponent();
-		}
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+            BindingContext = DependencyService.Get<RequestCallBackViewModel>();
 
-			BindingContext = DependencyService.Get<RequestCallBackViewModel>();
-		}
+        }
+
+   
 
 	}
 }

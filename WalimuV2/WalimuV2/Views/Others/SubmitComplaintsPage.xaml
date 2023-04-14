@@ -6,46 +6,37 @@
     xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
     Title="Submit Complaints"
     Shell.NavBarIsVisible="true">
-
     <ContentPage.Content>
         <StackLayout>
             <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout>
                     <ScrollView Padding="10">
-
                         <StackLayout Margin="10">
-                            <Button
-                        Command="{Binding GoToMyComplaintsCommand}"
-                        CornerRadius="7"
-                        FontSize="13"
-                        Style="{x:StaticResource ButtonMaterialFilledPrimary2}"     
-                        Text="View My Previous Complaints"
-                        TextTransform="None" />
 
                             <Picker 
+                                
                         Title="Select Complaint Type" 
                         Style="{x:StaticResource BaseLabel}" 
-                        TitleColor="bLACK"
+                        TitleColor="black"
                         ItemsSource="{Binding ComplaintsType}"
                         SelectedItem="{Binding SelectedComplaintType}" />
 
                             <StackLayout Margin="10" IsVisible="{Binding IsPoorService}">
-
                                 <Label
                                 Margin="2"                       
                                 Text="Hospital Name"
                                 TextColor="{StaticResource Secondary}" />
+                                
                                 <inputLayout:SfTextInputLayout
-                        Margin="0,0,0,0"                       
-                        VerticalOptions="FillAndExpand">
+                                 Margin="0,0,0,0"                       
+                                 VerticalOptions="FillAndExpand">
                                     <Editor
-                            AutoSize="TextChanges"
-                            Text="{Binding HospitalName}"
-                            VerticalOptions="FillAndExpand" />
+                                AutoSize="TextChanges"
+                                Text="{Binding HospitalName}"
+                                VerticalOptions="FillAndExpand" />
                                 </inputLayout:SfTextInputLayout>
                                 <Label
-                        Margin="2"
-                       
+                        Margin="2"                       
                         Text="Hospital Department"
                         TextColor="{StaticResource Secondary}" />
                                 <inputLayout:SfTextInputLayout
@@ -69,7 +60,6 @@
                                 <RadioButton Content="Invalid OTP" Value="Invalid OTP" IsChecked="{Binding InvalidOTP}" />
                                 <RadioButton Content="Fraudulent OTP" Value="Fraudulent OTP" IsChecked="{Binding FraudulentOTP}"/>
                             </StackLayout>
-
                             <StackLayout 
                                         Margin="10"
                                         IsVisible="{Binding IsPreAuth}"
@@ -96,8 +86,8 @@
                                      TextColor="{StaticResource Secondary}" />
 
                                 <inputLayout:SfTextInputLayout
-                                                               Margin="0,0,0,0"                      
-                                                               VerticalOptions="FillAndExpand">
+                                             Margin="0,0,0,0"                      
+                                             VerticalOptions="FillAndExpand">
                                     <Editor
                                             AutoSize="TextChanges"
                                             Text="{Binding DependentName}"
@@ -110,7 +100,7 @@
                                             Margin="10"
                                             IsVisible="{Binding IsMemberDetails}"
                                             RadioButtonGroup.GroupName="{Binding MemberGroup}"
-                                            RadioButtonGroup.SelectedValue="{Binding MemberCategory}">
+                                            RadioButtonGroup.SelectedValue="{Binding MemberCategory}">                                
                                 <Label Text="Select Type?" />
                                 <RadioButton Content="Incorrect Name" Value="Incorrect Details" IsChecked="{Binding IncorrectDetails}"/>
                                 <RadioButton Content="Incorrect Date of Birth" Value="Member Update " IsChecked="{Binding MemberUpdate}"/>
@@ -125,8 +115,8 @@
                                     TextColor="{StaticResource Secondary}" />
 
                             <inputLayout:SfTextInputLayout                                
-                                                            Margin="0,0,0,0"                       
-                                                            VerticalOptions="FillAndExpand">
+                                         Margin="0,0,0,0"                       
+                                         VerticalOptions="FillAndExpand">
                                 <Editor
                                         AutoSize="TextChanges"
                                         Text="{Binding ComplaintDescription}"
@@ -142,7 +132,19 @@
                                         Text="Submit Complaint"
                                         TextTransform="None"
                                         VerticalOptions="StartAndExpand" />
+
+                            <Button
+                                    Command="{Binding GoToMyComplaintsCommand}"
+                                    FontSize="13"
+                                    CornerRadius="16"
+                                    Style="{x:StaticResource ButtonMaterialFilledPrimary2}"     
+                                    Text="View My Previous Complaints"
+                                    TextTransform="None" />     
                         </StackLayout>
+                        
+                        
+                        
+                        
                     </ScrollView>
                 </StackLayout>
             </AbsoluteLayout>

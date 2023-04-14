@@ -61,7 +61,7 @@
                                 <Span
                                 FontSize="20"
                                 Style="{x:StaticResource MedBookLabel}"
-                                Text="Select an option " />
+                                Text="Enter details bellow" />
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>

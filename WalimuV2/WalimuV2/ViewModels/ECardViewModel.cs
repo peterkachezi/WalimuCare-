@@ -112,14 +112,13 @@ namespace WalimuV2.ViewModels
 
                     string MemberId = Preferences.Get(nameof(AspNetUsers.memberId), "");
 
-                    IsRefreshing = true;
-
                     var data = await dependantService.GetDependants();
-
-                    IsRefreshing = false;
+                                    
 
                     if (data != null)
                     {
+                        await RemoveLoadingMessage();
+
                         data.Insert(0, new Dependant()
                         {
                             PrincipalNumber = Preferences.Get("memberNumber", string.Empty),
@@ -141,6 +140,7 @@ namespace WalimuV2.ViewModels
                             Relation = "Self"
 
                         }); ;
+                        IsRefreshing = false;
 
                         data = data.ToList();
 
@@ -166,7 +166,10 @@ namespace WalimuV2.ViewModels
 
                                 DateOfBirth = Preferences.Get(nameof(AspNetUsers.DateOfBirth), DateTime.Now.AddYears(-100)),
                             }
+
                         };
+                        IsRefreshing = false;
+
                     }
                     await RemoveLoadingMessage();
                 }

@@ -41,7 +41,7 @@ namespace WalimuV2.Services
 
                     var getDependants = JsonConvert.DeserializeObject<List<Dependant>>(results);
 
-                    return getDependants.Where(x => x.Status != 2 && x.Status != 3).ToList();
+                    return getDependants.Where(x => x.Status == 1).ToList();
                 }
                 else
                 {

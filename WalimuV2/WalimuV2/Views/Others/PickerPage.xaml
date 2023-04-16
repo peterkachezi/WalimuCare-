@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:WalimuV2.Models"
+             xmlns:vm="clr-namespace:WalimuV2.ViewModels"
+
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             x:Class="WalimuV2.Views.Others.PickerPage">
+    <ContentPage.Content>
+    
+
+
+        <StackLayout Padding="0,50,0,0">
+            
+            
+            
+            <combobox:SfComboBox x:Name="comboBox" 
+                                     HeightRequest="50"
+                                     IsEditableMode="false"
+                                     IgnoreDiacritic="true"
+                                     MultiSelectMode="Token"
+                                     DataSource="{Binding Colors}"
+                                     SelectedItem="{Binding SelectedItem}"
+                                     Watermark="Select an Item"
+                                     ComboBoxMode="Suggest">
+            </combobox:SfComboBox>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

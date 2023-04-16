@@ -291,6 +291,8 @@
     <FlyoutItem  Title="Emergency Contacts" Icon="contactUsIcon.png" >
         <ShellContent  Route="ContactUsPage" ContentTemplate="{DataTemplate Others:ContactUsPage}" />
     </FlyoutItem>
+    
+
 
     <!--<FlyoutItem  Title="Profile" Icon="contactUsIcon.png" >
         <ShellContent  Route="ContactUsPage" ContentTemplate="{DataTemplate Profile:FileUploadPage}" />

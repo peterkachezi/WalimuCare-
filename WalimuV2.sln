@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalimuV2.Android", "WalimuV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalimuV2.iOS", "WalimuV2\WalimuV2.iOS\WalimuV2.iOS.csproj", "{9E7BB97E-AD13-4EAF-9BF3-8C1847B82FEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalimuV2", "WalimuV2\WalimuV2\WalimuV2.csproj", "{86041FB1-E316-4CBE-A00F-714F2B6675F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalimuV2", "WalimuV2\WalimuV2\WalimuV2.csproj", "{86041FB1-E316-4CBE-A00F-714F2B6675F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4086EC3-BD8A-46F2-8AFA-7E4152EA9E89}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

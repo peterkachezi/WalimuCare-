@@ -136,7 +136,7 @@
       <Version>1.0.0-beta5</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.2</Version>
+      <Version>13.0.3</Version>
     </PackageReference>
     <PackageReference Include="PanCardView">
       <Version>1.0.0</Version>
@@ -145,19 +145,19 @@
       <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Licensing">
-      <Version>20.4.0.52</Version>
+      <Version>21.1.39</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
-      <Version>20.4.0.52</Version>
+      <Version>21.1.39</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>20.4.0.52</Version>
+      <Version>21.1.39</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Expander">
-      <Version>20.4.0.52</Version>
+      <Version>21.1.39</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfProgressBar">
-      <Version>21.1.35</Version>
+      <Version>21.1.39</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Connectivity">
       <Version>3.2.0</Version>
@@ -174,10 +174,10 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>5.0.0.2545</Version>
+      <Version>5.0.0.2578</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>2.3.0.759</Version>

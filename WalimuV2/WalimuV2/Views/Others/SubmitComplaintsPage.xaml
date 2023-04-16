@@ -4,22 +4,48 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+         xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
     Title="Submit Complaints"
     Shell.NavBarIsVisible="true">
-    <ContentPage.Content>
+    <ContentPage.Content>        
         <StackLayout>
+
+            
+      
+            
+            
             <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout>
+                    
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="30">
+               
+                        <combobox:SfComboBox
+                                     x:Name="comboBox" 
+                                     Text="Select Complaint Type" 
+                                     HeightRequest="50"
+                                     IsEditableMode="false"
+                                     IgnoreDiacritic="true"
+                                     DataSource="{Binding ComplaintsType}"
+                                     SelectedItem="{Binding SelectedComplaintType}"
+                                     Watermark="Select an Item"
+                                     ComboBoxMode="Suggest">
+                        </combobox:SfComboBox>
+                    </StackLayout>
+                    
                     <ScrollView Padding="10">
+                        
                         <StackLayout Margin="10">
 
-                            <Picker 
+                            
+                            
+                         <!--<Picker 
                                 
                         Title="Select Complaint Type" 
                         Style="{x:StaticResource BaseLabel}" 
                         TitleColor="black"
                         ItemsSource="{Binding ComplaintsType}"
-                        SelectedItem="{Binding SelectedComplaintType}" />
+                        SelectedItem="{Binding SelectedComplaintType}" />-->
 
                             <StackLayout Margin="10" IsVisible="{Binding IsPoorService}">
                                 <Label

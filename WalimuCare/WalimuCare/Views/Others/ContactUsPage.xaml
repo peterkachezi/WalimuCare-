@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customrenderer:CustomContentPageRenderer
+    xmlns:customrenderer="clr-namespace:WalimuCare.CustomRenderer"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:templates="clr-namespace:WalimuCare.DataTemplates" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+    x:Class="WalimuCare.Views.Others.ContactUsPage">
+
+    <Shell.TitleView>
+        <StackLayout
+            BackgroundColor="{StaticResource Primary}"
+            HorizontalOptions="FillAndExpand"
+            Spacing="0"
+            VerticalOptions="FillAndExpand">
+            <Label
+                Margin="0"
+                Padding="0"
+                FontSize="20"
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource MedBookLabel}"
+                Text="{Binding PageTitle}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+            <Label
+                Margin="0,-15,0,0"
+                Padding="0"
+                FontSize="Micro"
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource MedBookLabelNormal}"
+                Text="{Binding PageSubTitle}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyBoxView" TargetType="BoxView">
+                <Setter Property="Margin" Value="60,0,15,0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="{x:StaticResource PrimaryLight3}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+
+            <StackLayout
+                Margin="0,10,0,0"
+                Padding="10"
+                HorizontalOptions="StartAndExpand"
+                Spacing="15"
+                VerticalOptions="StartAndExpand">
+
+                <StackLayout
+                    Margin="10,0,10,0"
+                    HeightRequest="200"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <maps:Map
+                        x:Name="map"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+
+                </StackLayout>
+
+                <templates:LabelWithIcon
+                    x:Name="txtOtherPhoneNumber"
+                    CustomText="1528"
+                    FontSize="20"
+                    ImageSize="20"
+                    ImageUrl="phoneIcon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OtherPhoneNumber_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>
+                
+                <BoxView Style="{StaticResource MyBoxView}" />
+
+
+                <templates:LabelWithIcon
+                    x:Name="txtPhoneNumber"
+                    CustomText="+254 730 604 000"
+                    FontSize="20"
+                    ImageSize="20"
+                    ImageUrl="phoneIcon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PhoneNumber_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>
+                
+                <BoxView Style="{StaticResource MyBoxView}" />
+
+
+                <templates:LabelWithIcon
+                    x:Name="txtWhatsapp"
+                    CustomText="+254 781 704 000(Ask Linda)"
+                    FontSize="20"
+                    ImageSize="20"
+                    ImageUrl="whatsappIcon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="whatsappNumber_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>
+
+
+                <BoxView Style="{StaticResource MyBoxView}" />
+
+
+
+                <templates:LabelWithIcon
+                    x:Name="txtEmail"
+                    CustomText="mmc.customerservice@minet.co.ke "
+                    FontSize="20"
+                    ImageSize="20"
+                    ImageUrl="emailicon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Email_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>
+
+
+                <BoxView Style="{StaticResource MyBoxView}" />
+
+                <templates:LabelWithIcon
+                    x:Name="txtWebsite"
+                    CustomText="www.minet.com/kenya"
+                    FontSize="20"
+                    ImageSize="20"
+                    ImageUrl="website"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Website_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>
+
+                <BoxView Style="{StaticResource MyBoxView}" />
+
+                <!--<templates:LabelWithIcon
+                    x:Name="txtFacebook"
+                    CustomText="Minet Kenya"
+                    FontSize="19"
+                    ImageSize="25"
+                    ImageUrl="facebookicon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Facebook_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>
+
+                <BoxView Style="{StaticResource MyBoxView}" />-->
+
+                <!--<templates:LabelWithIcon
+                    x:Name="txtTwitter"
+                    CustomText="@Minet_Kenya"
+                    FontSize="19"
+                    ImageSize="30"
+                    ImageUrl="twitterIcon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Twitter_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+                </templates:LabelWithIcon>-->
+
+                <!--<BoxView Style="{StaticResource MyBoxView}" />-->
+
+                <!--<templates:LabelWithIcon
+                    x:Name="txtInstagram"
+                    CustomText="Minet Kenya"
+                    FontSize="19"
+                    ImageSize="30"
+                    ImageUrl="instagramIcon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Instagram_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>-->
+                
+                <!--<BoxView Style="{StaticResource MyBoxView}" />-->
+                
+                <!--<templates:LabelWithIcon
+                    x:Name="txtTelegram"
+                    CustomText="Teachers Medical Scheme"
+                    FontSize="19"
+                    ImageSize="30"
+                    ImageUrl="telegram"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Telegram_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>-->
+                <!--<BoxView Style="{StaticResource MyBoxView}" />-->
+
+                <!--<templates:LabelWithIcon
+                    x:Name="txtLocation"
+                    CustomText="Minet House, Processional Way (off Nyerere Rd)"
+                    FontSize="19"
+                    HorizontalOptions="StartAndExpand"
+                    ImageSize="24"
+                    ImageUrl="placeMarkerIcon"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="StartAndExpand">
+
+                    <templates:LabelWithIcon.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Location_Tapped" />
+                    </templates:LabelWithIcon.GestureRecognizers>
+
+                </templates:LabelWithIcon>-->
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</customrenderer:CustomContentPageRenderer>

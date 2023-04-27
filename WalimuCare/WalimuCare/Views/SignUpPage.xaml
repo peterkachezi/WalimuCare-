@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:WalimuCare.CustomRenderer"
+             x:Class="WalimuCare.Views.SignUpPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             BackgroundColor="{StaticResource Primary}"
+             NavigationPage.HasNavigationBar="False"
+             Style="{StaticResource MyContentPageStyle}">    
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout
+                Padding="20,30,20,0"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                VerticalOptions="StartAndExpand">                
+                
+                <Label
+                    FontSize="30"
+                    Style="{StaticResource MedBookLabelMedium}"
+                    Text="Hi"
+                    TextColor="white" />
+
+                <Label
+                    FontSize="18"
+                    Style="{StaticResource MedBookLabelMedium}"
+                    Text="What's your Tsc Member No. and Phone No.?"
+                    TextColor="white" />
+
+                <local:EntryWithBorderBottomColorWhite
+                    Margin="0,10,0,10"
+                    ClearButtonVisibility="WhileEditing"
+                    Keyboard="Numeric"
+                    Placeholder="TSC No"
+                    PlaceholderColor="#c3a22e"
+                    Style="{x:StaticResource MedBookEntryNormal}"
+                    Text="{Binding MemberNumber}"
+                    TextColor="White">
+                    <local:EntryWithBorderBottomColorWhite.Behaviors>
+                        <xct:UserStoppedTypingBehavior
+                            MinimumLengthThreshold="6"
+                            ShouldDismissKeyboardAutomatically="True"
+                            StoppedTypingTimeThreshold="500" />
+                    </local:EntryWithBorderBottomColorWhite.Behaviors>
+                </local:EntryWithBorderBottomColorWhite>
+
+
+                <local:EntryWithBorderBottomColorWhite
+                    Margin="0,10,0,0"
+                    ClearButtonVisibility="WhileEditing"
+                    Keyboard="Telephone"
+                    MaxLength="10"
+                    Placeholder="Phone Number"
+                    PlaceholderColor="#c3a22e"
+                    Style="{x:StaticResource MedBookEntryNormal}"
+                    Text="{Binding PhoneNumber}"
+                    TextColor="White">
+                    <local:EntryWithBorderBottomColorWhite.Behaviors>
+                        <xct:UserStoppedTypingBehavior
+                            MinimumLengthThreshold="10"
+                            ShouldDismissKeyboardAutomatically="True"
+                            StoppedTypingTimeThreshold="500" />
+                    </local:EntryWithBorderBottomColorWhite.Behaviors>
+                </local:EntryWithBorderBottomColorWhite>
+                
+                <local:EntryWithBorderBottomColorWhite
+                    Margin="0,10,0,0"
+                    ClearButtonVisibility="WhileEditing"
+                    Keyboard="Telephone"
+                    MaxLength="10"
+                    Placeholder="Password"
+                    PlaceholderColor="#c3a22e"
+                    Style="{x:StaticResource MedBookEntryNormal}"
+                    Text="{Binding Password}"
+                    TextColor="White">
+                    <local:EntryWithBorderBottomColorWhite.Behaviors>
+                        <xct:UserStoppedTypingBehavior
+                            MinimumLengthThreshold="10"
+                            ShouldDismissKeyboardAutomatically="True"
+                            StoppedTypingTimeThreshold="500" />
+                    </local:EntryWithBorderBottomColorWhite.Behaviors>
+                </local:EntryWithBorderBottomColorWhite>
+                                
+                
+                <Label
+                    FontSize="13"
+                    Style="{StaticResource MedBookLabelNormal}"
+                    Text="*Please enter your scheme registered member number and phone number"
+                    TextColor="white" />
+
+                <Button
+                    x:Name="btnSignUp"
+                    Margin="0,60,0,10"
+                    Command="{Binding SignUpCommand}"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding EnableSubmitBtn}"
+                    Style="{x:StaticResource ButtonStyleLogin}"
+                    CornerRadius="20"               
+                    Text="Next" />
+
+                <Label
+                Grid.Row="2"
+                Margin="0,15,0,15"
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Style="{x:StaticResource MedBookLabel}"
+                Text="Already have an account?"
+                TextColor="{x:StaticResource HkBackground}"
+                VerticalOptions="End" />
+
+                <Button
+                x:Name="btnLogin"
+                Grid.Row="3"
+                Margin="15,0,15,15"
+                Clicked="btnLogin_Clicked"
+                Style="{x:StaticResource ButtonStyleLogin}"
+                Text="Login"
+                VerticalOptions="Start" />
+                
+                
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

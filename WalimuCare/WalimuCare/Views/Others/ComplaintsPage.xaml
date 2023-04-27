@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuCare.Views.Others.ComplaintsPage"
+             Title="My Complaints">
+    <ContentPage.Content>
+        <StackLayout>
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+              
+                <StackLayout
+                    
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsVisible="{Binding IsEmptyIllustrationVisible}"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetMemberComplaintsCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="empty"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabel}"
+                        Text="{Binding NoDataAvailableMessage}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalOptions="End" />
+                    <Label
+                        FontSize="Micro"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabelNormal}"
+                        Text="Tap to Refresh"
+                        VerticalOptions="End" />
+                </StackLayout>
+                <ListView
+                  
+                    AbsoluteLayout.LayoutBounds="0,0,1,0.8"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HasUnevenRows="True"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    IsVisible="{Binding IsListViewVisible}"
+                    ItemsSource="{Binding MemberComplaints}"
+                    RefreshCommand="{Binding GetMemberComplaintsCommand}"
+                    SelectionMode="None"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="10" Padding="0">
+                                    <StackLayout Margin="0" Padding="0">
+                                        <StackLayout
+                                            Margin="0"
+                                            Padding="5"
+                                            Orientation="Horizontal">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                Style="{StaticResource MedBookLabel}"
+                                                Text="{Binding Topic}"
+                                                TextColor="{StaticResource Primary}" />
+
+                                            <Frame
+                                                Margin="0"
+                                                Padding="10,2,10,2"
+                                                BackgroundColor="{Binding statusColor}"
+                                                CornerRadius="10"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Style="{StaticResource MedBookLabel}"
+                                                    Text="{Binding StatusDescription}"
+                                                    TextColor="White"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    VerticalTextAlignment="Center" />
+
+                                            </Frame>
+
+                                        </StackLayout>
+                                       
+                                        <StackLayout Padding="5" MinimumHeightRequest="200">
+                                            <Label Style="{StaticResource MedBookLabelNormal}" Text="{Binding Description}" />
+                                        </StackLayout>
+
+
+                                        <StackLayout Padding="5" Orientation="Horizontal" MinimumHeightRequest="200">
+
+                                            <Label
+                                                FontSize="Micro"
+                                                HorizontalOptions="EndAndExpand"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="{Binding CreateDate, StringFormat='{}{0:dd-MMM-yyyy}'}"
+                                                VerticalOptions="CenterAndExpand" />
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>            
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

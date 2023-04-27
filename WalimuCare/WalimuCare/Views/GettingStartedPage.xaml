@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuCare.Views.GettingStartedPage"
+            Style="{StaticResource MyContentPageStyle}"
+            Visual="Material">  
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="theRealTemplate">
+                <Grid RowDefinitions="0.65*,0.35*">
+
+                    <Image
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Aspect="AspectFill"
+                        Source="{Binding ImageUrl}" />
+
+                    <StackLayout
+                        Grid.Row="1"
+                        Padding="20"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <!--  BackgroundColor="{Binding BackgroundColor}"  -->
+                        <StackLayout
+                            Padding="20"
+                            BackgroundColor="{Binding BackgroundColor}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            <Label
+                                FontSize="18"
+                                Style="{StaticResource MedBookLabelMedium}"
+                                Text="{Binding Title}"
+                                TextColor="White"
+                                VerticalOptions="Start" />
+
+                            <Label
+                                FontSize="12"
+                                Style="{StaticResource MedBookLabelNormal}"
+                                Text="{Binding SubTitle}"
+                                TextColor="White"
+                                VerticalOptions="Start" />
+
+                            <StackLayout                                 
+                                Orientation="Horizontal"
+                                VerticalOptions="EndAndExpand"
+                                Margin="0,10, 15, 0"
+                                
+                                >
+
+                                <Button
+                                    x:Name="lblSkip"
+                                    Padding="0"
+                                    Command="{Binding lblPreviousCommand}"
+                                    CommandParameter="{Binding PreviousPosition}"
+                                    HeightRequest="30"
+                                    HorizontalOptions="StartAndExpand" 
+                                    BackgroundColor="{StaticResource Primary}"
+                                    Text="{Binding PreviousBtnText}" />
+
+                                <Button
+                                    x:Name="lblNext"
+                                    Padding="0"
+                                    WidthRequest="120"
+                                    Command="{Binding lblNextCommand}"
+                                    CommandParameter="{Binding NextPosition}"                                 
+                                    HeightRequest="30"
+                                    HorizontalOptions="EndAndExpand"   
+                                    BackgroundColor="{StaticResource Primary}"
+                                    Text="{Binding NextBtnText}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <CarouselView
+                    x:Name="corouselView"
+                    Margin="0,0,0,0"
+                    AbsoluteLayout.LayoutBounds="1,1,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalScrollBarVisibility="Always"
+                    IndicatorView="indicatorView"
+                    IsSwipeEnabled="False"
+                    ItemTemplate="{StaticResource theRealTemplate}"
+                    ItemsSource="{Binding MyCorousels}"
+                    VerticalOptions="FillAndExpand" />
+
+                <IndicatorView
+                    x:Name="indicatorView"
+                    AbsoluteLayout.LayoutBounds="0.12,0.87"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    IndicatorColor="White"
+                    SelectedIndicatorColor="{StaticResource Primary}" />
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

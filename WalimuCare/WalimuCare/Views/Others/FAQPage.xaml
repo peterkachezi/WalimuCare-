@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Expander;assembly=Syncfusion.Expander.XForms"
+             x:Class="WalimuCare.Views.Others.FAQPage"
+               Title="FAQs">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsRefreshing}"
+                ItemsSource="{Binding FaqBases}"
+                RefreshCommand="{Binding GetFaqsCommand}"
+                SelectionMode="None"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Margin="0" VerticalOptions="StartAndExpand">
+
+                                <StackLayout
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource SecondaryLight4}"
+                                    HeightRequest="50"
+                                    VerticalOptions="StartAndExpand">
+
+                                    <Label
+                                        Margin="0"
+                                        FontSize="18"
+                                        HorizontalOptions="StartAndExpand"
+                                        Padding="15"
+                                        Style="{StaticResource MedBookLabelNormal}"
+                                        Text="{Binding category}"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="CenterAndExpand" />
+                                </StackLayout>
+
+
+                                <ListView
+                                    HasUnevenRows="True"
+                                    ItemsSource="{Binding faqs}"
+                                    SelectionMode="None"
+                                    SeparatorVisibility="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout
+                                                    Margin="5,0,5,0"
+                                                    Padding="10"
+                                                    BackgroundColor="#FFFFFF"
+                                                    VerticalOptions="StartAndExpand">
+
+                                                    <Frame
+                                                        Margin="0"
+                                                        Padding="5"
+                                                        BorderColor="{StaticResource SecondaryLight4}"
+                                                        HasShadow="False">
+                                                        <StackLayout>
+                                                            <syncfusion:SfExpander
+                                                                Margin="0"
+                                                                HeaderBackgroundColor="White"
+                                                                HeaderIconPosition="Start"
+                                                                DynamicSizeMode="Content">
+                                                                <syncfusion:SfExpander.Header>
+                                                                    <StackLayout HeightRequest="40">
+                                                                        <Label
+                                                                            Style="{StaticResource MedBookLabel}"
+                                                                            Text="{Binding question}"
+                                                                            TextColor="{StaticResource Secondary}"
+                                                                            VerticalOptions="CenterAndExpand" />
+                                                                    </StackLayout>
+
+                                                                </syncfusion:SfExpander.Header>
+                                                                <syncfusion:SfExpander.Content>
+                                                                    <WebView >
+                                                                        <WebView.Source>
+                                                                            <HtmlWebViewSource Html="{Binding answer}" />
+                                                                        </WebView.Source>
+                                                                    </WebView>
+                                                                </syncfusion:SfExpander.Content>
+                                                            </syncfusion:SfExpander>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuCare.Views.WalimuSuccessPage"
+            xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+            CloseWhenBackgroundIsClicked="True"
+            NavigationPage.HasNavigationBar="False">    
+    <popup:PopupPage.Content>
+        <StackLayout
+            Padding="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Frame
+                Padding="0"
+                BackgroundColor="White"
+                CornerRadius="10"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="200">
+
+
+                <!--<StackLayout Orientation="Vertical">
+
+                    <Image
+                        HorizontalOptions="CenterAndExpand"
+                        Source="success.png"
+                        WidthRequest="40" />
+
+                    <Label
+                        x:Name="lblMessage"
+                        FontSize="Default"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Style="{x:StaticResource MedBookLabelNormal}"
+                        Text="The Operation was successful"
+                        TextColor="{StaticResource Secondary}"
+                        VerticalTextAlignment="Center" />
+
+                </StackLayout>-->
+
+
+
+                <StackLayout
+                    Margin="0"
+                    Padding="0"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        Margin="0"
+                        Padding="20"
+                        BackgroundColor="Green">
+
+                        <Image
+                            HeightRequest="70"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="success2"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <StackLayout Padding="10">
+
+                        <!--<Label
+                            HorizontalOptions="CenterAndExpand"
+                            Style="{StaticResource MedBookLabel}"
+                            Text="Successful"
+                            VerticalOptions="CenterAndExpand" />-->
+
+                        <Label
+                            x:Name="lblMessage"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource MedBookLabelNormal}"
+                            Text="The Operation was successful"
+                            VerticalOptions="CenterAndExpand" />
+
+                    </StackLayout>
+                </StackLayout>
+
+
+
+            </Frame>
+
+        </StackLayout>
+    </popup:PopupPage.Content>
+    </popup:PopupPage>  

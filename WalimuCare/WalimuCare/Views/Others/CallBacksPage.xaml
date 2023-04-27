@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WalimuCare.Views.Others.CallBacksPage"
+             Visual="Material"
+         
+
+    Title="CallBack Logs">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsVisible="{Binding IsEmptyIllustrationVisible}"
+                    VerticalOptions="CenterAndExpand">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GetMemberRequestsCommand}" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="empty"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabel}"
+                        Text="{Binding NoDataAvailableMessage}"
+                        TextColor="{StaticResource Primary}"
+                        VerticalOptions="End" />
+                    <Label
+                        FontSize="Micro"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource MedBookLabelNormal}"
+                        Text="Tap to Refresh"
+                        VerticalOptions="End" />
+                </StackLayout>
+
+                <ListView
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HasUnevenRows="True"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    IsVisible="{Binding IsListViewVisible}"
+                    ItemsSource="{Binding CallBackrequests}"
+                    RefreshCommand="{Binding GetMemberRequestsCommand}"
+                    SelectionMode="None"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="10" Padding="0" CornerRadius="10" BackgroundColor="#dcf8c6">
+                                    <StackLayout Margin="0" Padding="0" >
+                                        <StackLayout Margin="0" Padding="5"  >
+                                            <Label  
+                                                TextColor="Black"
+                                                Style="{StaticResource  MedBookLabelMedium}" 
+                                                Text="{Binding Remarks}" />
+                                            
+                                            
+                                            <Label
+                                                TextColor="{StaticResource PrimaryLight1}"                                                
+                                                FontSize="Micro"
+                                                Style="{StaticResource MedBookLabelNormal}"
+                                                Text="{Binding CreateDate, StringFormat='{}{0:dd-MMM-yyyy}'}" />
+                                        </StackLayout>
+
+                                        <BoxView
+                                          
+                                            Margin="0"
+                                            BackgroundColor="LightGray"
+                                            HeightRequest="1"
+                                            HorizontalOptions="FillAndExpand" />
+
+                                        <StackLayout Padding="5" MinimumHeightRequest="200">
+
+                                            <Frame
+                                
+                                                Grid.Row="4"
+                                                Grid.Column="1"       
+                                                Margin="0"
+                                                Padding="10,2,10,2"
+                                                BackgroundColor="{Binding StatusDescriptionColor}"
+                                                CornerRadius="10"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="CenterAndExpand">
+
+                                                <Label
+                                                    Grid.Row="4"
+                                                    Grid.Column="1"                               
+                                                    Style="{x:StaticResource MedBookLabelNormal}"
+                                                    Text="{Binding StatusDescription}"                                            
+                                                    TextColor="white" />
+                                            </Frame>
+                                        
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button
+                    x:Name="FloatingActionButtonAdd"
+                    AbsoluteLayout.LayoutBounds="0.95,0.95"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    Command="{Binding AddNewRequestCommand}"
+                    CornerRadius="30"
+                    FontSize="30"
+                    HeightRequest="60"
+                    Style="{StaticResource ButtonMaterialFilledSecondary}"
+                    Text="+"
+                    WidthRequest="60" />
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customrenderer:CustomContentPageRenderer
+    xmlns:customrenderer="clr-namespace:WalimuCare.CustomRenderer"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    x:Class="WalimuCare.Views.Others.RequestCallBack"
+    Title="Request Call Back"
+    BackgroundColor="{x:StaticResource HkBackground}">
+
+    <Shell.TitleView>
+        <StackLayout
+            BackgroundColor="{StaticResource Primary}"
+            HorizontalOptions="FillAndExpand"
+            Spacing="0"
+            VerticalOptions="FillAndExpand">
+            <Label
+                Margin="0"
+                Padding="0"
+                FontSize="20"
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource MedBookLabel}"
+                Text="{Binding PageTitle}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+            <Label
+                Margin="0,-15,0,0"
+                Padding="0"
+                FontSize="Micro"
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource MedBookLabelNormal}"
+                Text="{Binding PageSubTitle}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <ffimageloading:CachedImage
+                    Aspect="Fill"
+                    CacheDuration="90"
+                    DownsampleToViewSize="true"
+                    HorizontalOptions="FillAndExpand"
+                    RetryCount="3"
+                    RetryDelay="600"
+                    Source="rqstClBck.jpg" />
+                <Label
+                Margin="0,5,5,0"
+                HorizontalTextAlignment="Center"
+                Text=" "
+                VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span
+                                FontSize="20"
+                                Style="{x:StaticResource MedBookLabel}"
+                                Text="Enter details bellow" />
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <!--<FlexLayout
+                Margin="5,0,0,5"
+                AlignContent="center"
+                AlignItems="center"
+                HorizontalOptions="Center"
+                JustifyContent="Center"
+                Wrap="Wrap">
+                    <syncfusion:SfRadioButton
+                    x:Name="myNo"
+                    CheckedColor="{StaticResource Primary}"
+                    GroupKey="{StaticResource ReguestCallBackType}"
+                    HorizontalOptions="Center"
+                    IsChecked="True"
+                    Text="Call my number"
+                    UncheckedColor="Gray" />
+                    <syncfusion:SfRadioButton
+                    x:Name="OtherNo"
+                    CheckedColor="{StaticResource Primary}"
+                    GroupKey="{StaticResource ReguestCallBackType}"
+                    HorizontalOptions="Center"
+                    Text="Call Other number"
+                    UncheckedColor="Gray" />
+                </FlexLayout>-->
+                <inputLayout:SfTextInputLayout
+                Margin="10"
+                Hint="Phone Number"
+                OutlineCornerRadius="20">
+
+                    <Entry
+                    x:Name="phonNoTxt"
+                    HeightRequest="70"
+                    HorizontalOptions="FillAndExpand"   
+                    Keyboard="Numeric"
+                    Placeholder="Enter Phone Number"
+                    Text="{Binding PhoneNumber}"
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center" />
+                </inputLayout:SfTextInputLayout>
+
+
+                <inputLayout:SfTextInputLayout
+                Margin="10"
+                Hint="Reason for request"
+                IsHintAlwaysFloated="False">
+
+                    <Editor HeightRequest="100" Text="{Binding Remarks}" />
+                </inputLayout:SfTextInputLayout>
+                <Button
+                Margin="10"
+                Command="{Binding SubmitCallBackRequest}"
+                HorizontalOptions="FillAndExpand"
+                Style="{x:StaticResource ButtonStyleLogin}"
+                Text="Send Request"
+                VerticalOptions="StartAndExpand" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</customrenderer:CustomContentPageRenderer>

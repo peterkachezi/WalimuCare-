@@ -119,7 +119,7 @@
                 Style="{StaticResource ButtonFilledPrimary}"
                 Text="Try Covid 19 Symptoms Checker" />-->
 
-            <pancake:PancakeView
+            <!--<pancake:PancakeView
                 Margin="10"
                 BackgroundColor="{StaticResource Secondary}"
                 CornerRadius="10"
@@ -144,7 +144,7 @@
                         VerticalOptions="CenterAndExpand" />
                 </StackLayout>
 
-            </pancake:PancakeView>
+            </pancake:PancakeView>-->
 
         </StackLayout>
     </ContentPage.Content>

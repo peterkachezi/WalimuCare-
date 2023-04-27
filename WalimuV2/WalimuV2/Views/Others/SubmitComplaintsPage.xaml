@@ -9,17 +9,12 @@
     Title="Submit Complaints"
     Shell.NavBarIsVisible="true">
     <ContentPage.Content>        
-        <StackLayout>
-
-            
-      
+        <StackLayout>                 
             
             
             <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <StackLayout>
-                    
-                    <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="30">
-               
+                <StackLayout>                    
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="20">               
                         <combobox:SfComboBox
                                      x:Name="comboBox" 
                                      Text="Select Complaint Type" 
@@ -27,17 +22,16 @@
                                      IsEditableMode="false"
                                      IgnoreDiacritic="true"
                                      DataSource="{Binding ComplaintsType}"
-                                     SelectedItem="{Binding SelectedComplaintType}"
+                                     SelectedItem="{Binding SelectedComplaintType,Mode=TwoWay}"
+                                     DisplayMemberPath="topic"
                                      Watermark="Select an Item"
-                                     ComboBoxMode="Suggest">
+                                    >
                         </combobox:SfComboBox>
                     </StackLayout>
                     
-                    <ScrollView Padding="10">
-                        
-                        <StackLayout Margin="10">
+                    <ScrollView Padding="10">                                            
 
-                            
+                        <StackLayout Margin="10,0,10,0">                           
                             
                          <!--<Picker 
                                 
@@ -47,7 +41,7 @@
                         ItemsSource="{Binding ComplaintsType}"
                         SelectedItem="{Binding SelectedComplaintType}" />-->
 
-                            <StackLayout Margin="10" IsVisible="{Binding IsPoorService}">
+                            <StackLayout Margin="10,0,10,0" IsVisible="{Binding IsPoorService}">
                                 <Label
                                 Margin="2"                       
                                 Text="Hospital Name"
@@ -123,7 +117,7 @@
 
 
                             <StackLayout 
-                                            Margin="10"
+                                            Margin="0"
                                             IsVisible="{Binding IsMemberDetails}"
                                             RadioButtonGroup.GroupName="{Binding MemberGroup}"
                                             RadioButtonGroup.SelectedValue="{Binding MemberCategory}">                                
@@ -166,10 +160,8 @@
                                     Style="{x:StaticResource ButtonMaterialFilledPrimary2}"     
                                     Text="View My Previous Complaints"
                                     TextTransform="None" />     
-                        </StackLayout>
-                        
-                        
-                        
+                        </StackLayout>                    
+                                               
                         
                     </ScrollView>
                 </StackLayout>

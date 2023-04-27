@@ -36,9 +36,9 @@ namespace WalimuV2.Views.Policy
 		private async void Button_Clicked(object sender, EventArgs ega)
 		{
 			try
-			{	
-
-				await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
+			{
+                await Browser.OpenAsync("https://ecard.makl-psms.com/PolicyDetails/Download");
+                //await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
 			}
 			catch (Exception ex)
 			{

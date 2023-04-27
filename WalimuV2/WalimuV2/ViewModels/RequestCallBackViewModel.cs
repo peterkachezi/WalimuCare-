@@ -16,6 +16,14 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Java.Lang.Annotation;
 using System.Collections.ObjectModel;
+using WalimuV2.Views.Dependants;
+using Xamarin.Forms.Internals;
+using WalimuV2.Views.Policy;
+using Android.Content.Res;
+using Rg.Plugins.Popup.Extensions;
+using WalimuV2.Views.PopUps;
+using WalimuV2.Views.hospitals;
+using WalimuV2.Views;
 
 namespace WalimuV2.ViewModels
 {
@@ -193,17 +201,17 @@ namespace WalimuV2.ViewModels
                         IsRefreshing = false;
                     }
                 }
-                if (getData.IsSuccessStatusCode == false)
-                {
+                //if (getData.IsSuccessStatusCode == false)
+                //{
 
-                    IsListViewVisible = false;
+                //    IsListViewVisible = false;
 
-                    IsEmptyIllustrationVisible = true;
+                //    IsEmptyIllustrationVisible = true;
 
-                    NoDataAvailableMessage = "Something went wrong, Please try again";
+                //    NoDataAvailableMessage = "Something went wrong, Please try again";
 
-                    IsRefreshing = false;
-                }
+                //    IsRefreshing = false;
+                //}
             }
             catch (Exception ex)
             {
@@ -264,16 +272,16 @@ namespace WalimuV2.ViewModels
                         try
                         {
                             if (response.IsSuccessStatusCode)
-                            {
-                                IsRefreshing = true;
-
-                                await ShowSuccessMessage("Call Back request Submitted successfuly");
-
-                                Thread.Sleep(2000);
+                            {                              
 
                                 await GetCallBackrequests();
 
-                                await Shell.Current.Navigation.PopAsync();
+                                await ShowSuccessMessage("Call Back request Submitted successfuly");
+
+                                //MainPage = new NavigationPage(new TheRealLoginPage());
+
+                                await Application.Current.MainPage.Navigation.PopAsync().ConfigureAwait(false); //Remove the page currently on top.
+                               // App.Current.MainPage = new NavigationPage(new AppShell());
 
                             }
                         }

@@ -44,7 +44,7 @@
                     VerticalOptions="Start" />
 
 
-                <StackLayout Margin="15" Orientation="Horizontal">
+                <!--<StackLayout Margin="15" Orientation="Horizontal">
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DownloadAllEcardsCommand}" />
@@ -63,7 +63,7 @@
                         HorizontalOptions="EndAndExpand"
                         Source="nextblack.png"
                         VerticalOptions="Center" />
-                </StackLayout>
+                </StackLayout>-->
 
                 <BoxView
                     Margin="0"

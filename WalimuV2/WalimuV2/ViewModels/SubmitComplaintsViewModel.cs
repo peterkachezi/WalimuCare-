@@ -6,16 +6,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WalimuV2.ApiResponses;
-using WalimuV2.Models;
 using WalimuV2.Services;
 using WalimuV2.Views.Others;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using static Android.Graphics.ColorSpace;
 
 namespace WalimuV2.ViewModels
 {
@@ -34,6 +31,7 @@ namespace WalimuV2.ViewModels
         public List<MemberComplaint> MemberComplaints
         {
             get { return memberComplaints; }
+
             set { memberComplaints = value; OnPropertyChanged(); }
         }
 
@@ -42,6 +40,7 @@ namespace WalimuV2.ViewModels
         public string ComplaintDescription
         {
             get { return complaintDescription; }
+
             set { complaintDescription = value; OnPropertyChanged(); }
         }
 
@@ -49,6 +48,7 @@ namespace WalimuV2.ViewModels
         public string ComplaintCategory
         {
             get { return complaintCategory; }
+
             set { complaintCategory = value; OnPropertyChanged(); }
         }
 
@@ -56,6 +56,7 @@ namespace WalimuV2.ViewModels
         public string HospitalName
         {
             get { return hospitalName; }
+
             set { hospitalName = value; OnPropertyChanged(); }
         }
 
@@ -63,6 +64,7 @@ namespace WalimuV2.ViewModels
         public string HospitalDepartment
         {
             get { return hospitalDepartment; }
+
             set { hospitalDepartment = value; OnPropertyChanged(); }
         }
 
@@ -70,36 +72,42 @@ namespace WalimuV2.ViewModels
         public ObservableCollection<ComplaintsSelectList> SelectionList
         {
             get { return selectionList; }
+
             set { selectionList = value; }
         }
         public bool isMemberDetails;
         public bool IsMemberDetails
         {
             get { return isMemberDetails; }
+
             set { isMemberDetails = value; OnPropertyChanged(); }
         }
         public bool isDependents;
         public bool IsDependents
         {
             get { return isDependents; }
+
             set { isDependents = value; OnPropertyChanged(); }
         }
         public bool isPreAuth;
         public bool IsPreAuth
         {
             get { return isPreAuth; }
+
             set { isPreAuth = value; OnPropertyChanged(); }
         }
         public bool isOtpRequest;
         public bool IsOtpRequest
         {
             get { return isOtpRequest; }
+
             set { isOtpRequest = value; OnPropertyChanged(); }
         }
         public bool isPoorService;
         public bool IsPoorService
         {
             get { return isPoorService; }
+
             set { isPoorService = value; OnPropertyChanged(); }
         }
 
@@ -107,6 +115,7 @@ namespace WalimuV2.ViewModels
         public bool LessApproval
         {
             get { return lessApproval; }
+
             set { lessApproval = value; OnPropertyChanged(); }
         }
 
@@ -121,57 +130,55 @@ namespace WalimuV2.ViewModels
         private bool delayedOTP;
         public bool DelayedOTP
         {
-
             get { return delayedOTP; }
+
             set { delayedOTP = value; OnPropertyChanged(); }
         }
-
         private bool invalidOTP;
         public bool InvalidOTP
         {
-
             get { return invalidOTP; }
+
             set { invalidOTP = value; OnPropertyChanged(); }
         }
-
 
         private bool fraudulentOTP;
         public bool FraudulentOTP
         {
-
             get { return fraudulentOTP; }
+
             set { fraudulentOTP = value; OnPropertyChanged(); }
         }
 
         private bool daughter;
         public bool Daughter
         {
-
             get { return daughter; }
+
             set { daughter = value; OnPropertyChanged(); }
         }
 
         private bool son;
         public bool Son
         {
-
             get { return son; }
+
             set { son = value; OnPropertyChanged(); }
         }
 
         private bool spouse;
         public bool Spouse
         {
-
             get { return spouse; }
+
             set { spouse = value; OnPropertyChanged(); }
         }
 
         private bool incorrectDetails;
         public bool IncorrectDetails
         {
-
             get { return incorrectDetails; }
+
             set { incorrectDetails = value; OnPropertyChanged(); }
         }
         private bool incorrectJob;
@@ -179,13 +186,14 @@ namespace WalimuV2.ViewModels
         {
 
             get { return incorrectJob; }
+
             set { incorrectJob = value; OnPropertyChanged(); }
         }
         private bool incorrectGender;
         public bool IncorrectGender
         {
-
             get { return incorrectGender; }
+
             set { incorrectGender = value; OnPropertyChanged(); }
         }
         private bool memberUpdate;
@@ -193,6 +201,7 @@ namespace WalimuV2.ViewModels
         {
 
             get { return memberUpdate; }
+
             set { memberUpdate = value; OnPropertyChanged(); }
         }
 
@@ -202,8 +211,7 @@ namespace WalimuV2.ViewModels
             get { return selectedComplaintType; }
             set
             {
-                selectedComplaintType = value; ShowHideCat(); OnPropertyChanged();
-
+                selectedComplaintType = value; OnPropertyChanged(); ShowHideCat();
             }
         }
 
@@ -211,30 +219,35 @@ namespace WalimuV2.ViewModels
         public string OtpCategory
         {
             get { return otpCategory; }
+
             set { otpCategory = value; OnPropertyChanged(); }
         }
         private string preAuthCategory;
         public string PreAuthCategory
         {
             get { return preAuthCategory; }
+
             set { preAuthCategory = value; OnPropertyChanged(); }
         }
         private string dependentCategory;
         public string DependentCategory
         {
             get { return dependentCategory; }
+
             set { dependentCategory = value; OnPropertyChanged(); }
         }
         private string memberCategory;
         public string MemberCategory
         {
             get { return memberCategory; }
+
             set { memberCategory = value; OnPropertyChanged(); }
         }
         private string dependentName;
         public string DependentName
         {
             get { return dependentName; }
+
             set { dependentName = value; OnPropertyChanged(); }
         }
 

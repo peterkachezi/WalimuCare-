@@ -30,18 +30,18 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
+                await Browser.OpenAsync("https://ecard.makl-psms.com/PolicyDetails/Download");
 
-				//string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
+                //string url = ApiDetail.EndPoint + "api/Reports/GenerateEcard?memberId=" + SelectedDependant.Id;
 
-				//string NameOfFile = SelectedDependant.FullName + ".pdf";
+                //string NameOfFile = SelectedDependant.FullName + ".pdf";
 
-				//await DependencyService.Get<IDownload>().DownloadFile(url, NameOfFile);
+                //await DependencyService.Get<IDownload>().DownloadFile(url, NameOfFile);
 
+                //await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
 
-				await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
-
-			}
-			catch (Exception ex)
+            }
+            catch (Exception ex)
 			{
 
 				SendErrorMessageToAppCenter(ex, "Policy Details");
@@ -52,7 +52,8 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-                await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
+                await Browser.OpenAsync("https://ecard.makl-psms.com/PolicyDetails/Download");
+                //await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
 
 
                 //if (await CheckStoragePermisions())

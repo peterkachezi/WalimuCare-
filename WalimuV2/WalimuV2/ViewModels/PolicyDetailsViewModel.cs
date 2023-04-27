@@ -83,16 +83,13 @@ namespace WalimuV2.ViewModels
 						NoDataAvailableMessage = "";
 						IsListViewVisible = true;
 
-
 						RestClient client = new RestClient(ApiDetail.EndPoint);
 
 						RestRequest restRequest = new RestRequest()
 						{
 							Method = Method.Get,
-							Resource = "/Members/GetPolicyDetails"
+							Resource = "Members/GetPolicyDetails"
 						};
-
-
 
 						var response = await client.ExecuteAsync(restRequest);
 
@@ -101,7 +98,6 @@ namespace WalimuV2.ViewModels
 						if (response.IsSuccessful)
 						{
 							var deserializedResponse = JsonConvert.DeserializeObject<BaseResponse<List<PolicyWriteUpResponse>>>(response.Content);
-
 
 							if (deserializedResponse.success)
 							{
@@ -158,7 +154,9 @@ namespace WalimuV2.ViewModels
 				SendErrorMessageToAppCenter(ex, "Policy Details", MemberNumber, PhoneNumber);
 				//await ShowErrorMessage();
 				IsEmptyIllustrationVisible = true;
+
 				NoDataAvailableMessage = "Sorry Something went wrong";
+
 				IsListViewVisible = false;
 			}
 		}
@@ -168,7 +166,7 @@ namespace WalimuV2.ViewModels
 		{
 			try
 			{
-				await Browser.OpenAsync("https://drive.google.com/u/0/uc?id=1RVwZgaTae5WuPA6UGI4FRxnSv0CEgOpU&export=download");
+                await Browser.OpenAsync("https://ecard.makl-psms.com/PolicyDetails/Download");
 
 			}
 			catch (Exception ex)

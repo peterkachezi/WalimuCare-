@@ -181,7 +181,7 @@ namespace WalimuCare.Views
         {
             try
             {
-                await Shell.Current.Navigation.PushAsync(new Covid19Page());
+                await Shell.Current.Navigation.PushAsync(new FAQPage());
             }
             catch (Exception ex)
             {

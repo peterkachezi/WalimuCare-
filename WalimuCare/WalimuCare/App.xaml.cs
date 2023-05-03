@@ -137,9 +137,7 @@ namespace WalimuCare
 
                 DependencyService.Register<ConfirmOtpViewModelReset>();
 
-                DependencyService.Register<ResetPinPageViewModel>();
-
-                DependencyService.Register<Covid19ViewModel>();
+                DependencyService.Register<ResetPinPageViewModel>(); 
 
                 DependencyService.Register<UserLocationViewModel>();
 

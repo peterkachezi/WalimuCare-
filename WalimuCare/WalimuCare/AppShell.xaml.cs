@@ -53,8 +53,6 @@ namespace WalimuCare
 
 				Routing.RegisterRoute(nameof(ContactUsPage), typeof(ContactUsPage));
 
-				Routing.RegisterRoute(nameof(Covid19Page), typeof(Covid19Page));
-
 				Routing.RegisterRoute(nameof(FAQPage), typeof(FAQPage));
 
 				Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));

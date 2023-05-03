@@ -284,9 +284,6 @@
         <ShellContent  Route="FAQPage" ContentTemplate="{DataTemplate Others:FAQPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem  Title="Covid 19" Icon="covid.png" >
-        <ShellContent  Route="Covid19Page" ContentTemplate="{DataTemplate Others:Covid19Page}" />
-    </FlyoutItem>
 
     <FlyoutItem  Title="Emergency Contacts" Icon="contactUsIcon.png" >
         <ShellContent  Route="ContactUsPage" ContentTemplate="{DataTemplate Others:ContactUsPage}" />

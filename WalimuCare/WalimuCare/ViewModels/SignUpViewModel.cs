@@ -106,7 +106,7 @@ namespace WalimuCare.ViewModels
 							if (response.IsSuccessStatusCode)
 							{
 
-								await ShowSuccessMessage("Call Back request Submitted successfuly");
+								await ShowSuccessMessage("Account has been successfuly created");
 
 								EnableSubmitBtn = true;
 

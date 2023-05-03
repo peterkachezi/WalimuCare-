@@ -197,10 +197,7 @@
                                         <TapGestureRecognizer Command="{Binding ShowChangePinPageCommand}" />
                                     </Image.GestureRecognizers>
                                 </Image>
-
                             </StackLayout>
-
-
                             <BoxView Style="{StaticResource Line}" />
                         </StackLayout>
                         <Label
